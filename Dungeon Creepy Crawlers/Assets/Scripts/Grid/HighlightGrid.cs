@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class GridController : MonoBehaviour
+public class HighlightGrid : MonoBehaviour
 {
     private Grid grid;
     [SerializeField] private Tilemap interactiveMap = null;
@@ -12,10 +12,13 @@ public class GridController : MonoBehaviour
 
     private Vector3Int previousMousePos = new Vector3Int();
 
-    // Start is called before the first frame update
-    void Start()
+    public static HighlightGrid Instance; // SINGLETON
+
+    private void Awake()
     {
         grid = gameObject.GetComponent<Grid>();
+        Instance = this;
+
     }
 
     // Update is called once per frame
@@ -31,7 +34,12 @@ public class GridController : MonoBehaviour
         }
     }
 
-    Vector3Int GetMousePosition()
+    public Vector3Int GetHighlightedCellPos()
+    {
+        return previousMousePos;
+    }
+
+    private Vector3Int GetMousePosition()
     {
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         return grid.WorldToCell(mouseWorldPos);
