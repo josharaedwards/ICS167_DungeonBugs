@@ -1,54 +1,82 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class GridManager : MonoBehaviour
 {
-    [SerializeField] private int _width, _height;
+    private Grid grid;
+    private Tilemap map;
 
-    [SerializeField] private RangeTile _tilePrefab;
-    private RangeTile[,] _tileList;
+    private HashSet<GameObject> gameObjects = new HashSet<GameObject>();
 
-    [SerializeField] private Camera _camera;
+    private Dictionary<Vector3Int, GameObject> objFromCell = new Dictionary<Vector3Int, GameObject>(); // <cellPos, Object>
+    private Dictionary<GameObject, Vector3Int> objPos = new Dictionary<GameObject, Vector3Int>();      // <Object, cellPos>
+    /* [SerializeField] private List<TileProperty> TileProperties; 
+     private Dictionary<TileBase,TileData> dataFromTiles */
 
-    void GenerateGrid()
+    public static GridManager Instance; // SINGLETON
+
+
+    private void Awake()
     {
-        for (int x = 0; x < _width; x++)
-        {
-            for (int y = 0; y < _height; y++)
-            {
-                RangeTile spawnedTile = Instantiate(_tilePrefab, new Vector3(x, y), Quaternion.identity);
-                spawnedTile.name = $"Tile {x} {y}";
-                _tileList[x,y] = spawnedTile;
-
-                bool offSet = (x % 2 == 0 && y % 2 == 1) || (x % 2 == 1 && y % 2 == 0);
-                spawnedTile.Init(offSet);
-
-
-            }
-        }
-
-        _camera.transform.position = new Vector3((float)_width / 2 - 0.5f, (float)_height / 2 - 0.5f, -10); // Move camera so 0,0 is at the bottom left
+        GridManager.Instance = this;
+        grid = gameObject.GetComponent<Grid>();
     }
+
     // Start is called before the first frame update
     void Start()
     {
-        _tileList = new RangeTile[_width,_height];
-        GenerateGrid();
-    }
-
-    public RangeTile GetTileAtPos (int x, int y)
-    {
-        if (x < _width && y < _height && x >= 0 && y >= 0)
-        {
-            return _tileList[x, y];
-        }
-        return null;
+        //TODO: Set up tile data dictionary
+        //TODO: Set up objFromCell, objPos
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    //TODO: Implement edge case where spawn pos is already occupied
+    public Vector3Int AddObject(GameObject obj, Vector3Int cellPos)
+    {
+        gameObjects.Add(obj);
+        objFromCell.Add(cellPos, obj);
+        objPos.Add(obj, cellPos);
+        return cellPos;
+
+    }
+
+    public Vector3Int AddObject(GameObject obj, Vector3 worldPos)
+    {
+        return AddObject(obj, grid.WorldToCell(worldPos));
+    }
+
+
+    // Move obj to targetPos on grid
+    public bool MoveObject(GameObject obj, Vector3Int targetPos)
+    {
+        if (objFromCell.ContainsKey(targetPos)) // Check if any object occupy targetPos
+            return false;
+
+        // Update pos for obj
+        objFromCell.Remove(objPos[obj]);
+        objPos[obj] = targetPos;
+        objFromCell.Add(targetPos, obj);
+        return true;
+    }
+
+    // Get Object from cellPos
+    public GameObject GetObjectFromCell(Vector3Int cellPos)
+    {
+        if (objFromCell.ContainsKey(cellPos))
+            return objFromCell[cellPos];
+
+        return null;
+    }
+
+    public Vector3 cellToWorld(Vector3Int cellPos)
+    {
+        return grid.CellToWorld(cellPos);
     }
 }
