@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class RangeTile : MonoBehaviour
 {
-    [SerializeField] private Color _baseColor, _offsetColor;
+    [SerializeField] private Color _baseColor;
     [SerializeField] private SpriteRenderer _renderer;
     [SerializeField] private GameObject _highlight;
 
-    public void Init(bool offSet)
+    public void Init()
     {
-        if (offSet)
-            _renderer.color = _offsetColor;
-        else
-            _renderer.color = _baseColor;
+        _renderer.color = _baseColor;
+    }
 
+    private void OnDisable()
+    {
+        _highlight.SetActive(false);
     }
 
     private void OnMouseEnter()

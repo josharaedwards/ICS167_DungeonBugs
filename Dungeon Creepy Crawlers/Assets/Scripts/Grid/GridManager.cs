@@ -15,14 +15,19 @@ public class GridManager : MonoBehaviour
     /* [SerializeField] private List<TileProperty> TileProperties; 
      private Dictionary<TileBase,TileData> dataFromTiles */
 
-    public static GridManager Instance; // SINGLETON
+    private static GridManager Instance; // SINGLETON
 
+    public static GridManager GetInstance()
+    {
+        return Instance;
+    }
 
     private void Awake()
     {
         GridManager.Instance = this;
         grid = gameObject.GetComponent<Grid>();
     }
+
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +52,7 @@ public class GridManager : MonoBehaviour
 
     }
 
+    // Overload: worlPos is passed instead of cellPos
     public Vector3Int AddObject(GameObject obj, Vector3 worldPos)
     {
         return AddObject(obj, grid.WorldToCell(worldPos));
@@ -63,10 +69,27 @@ public class GridManager : MonoBehaviour
         objFromCell.Remove(objPos[obj]);
         objPos[obj] = targetPos;
         objFromCell.Add(targetPos, obj);
+
+        GridMovementEvent(targetPos);
+
         return true;
     }
 
-    // Get Object from cellPos
+    // Tell every GridMovementEventReceiver object something just moved
+    private void GridMovementEvent(Vector3Int cellPos)
+    {
+        GridMovementEventReceiver receiver = null;
+        foreach (GameObject obj in gameObjects)
+        {
+            receiver = obj.GetComponent<GridMovementEventReceiver>();
+            if (receiver != null)
+            {
+                receiver.GridMovementEventCallBack(cellPos);
+            }
+        }
+    }
+
+
     public GameObject GetObjectFromCell(Vector3Int cellPos)
     {
         if (objFromCell.ContainsKey(cellPos))
