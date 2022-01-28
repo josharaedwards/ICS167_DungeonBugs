@@ -4,7 +4,10 @@ using UnityEngine;
 
 public interface InputSelectReciever
 {
-    public InputSelectReciever CallBack(); // Return desired selected object
+    // Return desired selected object
+    public SelectionHandler CallBackSelect();  // Callback when selected
+    public SelectionHandler CallBackSelect(Vector3Int cellPos);
 
-    public InputSelectReciever CallBack(Vector3Int cellPos);
+    public SelectionHandler CallBackDeselect(); // Callback when deslected
+
 }

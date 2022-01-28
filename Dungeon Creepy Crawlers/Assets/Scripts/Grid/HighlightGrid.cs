@@ -12,14 +12,20 @@ public class HighlightGrid : MonoBehaviour
 
     private Vector3Int previousMousePos = new Vector3Int();
 
-    public static HighlightGrid Instance; // SINGLETON
+    private static HighlightGrid Instance; // SINGLETON
+
+    public static HighlightGrid GetInstance()
+    {
+        return Instance;
+    }
 
     private void Awake()
     {
         grid = gameObject.GetComponent<Grid>();
         Instance = this;
-
     }
+
+    
 
     // Update is called once per frame
     void Update()
