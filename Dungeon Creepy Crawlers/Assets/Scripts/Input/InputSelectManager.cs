@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InputSelectManager : MonoBehaviour, TurnEventReciever
 {
@@ -42,6 +43,9 @@ public class InputSelectManager : MonoBehaviour, TurnEventReciever
 
     private void HandleCallBackSelect()
     {
+
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
 
         Vector3Int selectedCell = highlightGrid.GetHighlightedCellPos();
         Debug.Log(selectedCell.ToString());
