@@ -33,7 +33,6 @@ public class GridManager : MonoBehaviour
     void Start()
     {
         //TODO: Set up tile data dictionary
-        //TODO: Set up objFromCell, objPos
     }
 
     // Update is called once per frame

@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public GameState getState()
+    public GameState getGameState()
     {
         return gameState;
     }

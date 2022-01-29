@@ -1,66 +1,79 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 // Might Make this abstract in the future to make a class for manage movement range display and ability range display
 public class GridGenerator : MonoBehaviour 
 {
 
     [SerializeField] private RangeTile _tilePrefab;
-    private Dictionary<Vector3Int, RangeTile> tileDict;
+    private Dictionary<Type, Dictionary<Vector3Int, RangeTile>> tileTypeDict;
     private GridManager gridManager = null;
 
-    /*void GenerateGrid(int _width, int _height)
+    
+    // Generate visualizing Grid and operate on them based on the type of the requesting object
+    public void GenerateGrid(HashSet<Vector3Int> cellPosSet, object obj)
     {
-        for (int x = 0; x < _width; x++)
+        Type type = obj.GetType();
+        Dictionary<Vector3Int, RangeTile> tileDict;
+
+        if (!tileTypeDict.ContainsKey(type))
         {
-            for (int y = 0; y < _height; y++)
-            {
-                RangeTile spawnedTile = Instantiate(_tilePrefab, new Vector3(x, y), Quaternion.identity);
-                spawnedTile.name = $"Tile {x} {y}";
-                _tileList[x,y] = spawnedTile;
-
-                //bool offSet = (x % 2 == 0 && y % 2 == 1) || (x % 2 == 1 && y % 2 == 0);
-                spawnedTile.Init();
-
-            }
+            tileDict = new Dictionary<Vector3Int, RangeTile>();
+            tileTypeDict.Add(type, tileDict);
+        }
+        else
+        {
+            tileDict = tileTypeDict[type];
         }
 
-        //_camera.transform.position = new Vector3((float)_width / 2 - 0.5f, (float)_height / 2 - 0.5f, -10); // Move camera so 0,0 is at the bottom left
-    }*/
-
-    public void GenerateGrid(HashSet<Vector3Int> cellPosSet)
-    {
         foreach (Vector3Int pos in cellPosSet)
         {
             Vector3 worldPos = gridManager.cellToWorld(pos);
-            RangeTile spawnedTile = Instantiate(_tilePrefab, worldPos + new Vector3(0.5f,0.5f,0f), Quaternion.identity);
+            RangeTile spawnedTile = Instantiate(_tilePrefab, worldPos + new Vector3(0.5f, 0.5f, 0f), Quaternion.identity);
             spawnedTile.transform.SetParent(gameObject.transform, true);
             spawnedTile.name = $"Tile {pos.x} {pos.y}";
             tileDict.Add(pos, spawnedTile);
         }
     }
 
-    public void DestroyGrid()
+    public void DestroyGrid(object obj)
     {
+        Type type = obj.GetType();
+        if (!tileTypeDict.ContainsKey(type))
+            return;
+        Dictionary<Vector3Int, RangeTile>  tileDict = tileTypeDict[type];
+
         foreach (RangeTile tile in tileDict.Values)
         {
             Destroy(tile.gameObject);
         }
         tileDict.Clear();
+        tileTypeDict.Remove(type);
         //Debug.Log("DESTROYED TILES");
     }
 
-    public void HideGrid()
+    public void HideGrid(object obj)
     {
+        Type type = obj.GetType();
+        if (!tileTypeDict.ContainsKey(type))
+            return;
+        Dictionary<Vector3Int, RangeTile> tileDict = tileTypeDict[type];
+
         foreach (RangeTile tile in tileDict.Values)
         {
             tile.gameObject.SetActive(false);
         }
     }
 
-    public void ShowGrid()
+    public void ShowGrid(object obj)
     {
+        Type type = obj.GetType();
+        if (!tileTypeDict.ContainsKey(type))
+            return;
+        Dictionary<Vector3Int, RangeTile> tileDict = tileTypeDict[type];
+
         foreach (RangeTile tile in tileDict.Values)
         {
             tile.gameObject.SetActive(true);
@@ -72,7 +85,7 @@ public class GridGenerator : MonoBehaviour
     void Start()
     {
         gridManager = GridManager.GetInstance();
-        tileDict = new Dictionary<Vector3Int, RangeTile>();
+        tileTypeDict = new Dictionary<Type,Dictionary<Vector3Int, RangeTile>>();
     }
 
     // Update is called once per frame
