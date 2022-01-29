@@ -515,7 +515,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 5, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -611,7 +611,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2742508885220627371
 RectTransform:
   m_ObjectHideFlags: 0
@@ -703,6 +703,9 @@ MonoBehaviour:
   actionPointSlider: {fileID: 2742508885220627368}
   fillImage: {fileID: 2742508883533056416}
   endRoundButton: {fileID: 4602428485140507825}
+  playerNameText: {fileID: 284017572}
+  actionPointText: {fileID: 1123791820}
+  playerName: Jay Doe
   maxActionPoints: 10
   fullActionColor: {r: 0.5877713, g: 0.35694784, b: 0.8867924, a: 1}
   emptyActionColor: {r: 0.27839085, g: 0.9622642, b: 0.9122247, a: 0.3529412}
