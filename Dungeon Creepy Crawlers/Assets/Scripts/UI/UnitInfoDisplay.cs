@@ -15,6 +15,7 @@ public class UnitInfoDisplay : MonoBehaviour
     public GameObject buttonContainer;
     public Button abilityButtonPrototype;
 
+    //Delete this once we have an ability class fully functional
     private string[] testAbilityNames = { "Melee Attack", "Healing Slime", "Snail Trail", "Song of Vitality" };
 
     private void OnEnable()
@@ -54,6 +55,14 @@ public class UnitInfoDisplay : MonoBehaviour
     private void CreateAbilityButton(string abilityText)
     {
         Button abilityButton = Instantiate(abilityButtonPrototype, buttonContainer.transform);
+
         abilityButton.GetComponentInChildren<TextMeshProUGUI>().text = abilityText;
+        abilityButton.onClick.AddListener(() => OnButtonClick(abilityText));
+    }
+
+    private void OnButtonClick(string abilityText)
+    {
+        //Temporarily will send out a log of the ability name
+        Debug.Log(abilityText);
     }
 }
