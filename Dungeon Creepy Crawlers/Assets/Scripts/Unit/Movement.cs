@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Movement : MonoBehaviour, InputSelectReciever, TurnEventReciever, GridMovementEventReceiver
+public class Movement : MonoBehaviour, InputSelectReceiver, TurnEventReciever, GridMovementEventReceiver
 {
     private SelectionHandler selectionHandler;
     private TurnEventHandler turnEventHandler;
@@ -26,6 +26,8 @@ public class Movement : MonoBehaviour, InputSelectReciever, TurnEventReciever, G
     // Start is called before the first frame update
     void Start()
     {
+
+
         gridGenerator = GetComponent<GridGenerator>();
 
         selectionHandler = GetComponent<SelectionHandler>();
@@ -90,11 +92,11 @@ public class Movement : MonoBehaviour, InputSelectReciever, TurnEventReciever, G
 
     private void GenerateValidMoveGrid()
     {
-        gridGenerator.DestroyGrid();
+        gridGenerator.DestroyGrid(this);
 
         GenerateValidMove();
-        gridGenerator.GenerateGrid(validMoveCellPos);
-        gridGenerator.HideGrid();
+        gridGenerator.GenerateGrid(validMoveCellPos, this);
+        gridGenerator.HideGrid(this);
     }
 
     // Generate valid movement each turn
@@ -133,7 +135,7 @@ public class Movement : MonoBehaviour, InputSelectReciever, TurnEventReciever, G
             Debug.Log("SELECTED PLAYER");
         else
             Debug.Log("SELECTED ENEMY");
-        gridGenerator.ShowGrid();
+        gridGenerator.ShowGrid(this);
         return selectionHandler;
     }
 
@@ -164,7 +166,7 @@ public class Movement : MonoBehaviour, InputSelectReciever, TurnEventReciever, G
             Debug.Log("DESELECTED PLAYER");
         else
             Debug.Log("DESELECTED ENEMY");
-        gridGenerator.HideGrid();
+        gridGenerator.HideGrid(this);
         return null;
     }
 

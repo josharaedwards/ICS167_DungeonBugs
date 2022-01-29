@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SelectionHandler : MonoBehaviour, InputSelectReciever
+public class SelectionHandler : MonoBehaviour, InputSelectReceiver
 {
-    private List<InputSelectReciever> inputSelectRecievers;
+    private List<InputSelectReceiver> inputSelectReceivers;
 
 
     void Awake()
     {
-        inputSelectRecievers = new List<InputSelectReciever>();
+        inputSelectReceivers = new List<InputSelectReceiver>();
     }
 
     public SelectionHandler CallBackSelect()  // Callback when selected
     {
-        foreach (InputSelectReciever reciever in inputSelectRecievers)
+        foreach (InputSelectReceiver reciever in inputSelectReceivers)
         {
             reciever.CallBackSelect();
         }
@@ -24,7 +24,7 @@ public class SelectionHandler : MonoBehaviour, InputSelectReciever
     public SelectionHandler CallBackSelect(Vector3Int cellPos)
     {
         SelectionHandler r = null;
-        foreach (InputSelectReciever reciever in inputSelectRecievers)
+        foreach (InputSelectReceiver reciever in inputSelectReceivers)
         {
             SelectionHandler t = reciever.CallBackSelect(cellPos);
             if (r == null)                                          // Will only return the first non-null CallBackSelect return
@@ -35,15 +35,15 @@ public class SelectionHandler : MonoBehaviour, InputSelectReciever
 
     public SelectionHandler CallBackDeselect() // Callback when deslected
     {
-        foreach (InputSelectReciever reciever in inputSelectRecievers)
+        foreach (InputSelectReceiver reciever in inputSelectReceivers)
         {
             reciever.CallBackDeselect();
         }
         return null;
     }
 
-    public void Subscribe(InputSelectReciever reciever)
+    public void Subscribe(InputSelectReceiver reciever)
     {
-        inputSelectRecievers.Add(reciever);
+        inputSelectReceivers.Add(reciever);
     }
 }
