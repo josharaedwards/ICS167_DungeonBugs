@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 343fafb94447aa74fb4c66959938d738, type: 3}
+  m_Name: SpiderBoss
+  m_EditorClassIdentifier: 
+  type: Spider Boss
+  miniSprite: {fileID: 21300000, guid: c4c4d476a2f5f2b4bacc73294d0a6ff5, type: 3}
+  selectedSprite: {fileID: 0}
+  fullSprite: {fileID: 21300000, guid: d19837e7d92244741abc1ba8f6135615, type: 3}
+  abilities:
+  - {fileID: 11400000, guid: 45009f4533f627246b8acd700f6db024, type: 2}
+  str: 2
+  def: 2
+  res: 2
+  movement: 1
