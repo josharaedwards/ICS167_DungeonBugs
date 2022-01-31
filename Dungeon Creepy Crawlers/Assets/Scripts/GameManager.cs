@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    //Joshara: temporarily keep reference to AP Bar
+    public ActionPointDisplay apBarUI;
+
     public enum GameState
     {
         Ongoing,
@@ -49,7 +52,6 @@ public class GameManager : MonoBehaviour
     {
         turnState = TurnState.PlayerTurn;
         Debug.Log("PlAYER TURN");
-        //TurnStateChangeEvent();
     }
 
     public void Subscribe(TurnEventHandler handler)
@@ -129,5 +131,14 @@ public class GameManager : MonoBehaviour
         }
 
         return GameState.Ongoing;
+    }
+
+    //Joshara: Temporarily add a hook to the AP Bar
+    public void UpdateAPBar(int cost)
+    {
+        if(apBarUI)
+        {
+            apBarUI.UpdateAPPoints(cost);
+        }  
     }
 }

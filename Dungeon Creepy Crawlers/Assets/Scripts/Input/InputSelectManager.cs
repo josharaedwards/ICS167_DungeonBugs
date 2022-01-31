@@ -43,8 +43,7 @@ public class InputSelectManager : MonoBehaviour, TurnEventReciever
 
     private void HandleCallBackSelect()
     {
-
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
             return;
 
         Vector3Int selectedCell = highlightGrid.GetHighlightedCellPos();
