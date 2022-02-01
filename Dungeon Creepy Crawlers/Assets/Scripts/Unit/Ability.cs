@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Ability", menuName = "Ability")]
-public class Ability : ScriptableObject
+public abstract class Ability : ScriptableObject
 {
     public string abilityName;
     public string description;
@@ -14,4 +13,6 @@ public class Ability : ScriptableObject
     public int damage;
     public int range;
     public int apCost;
+
+    public abstract void Execute(StatsTracker target);
 }
