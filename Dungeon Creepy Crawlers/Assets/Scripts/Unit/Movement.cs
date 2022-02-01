@@ -180,9 +180,8 @@ public class Movement : MonoBehaviour, InputSelectReceiver, TurnEventReciever, G
         GenerateValidMoveGrid();
         DisableMovement();
 
-        // TODO: WILL CHANGE THIS LATER, ONLY DO THIS TO DEMO TURN SYSTEM WITHOUT ENDROUND BUTTON
-        // END TURN IMMEDIATELY AFTER MOVING
-        GameManager.GetInstance().ChangeTurnState();
+        //Joshara: Update so that AP point will be subtracted based on how many squares the player moved
+        GameManager.GetInstance().UpdateAPBar(1);
 
     }
 

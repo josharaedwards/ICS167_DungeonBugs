@@ -19,6 +19,8 @@ public class ActionPointDisplay : MonoBehaviour
     public Color fullActionColor;
     public Color emptyActionColor;
 
+    private bool turnPassed;
+
     private void OnEnable()
     {
         playerNameText.text = playerName + "'s Mana";
@@ -27,6 +29,30 @@ public class ActionPointDisplay : MonoBehaviour
 
         currentActionPoints = maxActionPoints;
 
+        turnPassed = false;
+
+        UpdateAPUI();
+
+        SetupEndRoundButton();
+    }
+
+    void Update()
+    {
+        if (currentActionPoints == maxActionPoints || turnPassed)
+        {
+            endRoundButton.SetActive(false);
+        }
+        else
+        {
+            endRoundButton.SetActive(true);
+        }
+
+        actionPointText.text = currentActionPoints.ToString();
+    }
+
+    public void UpdateAPPoints(int cost)
+    {
+        currentActionPoints -= cost;
         UpdateAPUI();
     }
 
@@ -37,22 +63,16 @@ public class ActionPointDisplay : MonoBehaviour
         fillImage.color = Color.Lerp(emptyActionColor, fullActionColor, currentActionPoints / maxActionPoints);
     }
 
-    void Start()
+    private void SetupEndRoundButton()
     {
-        
+        Button endRound = endRoundButton.GetComponentInChildren<Button>();
+
+        endRound.onClick.AddListener(() => EndPlayerRound());
     }
 
-    void Update()
+    private void EndPlayerRound()
     {
-        if (currentActionPoints == maxActionPoints)
-        {
-            endRoundButton.SetActive(false);
-        }
-        else
-        {
-            endRoundButton.SetActive(true);
-        }
-
-        actionPointText.text = currentActionPoints.ToString();
+        GameManager.GetInstance().ChangeTurnState();
+        turnPassed = true;
     }
 }
