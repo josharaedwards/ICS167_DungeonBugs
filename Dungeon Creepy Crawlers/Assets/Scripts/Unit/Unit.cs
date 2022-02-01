@@ -13,6 +13,8 @@ public class Unit : ScriptableObject
 
     public Ability[] abilities;
 
+    public int hp;
+
     //stats
     public int str;
     public int def;

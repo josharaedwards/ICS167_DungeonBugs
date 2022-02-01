@@ -16,8 +16,8 @@ MonoBehaviour:
   miniSprite: {fileID: 21300000, guid: 8e4dca7ca512051459628195a95108ee, type: 3}
   selectedSprite: {fileID: 0}
   fullSprite: {fileID: 0}
-  abilities:
-  - {fileID: 11400000, guid: 660bca6dd2b17ba4f936a87b3bfc5f2d, type: 2}
+  abilities: []
+  hp: 0
   str: 1
   def: 1
   res: 1
