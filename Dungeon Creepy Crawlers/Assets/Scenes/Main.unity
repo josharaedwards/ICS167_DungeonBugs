@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: 1
-  spawnPos: {x: 0, y: 0, z: 0}
+  spawnPos: {x: 0, y: 0}
 --- !u!114 &277109670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -459,7 +459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: 1
-  spawnPos: {x: 3, y: 3, z: 0}
+  spawnPos: {x: 3, y: 3}
 --- !u!1001 &785200313
 PrefabInstance:
   m_ObjectHideFlags: 0

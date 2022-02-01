@@ -2,29 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class Movement : MonoBehaviour, InputSelectReceiver, TurnEventReciever, GridMovementEventReceiver
+public abstract class Movement : MonoBehaviour, InputSelectReceiver, TurnEventReciever, GridMovementEventReceiver
 {
-    private SelectionHandler selectionHandler;
-    private TurnEventHandler turnEventHandler;
-    private GridGenerator gridGenerator;
+    protected SelectionHandler selectionHandler;
+    protected TurnEventHandler turnEventHandler;
+    protected GridGenerator gridGenerator;
 
-    private GridManager gridManager;
+    protected GridManager gridManager;
 
-    private Vector3Int currentCellPos;
-    private bool movable;
+    protected Vector3Int currentCellPos;
+    protected bool movable;
 
-    private int frame; // WILL PROBABLY DELETE THIS; JUST A TEMPORARY SOLUTION FOR RUNNING A FUNCTION ON FRAME 2
-    
+    protected int frame; // WILL PROBABLY DELETE THIS; JUST A TEMPORARY SOLUTION FOR RUNNING A FUNCTION ON FRAME 2
 
-    [SerializeField] private int movement;
-    private HashSet<Vector3Int> validMoveCellPos;
 
-    public Vector3Int spawnPos = Vector3Int.zero;
+    [SerializeField] protected int movement;
+    protected HashSet<Vector3Int> validMoveCellPos;
+
+    [SerializeField] protected Vector2Int spawnPos = Vector2Int.zero;
 
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
 
 
@@ -49,9 +48,10 @@ public class Movement : MonoBehaviour, InputSelectReceiver, TurnEventReciever, G
         frame = 0;
     }
 
-    public void Init(Vector3Int spawnPos)
+    public void Init(Vector2Int spawnPos)
     {
-        currentCellPos = gridManager.AddObject(gameObject, spawnPos);
+        Vector3Int spawnPosVec3 = new Vector3Int(spawnPos.x, spawnPos.y, 0);
+        currentCellPos = gridManager.AddObject(gameObject, spawnPosVec3);
         transform.position = gridManager.cellToWorld(currentCellPos);
         transform.position = transform.position + new Vector3(0.5f, 0.5f, 0);
     }
@@ -81,7 +81,7 @@ public class Movement : MonoBehaviour, InputSelectReceiver, TurnEventReciever, G
     }
 
     // Re-generate valid movable tile if cellPos from the event is within the existing valid moves
-    public void GridMovementEventCallBack(Vector3Int cellPos) 
+    public void GridMovementEventCallBack(Vector3Int cellPos)
     {
         Debug.Log("GridMovementEventCallBack");
         if (validMoveCellPos.Contains(cellPos) && cellPos != currentCellPos)
@@ -90,7 +90,7 @@ public class Movement : MonoBehaviour, InputSelectReceiver, TurnEventReciever, G
         }
     }
 
-    private void GenerateValidMoveGrid()
+    protected void GenerateValidMoveGrid()
     {
         gridGenerator.DestroyGrid(this);
 
@@ -100,7 +100,7 @@ public class Movement : MonoBehaviour, InputSelectReceiver, TurnEventReciever, G
     }
 
     // Generate valid movement each turn
-    private void GenerateValidMove() // TODO: Consider obstacle that affect valid move
+    protected void GenerateValidMove() // TODO: Consider obstacle that affect valid move
     {
         validMoveCellPos.Clear();
         // a temporary set to store the validMove to the next loop to calculate the next valid move pos
@@ -129,7 +129,7 @@ public class Movement : MonoBehaviour, InputSelectReceiver, TurnEventReciever, G
     }
 
 
-    public SelectionHandler CallBackSelect()
+    public virtual SelectionHandler CallBackSelect()
     {
         if (turnEventHandler.turn == GameManager.TurnState.PlayerTurn)
             Debug.Log("SELECTED PLAYER");
@@ -139,28 +139,13 @@ public class Movement : MonoBehaviour, InputSelectReceiver, TurnEventReciever, G
         return selectionHandler;
     }
 
-    public SelectionHandler CallBackSelect(Vector3Int cellPos)
+    public virtual SelectionHandler CallBackSelect(Vector3Int cellPos)
     {
-        if (!validMoveCellPos.Contains(cellPos))
-        {
-            return CallBackDeselect(); // Deselect happens
-        }
-
-        
-        if (movable)
-        {
-            bool t = gridManager.MoveObject(gameObject, cellPos);
-            if (t)
-                Move(cellPos);
-
-            return selectionHandler;
-        }
-
-        return CallBackDeselect();
+        return null;
 
     }
 
-    public SelectionHandler CallBackDeselect()
+    public virtual SelectionHandler CallBackDeselect()
     {
         if (turnEventHandler.turn == GameManager.TurnState.PlayerTurn)
             Debug.Log("DESELECTED PLAYER");
@@ -171,7 +156,7 @@ public class Movement : MonoBehaviour, InputSelectReceiver, TurnEventReciever, G
     }
 
 
-    public void Move(Vector3Int cellPos)
+    public virtual void Move(Vector3Int cellPos)
     {
         currentCellPos = cellPos;
         transform.position = gridManager.cellToWorld(currentCellPos);
@@ -179,13 +164,9 @@ public class Movement : MonoBehaviour, InputSelectReceiver, TurnEventReciever, G
 
         GenerateValidMoveGrid();
         DisableMovement();
-
-        //Joshara: Update so that AP point will be subtracted based on how many squares the player moved
-        GameManager.GetInstance().UpdateAPBar(1);
-
     }
 
-    public void CallBackTurnEvent(GameManager.TurnState turnState)
+    public virtual void CallBackTurnEvent(GameManager.TurnState turnState)
     {
         if (turnState != turnEventHandler.turn)
         {
@@ -196,7 +177,4 @@ public class Movement : MonoBehaviour, InputSelectReceiver, TurnEventReciever, G
             EnableMovement();
         }
     }
-
-
 }
-
