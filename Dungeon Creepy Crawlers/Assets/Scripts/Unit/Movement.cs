@@ -181,7 +181,7 @@ public class Movement : MonoBehaviour, InputSelectReceiver, TurnEventReciever, G
         DisableMovement();
 
         //Joshara: Update so that AP point will be subtracted based on how many squares the player moved
-        GameManager.GetInstance().UpdateAPBar(2);
+        GameManager.GetInstance().UpdateAPBar(1);
 
     }
 
