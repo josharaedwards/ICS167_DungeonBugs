@@ -141,6 +141,7 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, TurnEventRe
 
     public virtual SelectionHandler CallBackSelect(Vector3Int cellPos)
     {
+        CallBackDeselect();
         return null;
 
     }
