@@ -30,7 +30,7 @@ public class StatsTracker : MonoBehaviour
     {
         if (dmg < 0)
         {
-            hp += dmg - res;
+            hp += dmg + res;
             if (hp < 0)
             {
                 hp = 0;
