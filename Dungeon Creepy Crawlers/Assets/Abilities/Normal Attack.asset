@@ -16,6 +16,6 @@ MonoBehaviour:
   description: A normal attack that every unit can use.
   teamCast: 0
   areaOfEffect: 0
-  damage: -1
+  damage: -2
   range: 1
   apCost: 1

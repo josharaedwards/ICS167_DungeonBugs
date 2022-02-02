@@ -1,3 +1,5 @@
+//Jaynie Leavins
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +8,6 @@ using UnityEngine;
 public class NormalAttack : Ability
 {
     public override void Execute(StatsTracker target) {
-        target.DamageCalc(damage);
+        target.DamageCalc(damage, abilityType);
     }
 }
