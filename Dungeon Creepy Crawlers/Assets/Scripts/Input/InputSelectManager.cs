@@ -46,8 +46,10 @@ public class InputSelectManager : MonoBehaviour, TurnEventReciever
         if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
             return;
 
+        SelectionHandler t; // Temp variable to hold value;
         Vector3Int selectedCell = highlightGrid.GetHighlightedCellPos();
         Debug.Log(selectedCell.ToString());
+
         if (selectedObject == null)
         {
             GameObject obj = gridManager.GetObjectFromCell(selectedCell);
@@ -55,12 +57,22 @@ public class InputSelectManager : MonoBehaviour, TurnEventReciever
                 selectedObject = obj.GetComponent<SelectionHandler>();
             if (selectedObject != null)
             {
-                selectedObject = selectedObject.CallBackSelect();
+                t = selectedObject.CallBackSelect();
+                if (t == null) // Call deselect if returns null
+                {
+                   selectedObject.CallBackDeselect();
+                }
+                selectedObject = t;
             }
         }
         else
         {
-            selectedObject = selectedObject.CallBackSelect(selectedCell);
+            t = selectedObject.CallBackSelect(selectedCell);
+            if (t == null) // Call deselect if returns null
+            {
+                selectedObject.CallBackDeselect();
+            }
+            selectedObject = t;
             if (selectedCell == null) // If selectedobj return null then try to find what SelectionHandler in selectedCell and call that
             {
                 GameObject g;
