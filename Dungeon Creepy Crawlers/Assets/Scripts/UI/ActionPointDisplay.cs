@@ -7,8 +7,7 @@ using TMPro;
 public class ActionPointDisplay : MonoBehaviour
 {
     public Slider actionPointSlider;
-    public Image fillImage;
-    public GameObject endRoundButton;
+    public Image fillImage; 
     public TextMeshProUGUI playerNameText;
     public TextMeshProUGUI actionPointText;
 
@@ -19,7 +18,14 @@ public class ActionPointDisplay : MonoBehaviour
     public Color fullActionColor;
     public Color emptyActionColor;
 
-    private bool turnPassed;
+    public GameObject backgroundObj;
+    public GameObject fillAreaObj;
+    public GameObject apNumberObj;
+    public GameObject playerNameObj;
+    public GameObject endRoundButton;
+    public GameObject enemyTextObj;
+
+    private bool toggle;
 
     private void OnEnable()
     {
@@ -29,7 +35,7 @@ public class ActionPointDisplay : MonoBehaviour
 
         currentActionPoints = maxActionPoints;
 
-        turnPassed = false;
+        toggle = false;
 
         UpdateAPUI();
 
@@ -38,7 +44,7 @@ public class ActionPointDisplay : MonoBehaviour
 
     void Update()
     {
-        if (currentActionPoints == maxActionPoints || turnPassed)
+        if (currentActionPoints == maxActionPoints || toggle)
         {
             endRoundButton.SetActive(false);
         }
@@ -73,6 +79,25 @@ public class ActionPointDisplay : MonoBehaviour
     private void EndPlayerRound()
     {
         GameManager.GetInstance().ChangeTurnState();
-        turnPassed = true;
+    }
+
+    public void ToggleRoundDisplay()
+    {
+        if(toggle)
+        {
+            toggle = false;
+        }
+        else
+        {
+            toggle = true;
+        }
+
+        backgroundObj.SetActive(!toggle);
+        fillAreaObj.SetActive(!toggle);
+        apNumberObj.SetActive(!toggle);
+        playerNameObj.SetActive(!toggle);
+        endRoundButton.SetActive(!toggle);
+
+        enemyTextObj.SetActive(toggle);
     }
 }

@@ -89,11 +89,15 @@ public class GameManager : MonoBehaviour
         {
             turnState = TurnState.EnemyTurn;
             Debug.Log("ENEMY TURN");
+
+            apBarUI.ToggleRoundDisplay();
         }
         else if (turnState == TurnState.EnemyTurn)
         {
             turnState = TurnState.PlayerTurn;
             Debug.Log("PlAYER TURN");
+
+            StartCoroutine(WaitForEnemies());
         }
         TurnStateChangeEvent();
     }
@@ -140,5 +144,13 @@ public class GameManager : MonoBehaviour
         {
             apBarUI.UpdateAPPoints(cost);
         }  
+    }
+
+    //Joshara: Also a temporary wait just to see that it is the enemy's turn
+    IEnumerator WaitForEnemies()
+    {
+        yield return new WaitForSeconds(2);
+
+        apBarUI.ToggleRoundDisplay();
     }
 }
