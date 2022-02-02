@@ -1,3 +1,5 @@
+//Jaynie Leavins
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +9,7 @@ public class SpiderAttack : Ability
 {
     public override void Execute(StatsTracker target) //if we make this AoE it will have to have a list of args
     {
-        target.DamageCalc(damage);
+        target.DamageCalc(damage, abilityType);
     }
 }
  

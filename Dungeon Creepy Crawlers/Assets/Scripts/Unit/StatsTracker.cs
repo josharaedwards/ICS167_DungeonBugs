@@ -45,27 +45,33 @@ public class StatsTracker : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            DamageCalc(-2);
+            DamageCalc(-2, Ability.AbilType.Phys);
         }
     }
 
-    public void DamageCalc(int dmg)
+    public void DamageCalc(int dmg, Ability.AbilType abilType)
     {
         int dmgCalc = dmg;
 
-        if (dmg < 0)
+        if (abilType == Ability.AbilType.Phys)
         {
+            dmgCalc += def;
+
+            hp += dmgCalc;
+        }
+        else if (abilType == Ability.AbilType.Mag) {
             dmgCalc += res;
 
             hp += dmgCalc;
-            if (hp < 0)
-            {
-                hp = 0;
-            }
         }
         else
         {
             hp += dmgCalc;
+        }
+
+        if (hp < 0)
+        {
+            hp = 0;
         }
 
         if(healthBar)

@@ -22,4 +22,4 @@ MonoBehaviour:
   str: 2
   def: 2
   res: 2
-  movement: 1
+  movement: 2

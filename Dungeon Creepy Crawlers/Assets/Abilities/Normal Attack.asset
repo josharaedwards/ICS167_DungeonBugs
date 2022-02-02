@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Normal Attack
   description: A normal attack that every unit can use.
+  abilityType: 0
   teamCast: 0
   areaOfEffect: 0
   damage: -1

@@ -22,5 +22,5 @@ MonoBehaviour:
   hp: 6
   str: 2
   def: 1
-  res: 1
+  res: 0
   movement: 1
