@@ -35,8 +35,15 @@ public class ActionPointDisplay : MonoBehaviour
     {
         playerNameText.text = playerName + "'s Mana";
 
-        maxActionPoints = playerManager.GetActionPoint();
-        actionPointSlider.maxValue = maxActionPoints;
+        if(playerManager)
+        {
+            maxActionPoints = playerManager.GetActionPoint();
+            actionPointSlider.maxValue = maxActionPoints;
+        }
+        else
+        {
+            Debug.Log("ERROR: Missing Player Manager on AP UI");
+        }
 
         toggle = false;
 
@@ -65,11 +72,14 @@ public class ActionPointDisplay : MonoBehaviour
 
     private void UpdateAPUI()
     {
-        currentActionPoints = playerManager.GetActionPoint();
-        actionPointSlider.value = currentActionPoints;
+        if(playerManager)
+        {
+            currentActionPoints = playerManager.GetActionPoint();
+            actionPointSlider.value = currentActionPoints;
 
-        actionPointText.text = currentActionPoints.ToString();
-        fillImage.color = Color.Lerp(emptyActionColor, fullActionColor, currentActionPoints / maxActionPoints);
+            actionPointText.text = currentActionPoints.ToString();
+            fillImage.color = Color.Lerp(emptyActionColor, fullActionColor, currentActionPoints / maxActionPoints);
+        }
     }
 
     private void SetupEndRoundButton()
