@@ -17,7 +17,8 @@ MonoBehaviour:
   selectedSprite: {fileID: 0}
   fullSprite: {fileID: 0}
   abilities:
-  - {fileID: 11400000, guid: 660bca6dd2b17ba4f936a87b3bfc5f2d, type: 2}
+  - {fileID: 11400000, guid: 3db11a098d985414d981d392d6d3598b, type: 2}
+  hp: 3
   str: 1
   def: 1
   res: 1
