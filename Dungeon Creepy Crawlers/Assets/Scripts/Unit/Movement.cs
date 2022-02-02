@@ -110,7 +110,7 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, TurnEventRe
     }
 
     // Generate valid movement each turn
-    protected void GenerateValidMove() // TODO: Consider obstacle that affect valid move
+    protected void GenerateValidMove() // TODO: Consider ally that could be went through
     {
         validMoveCellPos.Clear();
         // a temporary set to store the validMove to the next loop to calculate the next valid move pos
@@ -133,7 +133,7 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, TurnEventRe
                 foreach (Vector3Int direction in fourDirections)
                 {
                     t = pos + direction;
-                    if (!gridManager.IsOccupied(t)) // check if t is occupied
+                    if (!gridManager.IsOccupied(t)) // check if t is occupied 
                     {
                         tempPos[i].Add(t);
                     }
