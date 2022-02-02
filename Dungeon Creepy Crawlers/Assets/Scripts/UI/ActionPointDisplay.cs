@@ -1,3 +1,5 @@
+//Joshara Edwards (2022)
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +8,8 @@ using TMPro;
 
 public class ActionPointDisplay : MonoBehaviour
 {
+    public PlayerManager playerManager;
+
     public Slider actionPointSlider;
     public Image fillImage; 
     public TextMeshProUGUI playerNameText;
@@ -31,13 +35,10 @@ public class ActionPointDisplay : MonoBehaviour
     {
         playerNameText.text = playerName + "'s Mana";
 
+        maxActionPoints = playerManager.GetActionPoint();
         actionPointSlider.maxValue = maxActionPoints;
 
-        currentActionPoints = maxActionPoints;
-
         toggle = false;
-
-        UpdateAPUI();
 
         SetupEndRoundButton();
     }
@@ -53,19 +54,21 @@ public class ActionPointDisplay : MonoBehaviour
             endRoundButton.SetActive(true);
         }
 
-        actionPointText.text = currentActionPoints.ToString();
+        UpdateAPUI();
     }
 
     public void UpdateAPPoints(int cost)
     {
-        currentActionPoints -= cost;
-        UpdateAPUI();
+        //currentActionPoints -= cost;
+        //UpdateAPUI();
     }
 
     private void UpdateAPUI()
     {
+        currentActionPoints = playerManager.GetActionPoint();
         actionPointSlider.value = currentActionPoints;
 
+        actionPointText.text = currentActionPoints.ToString();
         fillImage.color = Color.Lerp(emptyActionColor, fullActionColor, currentActionPoints / maxActionPoints);
     }
 
