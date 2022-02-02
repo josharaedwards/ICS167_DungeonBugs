@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Heal
   description: An ability that allows a unit to heal itself or its allies.
+  abilityType: 2
   teamCast: 1
   areaOfEffect: 0
   damage: 2

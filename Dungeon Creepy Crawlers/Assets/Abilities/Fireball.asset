@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Fireball
   description: A magic ability that casts a ranged ball of fire at an enemy.
+  abilityType: 1
   teamCast: 0
   areaOfEffect: 0
   damage: -3
