@@ -25,8 +25,6 @@ public class AbilityManager : MonoBehaviour
         return true;
     }
 
-    public bool APCost;
-
     public void Cast(StatsTracker caster, StatsTracker target, Ability ability) {
         if (InRange(caster, target, ability)) {
             ability.Execute(target);
