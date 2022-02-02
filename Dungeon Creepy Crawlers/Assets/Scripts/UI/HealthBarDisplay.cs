@@ -15,7 +15,6 @@ public class HealthBarDisplay : MonoBehaviour
     public void OnEnable()
     {
         self = GetComponent<Slider>();
-        //isInit = false;
     }
 
     void Update()
@@ -35,14 +34,14 @@ public class HealthBarDisplay : MonoBehaviour
 
     public void DamageReceived(int dmg)
     {
-        currentAmount = self.value - dmg;
+        currentAmount = self.value + dmg;
     }
 
     private void UpdateBar()
     {
         if(currentAmount != self.value)
         {
-            self.value = Mathf.Lerp(currentAmount, self.value, Time.deltaTime * lerpSpeed);
+            self.value = Mathf.Lerp(self.value, currentAmount, Time.deltaTime * lerpSpeed);
             fill.color = gradient.Evaluate(self.normalizedValue);
         }
     }

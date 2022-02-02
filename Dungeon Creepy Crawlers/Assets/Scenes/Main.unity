@@ -426,11 +426,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unit: {fileID: 11400000, guid: c48d2c3511261024e9f428c6e240dc50, type: 2}
   hp: 0
+  maxHP: 0
   abilities: []
   str: 0
   def: 0
   res: 0
   movement: 0
+  healthBar: {fileID: 0}
 --- !u!1 &383700619
 GameObject:
   m_ObjectHideFlags: 0
@@ -1445,14 +1447,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1045895896, guid: a352ac923bc170546b7210cfc2b76582, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1045895896, guid: a352ac923bc170546b7210cfc2b76582, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1216631140, guid: a352ac923bc170546b7210cfc2b76582, type: 3}
       propertyPath: m_Camera
       value: 
