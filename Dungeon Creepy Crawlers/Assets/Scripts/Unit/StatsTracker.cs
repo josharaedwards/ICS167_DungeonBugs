@@ -16,6 +16,8 @@ public class StatsTracker : MonoBehaviour
 
     public int movement;
 
+    public HealthBarDisplay healthBar;
+
     void Start()
     {
         hp = unit.hp;
@@ -24,6 +26,17 @@ public class StatsTracker : MonoBehaviour
         res = unit.res;
         movement = unit.movement;
         abilities = unit.abilities;
+
+        SetupHealthBar();  
+    }
+
+    //Joshara: For debug reasons only. Delete this once damaging gets hooked up!
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            DamageCalc(1);
+        }
     }
 
     public void DamageCalc(int dmg)
@@ -40,5 +53,20 @@ public class StatsTracker : MonoBehaviour
         {
             hp += dmg;
         }
+
+        if(healthBar)
+        {
+            healthBar.DamageReceived(dmg);
+        }
+    }
+
+    public void SetupHealthBar()
+    {
+        healthBar = GetComponentInChildren<HealthBarDisplay>();
+
+        if(healthBar)
+        {
+            healthBar.Init(hp);
+        } 
     }
 }
