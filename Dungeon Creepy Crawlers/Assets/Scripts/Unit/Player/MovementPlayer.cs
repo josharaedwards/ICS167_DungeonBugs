@@ -11,13 +11,10 @@ public class MovementPlayer : Movement
         {
             return null; // Deselect happens
         }
-        
-        if (movable)
-        {
-            bool t = gridManager.MoveObject(gameObject, cellPos);
-            if (t)
-                Move(cellPos);
 
+        bool t = Move(cellPos);
+        if (t)
+        {
             return selectionHandler;
         }
 
@@ -25,12 +22,19 @@ public class MovementPlayer : Movement
     }
 
 
-    public override void Move(Vector3Int cellPos)
+    public override bool Move(Vector3Int cellPos)
     {
-        base.Move(cellPos);
+        bool t = base.Move(cellPos);
 
         //Joshara: Update so that AP point will be subtracted based on how many squares the player moved
+        if (!t)
+        {
+            return false;
+        }
+
         GameManager.GetInstance().UpdateAPBar(1);
+        return true;
+
 
     }
 }

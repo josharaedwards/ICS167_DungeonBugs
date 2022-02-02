@@ -587,7 +587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6fa39c07c1d67f479f059638bafc061, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement: 1
+  movement: 2
   spawnPos: {x: 3, y: 3}
 --- !u!114 &383700629
 MonoBehaviour:
