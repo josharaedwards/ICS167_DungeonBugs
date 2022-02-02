@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class MovementPlayer : Movement, InputSelectReceiver, TurnEventReciever, GridMovementEventReceiver
+public class MovementPlayer : Movement
 {   
     public override SelectionHandler CallBackSelect(Vector3Int cellPos)
     {

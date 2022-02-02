@@ -66,6 +66,11 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, TurnEventRe
         movable = true;
     }
 
+    public Vector3Int currentPos()
+    {
+        return currentCellPos;
+    }
+
     // Update is called once per frame
     void Update()
     {
