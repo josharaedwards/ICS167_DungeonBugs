@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class MovementPlayer : Movement, InputSelectReceiver, TurnEventReciever, GridMovementEventReceiver
+public class MovementPlayer : Movement
 {   
     public override SelectionHandler CallBackSelect(Vector3Int cellPos)
     {
         if (!validMoveCellPos.Contains(cellPos))
         {
-            return CallBackDeselect(); // Deselect happens
+            return null; // Deselect happens
         }
         
         if (movable)
@@ -21,7 +21,7 @@ public class MovementPlayer : Movement, InputSelectReceiver, TurnEventReciever, 
             return selectionHandler;
         }
 
-        return CallBackDeselect();
+        return null;
     }
 
 

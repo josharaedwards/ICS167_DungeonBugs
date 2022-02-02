@@ -838,13 +838,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionPointSlider: {fileID: 2742508885220627368}
   fillImage: {fileID: 2742508883533056416}
-  endRoundButton: {fileID: 4602428485140507825}
   playerNameText: {fileID: 284017572}
   actionPointText: {fileID: 1123791820}
   playerName: Jay Doe
   maxActionPoints: 10
   fullActionColor: {r: 0.5877713, g: 0.35694784, b: 0.8867924, a: 1}
   emptyActionColor: {r: 0.27839085, g: 0.9622642, b: 0.9122247, a: 0.72156864}
+  backgroundObj: {fileID: 2742508883406392668}
+  fillAreaObj: {fileID: 2742508885119446804}
+  apNumberObj: {fileID: 1123791818}
+  playerNameObj: {fileID: 284017570}
+  endRoundButton: {fileID: 4602428485140507825}
+  enemyTextObj: {fileID: 588246799}
 --- !u!1 &4602428485140507825
 GameObject:
   m_ObjectHideFlags: 0

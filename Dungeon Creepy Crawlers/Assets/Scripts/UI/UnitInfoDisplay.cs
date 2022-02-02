@@ -6,63 +6,61 @@ using TMPro;
 
 public class UnitInfoDisplay : MonoBehaviour
 {
-    public string unitName;
-    public Sprite unitImage;
-
     public Image unitImageObject;
     public TextMeshProUGUI unitNameText;
+    public Slider healthBar;
+    public TextMeshProUGUI healthBarValue;
 
     public GameObject buttonContainer;
     public Button abilityButtonPrototype;
 
-    //Delete this once we have an ability class fully functional
-    private string[] testAbilityNames = { "Melee Attack", "Healing Slime", "Snail Trail", "Song of Vitality" };
+    public StatsTracker unitStats;
 
     private void OnEnable()
     {
-        unitNameText.text = unitName;
-        unitImageObject.sprite = unitImage;
-
-        //Debug for testing out updating abilities
-        UpdateAbilites(testAbilityNames);
+        Init();
+        UpdateAbilities();
     }
 
-    void Start()
+    public void Init()
     {
-        
+        if(unitStats)
+        {
+            unitNameText.text = unitStats.unit.type;
+            unitImageObject.sprite = unitStats.unit.fullSprite;
+
+            healthBar.maxValue = unitStats.maxHP;
+            healthBar.value = unitStats.hp;
+
+            healthBarValue.text = unitStats.hp.ToString() + " / " + unitStats.maxHP.ToString();
+        }
+        else
+        {
+            unitNameText.text = "Debug";
+        }
     }
 
-    void Update()
+    public void UpdateAbilities()
     {
-        
-    }
+        if (!unitStats)
+            return;
 
-    public void UpdateAbilites(string[] abilitiesIn)
-    {
-        int numOfAbilities = abilitiesIn.Length;
+        int numOfAbilities = unitStats.abilities.Length;
 
-        foreach(Transform child in buttonContainer.transform)
+        foreach (Transform child in buttonContainer.transform)
         {
             GameObject.Destroy(child.gameObject);
         }
 
         for(int i = 0; i < numOfAbilities; ++i)
         {
-            CreateAbilityButton(abilitiesIn[i]);
+            CreateAbilityButton(unitStats.abilities[i]);
         }
     }
 
-    private void CreateAbilityButton(string abilityText)
+    private void CreateAbilityButton(Ability ability)
     {
         Button abilityButton = Instantiate(abilityButtonPrototype, buttonContainer.transform);
-
-        abilityButton.GetComponentInChildren<TextMeshProUGUI>().text = abilityText;
-        abilityButton.onClick.AddListener(() => OnButtonClick(abilityText));
-    }
-
-    private void OnButtonClick(string abilityText)
-    {
-        //Temporarily will send out a log of the ability name
-        Debug.Log(abilityText);
+        abilityButton.GetComponent<AbilityButtonBroadcast>().Init(ability);
     }
 }

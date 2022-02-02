@@ -46,8 +46,10 @@ public class InputSelectManager : MonoBehaviour, TurnEventReciever
         if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
             return;
 
+        SelectionHandler t; // Temp variable to hold value;
         Vector3Int selectedCell = highlightGrid.GetHighlightedCellPos();
         Debug.Log(selectedCell.ToString());
+
         if (selectedObject == null)
         {
             GameObject obj = gridManager.GetObjectFromCell(selectedCell);
@@ -55,19 +57,31 @@ public class InputSelectManager : MonoBehaviour, TurnEventReciever
                 selectedObject = obj.GetComponent<SelectionHandler>();
             if (selectedObject != null)
             {
-                selectedObject = selectedObject.CallBackSelect();
+                t = selectedObject.CallBackSelect();
+                if (t == null) // Call deselect if returns null
+                {
+                    HandleCallBackDeselect();
+                }
+                selectedObject = t;
             }
         }
         else
         {
-            selectedObject = selectedObject.CallBackSelect(selectedCell);
-            if (selectedCell == null) // If selectedobj return null then try to find what SelectionHandler in selectedCell and call that
+            t = selectedObject.CallBackSelect(selectedCell);
+            if (t == null) // Call deselect if returns null
+            {
+                HandleCallBackDeselect();
+            }
+            selectedObject = t;
+            if (selectedObject == null) // If selectedobj return null then try to find what SelectionHandler in selectedCell and call that
             {
                 GameObject g;
                 g = gridManager.GetObjectFromCell(selectedCell);
                 if (g != null)
+                {
                     selectedObject = g.GetComponent<SelectionHandler>();
                     selectedObject = selectedObject.CallBackSelect();
+                }
             }
         }
     }
@@ -82,6 +96,7 @@ public class InputSelectManager : MonoBehaviour, TurnEventReciever
 
     public void CallBackTurnEvent(GameManager.TurnState turnState)
     {
+        HandleCallBackDeselect();
         selectedObject = null; // Deselect regardless at turn change
         Debug.Log("DESELECTED EVERYTHING");
     }
