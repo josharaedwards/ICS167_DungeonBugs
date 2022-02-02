@@ -21,11 +21,17 @@ public class AbilityManager : MonoBehaviour
         return instance;
     }
 
-    public bool InRange(StatsTracker caster, StatsTracker target, Ability ability) { // TODO
-        return true;
+    public bool InRange(StatsTracker caster, StatsTracker target, Ability ability) {
+        Vector3Int casterPos = gridManager.GetPosFromObject(caster.gameObject);
+        Vector3Int targetPos = gridManager.GetPosFromObject(target.gameObject);
+        if (Vector3Int.Distance(casterPos, targetPos) <= ability.range)
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
-
-    public bool APCost;
 
     public void Cast(StatsTracker caster, StatsTracker target, Ability ability) {
         if (InRange(caster, target, ability)) {
