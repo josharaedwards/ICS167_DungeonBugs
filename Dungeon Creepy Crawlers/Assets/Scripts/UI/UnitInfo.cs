@@ -37,9 +37,10 @@ public class UnitInfo : MonoBehaviour, InputSelectReceiver
     {
         Debug.Log("Close Info UI");
 
-        Destroy(unitInfoInst.gameObject);
+        if (unitInfoInst != null)
+            Destroy(unitInfoInst.gameObject);
 
-        return selectionHandler;
+        return null;
     }
 
     public SelectionHandler CallBackSelect(Vector3Int cellPos)
