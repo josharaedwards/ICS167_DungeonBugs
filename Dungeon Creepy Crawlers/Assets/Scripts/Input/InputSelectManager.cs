@@ -60,7 +60,7 @@ public class InputSelectManager : MonoBehaviour, TurnEventReciever
                 t = selectedObject.CallBackSelect();
                 if (t == null) // Call deselect if returns null
                 {
-                   selectedObject.CallBackDeselect();
+                    HandleCallBackDeselect();
                 }
                 selectedObject = t;
             }
@@ -70,16 +70,18 @@ public class InputSelectManager : MonoBehaviour, TurnEventReciever
             t = selectedObject.CallBackSelect(selectedCell);
             if (t == null) // Call deselect if returns null
             {
-                selectedObject.CallBackDeselect();
+                HandleCallBackDeselect();
             }
             selectedObject = t;
-            if (selectedCell == null) // If selectedobj return null then try to find what SelectionHandler in selectedCell and call that
+            if (selectedObject == null) // If selectedobj return null then try to find what SelectionHandler in selectedCell and call that
             {
                 GameObject g;
                 g = gridManager.GetObjectFromCell(selectedCell);
                 if (g != null)
+                {
                     selectedObject = g.GetComponent<SelectionHandler>();
                     selectedObject = selectedObject.CallBackSelect();
+                }
             }
         }
     }
@@ -94,6 +96,7 @@ public class InputSelectManager : MonoBehaviour, TurnEventReciever
 
     public void CallBackTurnEvent(GameManager.TurnState turnState)
     {
+        HandleCallBackDeselect();
         selectedObject = null; // Deselect regardless at turn change
         Debug.Log("DESELECTED EVERYTHING");
     }

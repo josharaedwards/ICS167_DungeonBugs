@@ -19,8 +19,16 @@ public class StatsTracker : MonoBehaviour
 
     public HealthBarDisplay healthBar;
 
+    private PlayerManager playerManager;
+
     void Start()
     {
+        if (gameObject.tag == "Player")
+        {
+            playerManager = PlayerManager.GetInstance();
+            playerManager.Add(this);
+        }
+
         hp = unit.hp;
         maxHP = hp;
         str = unit.str;

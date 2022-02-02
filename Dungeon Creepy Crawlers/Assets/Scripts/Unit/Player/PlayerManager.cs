@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    private List<GameObject> players;
+    private HashSet<GameObject> players;
 
     private static PlayerManager instance;
 
-    [SerializeField] private int ActionPoint;
+    [SerializeField] private int ActionPoint; // shared pool of AP for the party
 
 
 
@@ -19,6 +19,7 @@ public class PlayerManager : MonoBehaviour
 
     void Awake()
     {
+        players = new HashSet<GameObject>();
         instance = this;
     }
 
@@ -27,9 +28,24 @@ public class PlayerManager : MonoBehaviour
 
     }
 
-    public GameObject[] GetPlayers()
+    public HashSet<GameObject> GetUnits()
     {
-        return players.ToArray();
+        return players;
+    }
+
+    public void Add(StatsTracker unit) // Will be called by players' StatTracker on Start()
+    {
+        players.Add(unit.gameObject);
+    }
+
+    public bool ExecuteAbility(Ability ability, StatsTracker caster, StatsTracker target) // Will be called by indivdual player unit to execute ability
+    {
+        if (ability.apCost < ActionPoint)
+        {
+            // AbilityManager.Execute
+        }
+
+        return false;
     }
 
     public int GetActionPoint()

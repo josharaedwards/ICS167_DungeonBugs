@@ -4,36 +4,31 @@ using UnityEngine;
 
 public class MovementAI : Movement
 {
-    private Movement currentTarget;
+    private AILogic mainLogic;
 
-    
 
-    public bool HasTarget()
-    { 
-        return currentTarget != null; 
-    }
-
-    public void SetTarget(Movement target)
+    protected override void Start()
     {
-        currentTarget = target;
+        base.Start();
+        mainLogic = GetComponent<AILogic>();
+
     }
 
-    public Movement CurrentTarget()
+    public void MoveNext()
     {
-        return currentTarget;
+        Move(GetNextMove());
     }
 
-    //TODO: Implement actual A* pathfinding
-    public Vector3Int GetNextMove() // Simple Greedy Pathfinding toward the target
+    private Vector3Int GetNextMove() // Simple Greedy Pathfinding toward the target
     {
         // TODO: When ability is implemented include the logic of using them
-
+        Vector3Int currentTargetPos = gridManager.GetPosFromObject(mainLogic.CurrentTarget());
         float distanceToTarget = float.MaxValue;
         float tempDist;
         Vector3Int bestMove = Vector3Int.zero;
         foreach (Vector3Int move in validMoveCellPos)
         {
-            tempDist = Vector3Int.Distance(move, currentTarget.currentPos());
+            tempDist = Vector3Int.Distance(move, currentTargetPos);
             if (tempDist < distanceToTarget)
             {
                 distanceToTarget = tempDist;
