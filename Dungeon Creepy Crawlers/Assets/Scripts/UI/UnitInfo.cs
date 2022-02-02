@@ -37,14 +37,13 @@ public class UnitInfo : MonoBehaviour, InputSelectReceiver
     {
         Debug.Log("Close Info UI");
 
-        Destroy(unitInfoInst);
+        Destroy(unitInfoInst.gameObject);
 
         return selectionHandler;
     }
 
     public SelectionHandler CallBackSelect(Vector3Int cellPos)
     {
-        CallBackSelect();
         return null;
     }
 
