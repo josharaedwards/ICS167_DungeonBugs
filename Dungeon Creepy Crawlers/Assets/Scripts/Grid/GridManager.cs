@@ -61,7 +61,7 @@ public class GridManager : MonoBehaviour
     // Move obj to targetPos on grid
     public bool MoveObject(GameObject obj, Vector3Int targetPos)
     {
-        if (objFromCell.ContainsKey(targetPos)) // Check if any object occupy targetPos
+        if (IsOccupied(targetPos)) // Check if any object occupy targetPos
             return false;
 
         // Update pos for obj
@@ -88,10 +88,15 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    public bool IsOccupied(Vector3Int cellPos)
+    {
+        return objFromCell.ContainsKey(cellPos);
+    }
+
 
     public GameObject GetObjectFromCell(Vector3Int cellPos)
     {
-        if (objFromCell.ContainsKey(cellPos))
+        if (IsOccupied(cellPos))
             return objFromCell[cellPos];
 
         return null;
