@@ -110,11 +110,15 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, TurnEventRe
     }
 
     // Generate valid movement each turn
-    protected void GenerateValidMove() // TODO: Consider obstacle that affect valid move
+    protected void GenerateValidMove() // TODO: Consider ally that could be went through
     {
         validMoveCellPos.Clear();
         // a temporary set to store the validMove to the next loop to calculate the next valid move pos
         HashSet<Vector3Int>[] tempPos = new HashSet<Vector3Int>[movement + 1];
+        Vector3Int[] fourDirections = { Vector3Int.right, Vector3Int.left, Vector3Int.up, Vector3Int.down };
+
+        Vector3Int t; // a temp variable to check gridManager.IsOccupied(t)
+
         for (int i = 0; i <= movement; ++i)
         {
             tempPos[i] = new HashSet<Vector3Int>();
@@ -126,10 +130,14 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, TurnEventRe
         {
             foreach (Vector3Int pos in tempPos[i - 1])
             {
-                tempPos[i].Add(pos + Vector3Int.right);
-                tempPos[i].Add(pos + Vector3Int.left);
-                tempPos[i].Add(pos + Vector3Int.up);
-                tempPos[i].Add(pos + Vector3Int.down);
+                foreach (Vector3Int direction in fourDirections)
+                {
+                    t = pos + direction;
+                    if (!gridManager.IsOccupied(t)) // check if t is occupied 
+                    {
+                        tempPos[i].Add(t);
+                    }
+                } 
             }
             foreach (Vector3Int pos in tempPos[i])
             {
@@ -166,14 +174,23 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, TurnEventRe
     }
 
 
-    public virtual void Move(Vector3Int cellPos)
+    public virtual bool Move(Vector3Int cellPos)
     {
+        if (!movable)
+            return false;
+
+        bool t = gridManager.MoveObject(gameObject, cellPos); // Check if its movable on grid
+        if (!t)
+            return false;
+
         currentCellPos = cellPos;
         transform.position = gridManager.cellToWorld(currentCellPos);
         transform.position = new Vector3(transform.position.x + 0.5f, transform.position.y + 0.5f, transform.position.z);
 
         GenerateValidMoveGrid();
         DisableMovement();
+
+        return true;
     }
 
     public virtual void CallBackTurnEvent(GameManager.TurnState turnState)
