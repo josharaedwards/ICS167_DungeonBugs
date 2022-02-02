@@ -6,11 +6,10 @@ using TMPro;
 
 public class UnitInfoDisplay : MonoBehaviour
 {
-    public string unitName;
-    public Sprite unitImage;
-
     public Image unitImageObject;
     public TextMeshProUGUI unitNameText;
+    public Slider healthBar;
+    public TextMeshProUGUI healthBarValue;
 
     public GameObject buttonContainer;
     public Button abilityButtonPrototype;
@@ -25,12 +24,27 @@ public class UnitInfoDisplay : MonoBehaviour
 
     public void Init()
     {
-        unitNameText.text = unitStats.unit.type;
-        unitImageObject.sprite = unitStats.unit.fullSprite;
+        if(unitStats)
+        {
+            unitNameText.text = unitStats.unit.type;
+            unitImageObject.sprite = unitStats.unit.fullSprite;
+
+            healthBar.maxValue = unitStats.maxHP;
+            healthBar.value = unitStats.hp;
+
+            healthBarValue.text = unitStats.hp.ToString() + " / " + unitStats.maxHP.ToString();
+        }
+        else
+        {
+            unitNameText.text = "Debug";
+        }
     }
 
     public void UpdateAbilities()
     {
+        if (!unitStats)
+            return;
+
         int numOfAbilities = unitStats.abilities.Length;
 
         foreach (Transform child in buttonContainer.transform)
