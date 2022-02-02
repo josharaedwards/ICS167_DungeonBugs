@@ -7,6 +7,7 @@ public class StatsTracker : MonoBehaviour
     public Unit unit;
 
     public int hp;
+    public int maxHP;
 
     public Ability[] abilities;
 
@@ -21,6 +22,7 @@ public class StatsTracker : MonoBehaviour
     void Start()
     {
         hp = unit.hp;
+        maxHP = hp;
         str = unit.str;
         def = unit.def;
         res = unit.res;
@@ -35,15 +37,19 @@ public class StatsTracker : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            DamageCalc(1);
+            DamageCalc(-2);
         }
     }
 
     public void DamageCalc(int dmg)
     {
+        int dmgCalc = dmg;
+
         if (dmg < 0)
         {
-            hp += dmg + res;
+            dmgCalc += res;
+
+            hp += dmgCalc;
             if (hp < 0)
             {
                 hp = 0;
@@ -51,12 +57,12 @@ public class StatsTracker : MonoBehaviour
         }
         else
         {
-            hp += dmg;
+            hp += dmgCalc;
         }
 
         if(healthBar)
         {
-            healthBar.DamageReceived(dmg);
+            healthBar.DamageReceived(dmgCalc);
         }
     }
 

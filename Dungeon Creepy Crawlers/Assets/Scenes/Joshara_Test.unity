@@ -393,6 +393,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1124379143}
     m_Modifications:
+    - target: {fileID: 2742508883533056419, guid: 449a1f0f18d8cde4ba0b3b0e5abaddba, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2742508883533056419, guid: 449a1f0f18d8cde4ba0b3b0e5abaddba, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2742508885220627370, guid: 449a1f0f18d8cde4ba0b3b0e5abaddba, type: 3}
       propertyPath: m_Name
       value: ' AP Bar'
@@ -506,6 +514,14 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1978282763, guid: 1b064309705c9654e9c20b227ec7b5f3, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1978282763, guid: 1b064309705c9654e9c20b227ec7b5f3, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4547558266661958416, guid: 1b064309705c9654e9c20b227ec7b5f3, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -593,6 +609,10 @@ PrefabInstance:
     - target: {fileID: 4547558266661958417, guid: 1b064309705c9654e9c20b227ec7b5f3, type: 3}
       propertyPath: m_Name
       value: Unit Info Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4547558266661958429, guid: 1b064309705c9654e9c20b227ec7b5f3, type: 3}
+      propertyPath: unitStats
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b064309705c9654e9c20b227ec7b5f3, type: 3}

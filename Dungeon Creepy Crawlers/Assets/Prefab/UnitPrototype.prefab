@@ -423,7 +423,7 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
   fill: {fileID: 1045895897}
-  lerpSpeed: 200
+  lerpSpeed: 8
 --- !u!1 &6637410797066503145
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,11 +581,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unit: {fileID: 11400000, guid: c84e8ac0273d1d44d80f75ed7038fd2b, type: 2}
   hp: 0
+  maxHP: 0
   abilities: []
   str: 0
   def: 0
   res: 0
   movement: 0
+  healthBar: {fileID: 0}
 --- !u!114 &6637410797066503059
 MonoBehaviour:
   m_ObjectHideFlags: 0
