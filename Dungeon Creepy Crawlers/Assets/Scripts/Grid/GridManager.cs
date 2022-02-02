@@ -97,6 +97,16 @@ public class GridManager : MonoBehaviour
         return null;
     }
 
+    public Vector3Int GetPosFromObject(GameObject obj)
+    {
+        if (!objPos.ContainsKey(obj))
+        {
+            return objPos[obj];
+        }
+
+        return Vector3Int.zero;
+    }
+
     public Vector3 cellToWorld(Vector3Int cellPos)
     {
         return grid.CellToWorld(cellPos);

@@ -9,7 +9,7 @@ public class MovementPlayer : Movement
     {
         if (!validMoveCellPos.Contains(cellPos))
         {
-            return CallBackDeselect(); // Deselect happens
+            return null; // Deselect happens
         }
         
         if (movable)
@@ -21,7 +21,7 @@ public class MovementPlayer : Movement
             return selectionHandler;
         }
 
-        return CallBackDeselect();
+        return null;
     }
 
 

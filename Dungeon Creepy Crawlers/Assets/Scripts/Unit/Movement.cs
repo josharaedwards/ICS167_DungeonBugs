@@ -66,6 +66,11 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, TurnEventRe
         movable = true;
     }
 
+    public bool Movable()
+    {
+        return movable;
+    }
+
     public Vector3Int currentPos()
     {
         return currentCellPos;
@@ -146,7 +151,6 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, TurnEventRe
 
     public virtual SelectionHandler CallBackSelect(Vector3Int cellPos)
     {
-        CallBackDeselect();
         return null;
 
     }
