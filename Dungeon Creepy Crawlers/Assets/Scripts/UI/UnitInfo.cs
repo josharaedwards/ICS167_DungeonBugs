@@ -7,18 +7,19 @@ using UnityEngine;
 public class UnitInfo : MonoBehaviour, InputSelectReceiver
 {
     public GameObject unitInfoPrototype;
-    public GameObject spawnLocation;
+    //public GameObject spawnLocation;
 
     private StatsTracker unitStats;
     private SelectionHandler selectionHandler;
     private GameObject unitInfoInst;
+    private UIManager uiManager;
 
     void Start()
     {
         selectionHandler = GetComponent<SelectionHandler>();
         selectionHandler.Subscribe(this);
-
         unitStats = GetComponent<StatsTracker>();
+        uiManager = UIManager.GetInstance();
     }
 
     void Update()
@@ -55,7 +56,7 @@ public class UnitInfo : MonoBehaviour, InputSelectReceiver
         if(unitStats && unitInfoPrototype)
         {
             unitInfoPrototype.GetComponent<UnitInfoDisplay>().unitStats = unitStats;
-            unitInfoInst = Instantiate(unitInfoPrototype, spawnLocation.transform);
+            unitInfoInst = Instantiate(unitInfoPrototype, uiManager.GetUnitSpawnLocation());
         }
         else
         {
