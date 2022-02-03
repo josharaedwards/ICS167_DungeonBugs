@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour, TurnEventReciever
 {
     private HashSet<GameObject> players;
+    [SerializeField] private int count;
 
     private static PlayerManager instance;
 
@@ -54,6 +55,11 @@ public class PlayerManager : MonoBehaviour, TurnEventReciever
 
         currentActionPoint = maxActionPoint;
         
+    }
+
+    void Update()
+    {
+        count = players.Count;
     }
 
     public void CallBackTurnEvent(GameManager.TurnState turnState) // Refill AP every player turn

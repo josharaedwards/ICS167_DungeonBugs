@@ -7,6 +7,7 @@ using UnityEngine;
 public class AIManager : MonoBehaviour, TurnEventReciever
 {
     private HashSet<AILogic> AIs;
+    [SerializeField] private int count;
 
     private static AIManager instance;
 
@@ -33,6 +34,11 @@ public class AIManager : MonoBehaviour, TurnEventReciever
 
         turnEventHandler = GetComponent<TurnEventHandler>();
         turnEventHandler.Subscribe(this);
+    }
+
+    void Update()
+    {
+        count = AIs.Count;
     }
 
     public void Add(AILogic AI) // Will be called by AILogics on Start()

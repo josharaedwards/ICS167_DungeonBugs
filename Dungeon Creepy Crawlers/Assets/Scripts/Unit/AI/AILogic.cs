@@ -8,7 +8,7 @@ public class AILogic : MonoBehaviour
 {
     private AIManager manager;
 
-    private GameObject currentTarget;
+    [SerializeField] private GameObject currentTarget;
 
     private MovementAI movementAI;
     // Will have script component for abilityAI
