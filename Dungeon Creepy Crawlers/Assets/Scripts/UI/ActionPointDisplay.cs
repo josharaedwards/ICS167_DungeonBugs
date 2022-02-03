@@ -31,14 +31,12 @@ public class ActionPointDisplay : MonoBehaviour
 
     private bool toggle;
 
-
-
-    private void OnEnable()
+    private void Start()
     {
         playerManager = PlayerManager.GetInstance();
         playerNameText.text = playerName + "'s Mana";
 
-        if(playerManager)
+        if (playerManager)
         {
             maxActionPoints = playerManager.GetMaxActionPoint();
             actionPointSlider.maxValue = maxActionPoints;
@@ -55,22 +53,7 @@ public class ActionPointDisplay : MonoBehaviour
 
     void Update()
     {
-        if (currentActionPoints == maxActionPoints || toggle)
-        {
-            endRoundButton.SetActive(false);
-        }
-        else
-        {
-            endRoundButton.SetActive(true);
-        }
-
         UpdateAPUI();
-    }
-
-    public void UpdateAPPoints(int cost)
-    {
-        //currentActionPoints -= cost;
-        //UpdateAPUI();
     }
 
     private void UpdateAPUI()

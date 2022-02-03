@@ -137,15 +137,6 @@ public class GameManager : MonoBehaviour
         return GameState.Ongoing;
     }
 
-    //Joshara: Temporarily add a hook to the AP Bar
-    public void UpdateAPBar(int cost)
-    {
-        if(apBarUI)
-        {
-            apBarUI.UpdateAPPoints(cost);
-        }  
-    }
-
     //Joshara: Also a temporary wait just to see that it is the enemy's turn
     IEnumerator WaitForEnemies()
     {

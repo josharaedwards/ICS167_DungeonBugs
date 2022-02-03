@@ -38,8 +38,20 @@ public class PlayerManager : MonoBehaviour, TurnEventReciever
     {
         abilityManager = AbilityManager.GetInstance();
 
+
         turnEventHandler = GetComponent<TurnEventHandler>();
-        turnEventHandler.Subscribe(this);
+        
+        if (turnEventHandler)
+        {
+            turnEventHandler.Subscribe(this);
+        }
+        else
+        {
+            Debug.Log("ERROR: Missing Turn Event Handler");
+        }
+
+        currentActionPoint = maxActionPoint;
+        
     }
 
     public void CallBackTurnEvent(GameManager.TurnState turnState) // Refill AP every player turn

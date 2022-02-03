@@ -38,7 +38,9 @@ public class StatsTracker : MonoBehaviour
         movement = unit.movement;
         abilities = unit.abilities;
 
-        SetupHealthBar();  
+        SetupHealthBar();
+
+        abilityHandler = GetComponent<AbilityHandler>();
     }
 
     //Joshara: For debug reasons only. Delete this once damaging gets hooked up!
@@ -83,7 +85,14 @@ public class StatsTracker : MonoBehaviour
 
     public void SelectAbility(Ability ability) // Will be called by an ability button
     {
-        abilityHandler.Select(ability);
+        if(ability)
+        {
+            abilityHandler.Select(ability);
+        }
+        else
+        {
+            Debug.Log("Missing Ability in Stats Tracker");
+        }
     }
 
     public void SetupHealthBar()

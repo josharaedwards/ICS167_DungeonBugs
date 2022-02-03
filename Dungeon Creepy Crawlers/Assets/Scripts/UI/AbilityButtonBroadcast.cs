@@ -9,6 +9,7 @@ using TMPro;
 public class AbilityButtonBroadcast : MonoBehaviour
 {
     public Ability ability;
+    public StatsTracker unit;
 
     private Button self;
 
@@ -17,9 +18,10 @@ public class AbilityButtonBroadcast : MonoBehaviour
         self = GetComponent<Button>();
     }
 
-    public void Init(Ability abilityIn)
+    public void Init(Ability abilityIn, StatsTracker unitIn)
     {
         ability = abilityIn;
+        unit = unitIn;
 
         self.GetComponentInChildren<TextMeshProUGUI>().text = ability.abilityName;
         self.onClick.AddListener(() => BroadcastAbility());
@@ -27,7 +29,14 @@ public class AbilityButtonBroadcast : MonoBehaviour
 
     private void BroadcastAbility()
     {
-        //Insert code to prepare executing the ability
-        Debug.Log("Broadcasting Ability: " + ability.abilityName);
+        if(unit)
+        {
+            Debug.Log("Broadcasting Ability: " + ability.abilityName);
+            unit.SelectAbility(ability);
+        }
+        else
+        {
+            Debug.Log("Stats Tracker missing");
+        }
     }
 }
