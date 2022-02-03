@@ -27,17 +27,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        
-    }
-
-    
-    void Update()
-    {
-        
-    }
-
     public Transform GetUnitSpawnLocation()
     {
         return unitInfoSpawnLoc.transform;

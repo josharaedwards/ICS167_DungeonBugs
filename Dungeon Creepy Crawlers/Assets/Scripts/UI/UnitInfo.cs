@@ -7,7 +7,6 @@ using UnityEngine;
 public class UnitInfo : MonoBehaviour, InputSelectReceiver
 {
     public GameObject unitInfoPrototype;
-    //public GameObject spawnLocation;
 
     private StatsTracker unitStats;
     private SelectionHandler selectionHandler;
@@ -20,11 +19,6 @@ public class UnitInfo : MonoBehaviour, InputSelectReceiver
         selectionHandler.Subscribe(this);
         unitStats = GetComponent<StatsTracker>();
         uiManager = UIManager.GetInstance();
-    }
-
-    void Update()
-    {
-        
     }
 
     public SelectionHandler CallBackSelect()
