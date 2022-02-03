@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: '[ COOL NAME FOR BOSS ABILITY ]'
   description: 
+  abilityType: 0
   teamCast: 0
   areaOfEffect: 1
-  damage: 4
+  damage: -4
   range: 1
   apCost: 2
