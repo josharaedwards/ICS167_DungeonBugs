@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class UIManager : MonoBehaviour, TurnEventReciever
@@ -65,6 +66,13 @@ public class UIManager : MonoBehaviour, TurnEventReciever
         apBarUI.ToggleRoundDisplay();
     }
 
+    IEnumerator WaitForWinLose()
+    {
+        yield return new WaitForSeconds(3);
+
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public Transform GetUnitSpawnLocation()
     {
         return unitInfoSpawnLoc.transform;
@@ -77,10 +85,12 @@ public class UIManager : MonoBehaviour, TurnEventReciever
             case GameManager.GameState.Won:
                 winLoseText.text = "You Won!";
                 winLoseText.gameObject.SetActive(true);
+                StartCoroutine(WaitForWinLose());
                 break;
             case GameManager.GameState.Lost:
                 winLoseText.text = "You Lose.";
                 winLoseText.gameObject.SetActive(true);
+                StartCoroutine(WaitForWinLose());
                 break;
             case GameManager.GameState.Ongoing:
             default:
