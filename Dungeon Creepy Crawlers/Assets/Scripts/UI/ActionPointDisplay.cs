@@ -40,7 +40,7 @@ public class ActionPointDisplay : MonoBehaviour
 
         if(playerManager)
         {
-            maxActionPoints = playerManager.GetActionPoint();
+            maxActionPoints = playerManager.GetMaxActionPoint();
             actionPointSlider.maxValue = maxActionPoints;
         }
         else
@@ -77,7 +77,7 @@ public class ActionPointDisplay : MonoBehaviour
     {
         if(playerManager)
         {
-            currentActionPoints = playerManager.GetActionPoint();
+            currentActionPoints = playerManager.GetCurrentActionPoint();
             actionPointSlider.value = currentActionPoints;
 
             actionPointText.text = currentActionPoints.ToString();
