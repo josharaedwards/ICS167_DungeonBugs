@@ -64,18 +64,20 @@ public class GridManager : MonoBehaviour
         if (IsOccupied(targetPos)) // Check if any object occupy targetPos
             return false;
 
+        Vector3Int prevPos = objPos[obj];
+
         // Update pos for obj
         objFromCell.Remove(objPos[obj]);
         objPos[obj] = targetPos;
         objFromCell.Add(targetPos, obj);
 
-        GridMovementEvent(targetPos);
+        GridMovementEvent(prevPos, targetPos);
 
         return true;
     }
 
     // Tell every GridMovementEventReceiver object something just moved
-    private void GridMovementEvent(Vector3Int cellPos)
+    private void GridMovementEvent(Vector3Int prevPos, Vector3Int newPos)
     {
         GridMovementEventReceiver receiver = null;
         foreach (GameObject obj in gameObjects)
@@ -83,7 +85,7 @@ public class GridManager : MonoBehaviour
             receiver = obj.GetComponent<GridMovementEventReceiver>();
             if (receiver != null)
             {
-                receiver.GridMovementEventCallBack(cellPos);
+                receiver.GridMovementEventCallBack(prevPos, newPos);
             }
         }
     }

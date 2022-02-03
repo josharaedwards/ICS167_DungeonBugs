@@ -23,7 +23,7 @@ public class UnitInfo : MonoBehaviour, InputSelectReceiver
 
     public SelectionHandler CallBackSelect()
     {
-        Debug.Log("Open Info UI");
+        //Debug.Log("Open Info UI");
 
         InitUnitInfoDisplay();
 
@@ -32,7 +32,7 @@ public class UnitInfo : MonoBehaviour, InputSelectReceiver
 
     public SelectionHandler CallBackDeselect()
     {
-        Debug.Log("Close Info UI");
+        //Debug.Log("Close Info UI");
 
         if (unitInfoInst != null)
             Destroy(unitInfoInst.gameObject);

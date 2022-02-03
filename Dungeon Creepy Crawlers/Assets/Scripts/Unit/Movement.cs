@@ -10,8 +10,9 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, TurnEventRe
 
     protected GridManager gridManager;
 
-    protected Vector3Int currentCellPos;
+    [SerializeField] protected Vector3Int currentCellPos;
     protected bool movable;
+    protected bool recentlyMoved;
 
     protected int frame; // WILL PROBABLY DELETE THIS; JUST A TEMPORARY SOLUTION FOR RUNNING A FUNCTION ON FRAME 2
 
@@ -40,7 +41,7 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, TurnEventRe
 
         Init(spawnPos);
 
-        if (turnEventHandler.turn == GameManager.TurnState.PlayerTurn)
+        if (turnEventHandler.turn == GameManager.TurnState.PlayerTurn) // By default the player start first, will change this for multiplayer
             movable = true;
         else
             movable = false;
@@ -90,11 +91,20 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, TurnEventRe
         }
     }
 
-    // Re-generate valid movable tile if cellPos from the event is within the existing valid moves
-    public void GridMovementEventCallBack(Vector3Int cellPos)
+    // Re-generate valid movable tile if prevPos or newPos from the event is within the existing valid moves
+    public void GridMovementEventCallBack(Vector3Int prevPos, Vector3Int newPos)
     {
-        Debug.Log("GridMovementEventCallBack");
-        if (validMoveCellPos.Contains(cellPos) && cellPos != currentCellPos)
+        if (recentlyMoved)
+        {
+            recentlyMoved = false;
+            return;
+        }
+        // Check if the newPos and prevPos is anywhere within the unit's possible range of movement
+        float prevDist = Vector3Int.Distance(currentCellPos, prevPos);
+        float newDist = Vector3Int.Distance(currentCellPos, newPos);
+        Debug.Log(prevDist);
+        Debug.Log(newDist);
+        if ((int) newDist <= movement || (int) prevDist <= movement) // 0.1f for floating point error
         {
             GenerateValidMoveGrid();
         }
@@ -125,7 +135,6 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, TurnEventRe
         }
 
         tempPos[0].Add(currentCellPos);
-
         for (int i = 1; i <= movement; ++i)
         {
             foreach (Vector3Int pos in tempPos[i - 1])
@@ -149,10 +158,10 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, TurnEventRe
 
     public virtual SelectionHandler CallBackSelect()
     {
-        if (turnEventHandler.turn == GameManager.TurnState.PlayerTurn)
+        /*if (turnEventHandler.turn == GameManager.TurnState.PlayerTurn)
             Debug.Log("SELECTED PLAYER");
         else
-            Debug.Log("SELECTED ENEMY");
+            Debug.Log("SELECTED ENEMY");*/
         gridGenerator.ShowGrid(this);
         return selectionHandler;
     }
@@ -165,10 +174,10 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, TurnEventRe
 
     public virtual SelectionHandler CallBackDeselect()
     {
-        if (turnEventHandler.turn == GameManager.TurnState.PlayerTurn)
+        /*if (turnEventHandler.turn == GameManager.TurnState.PlayerTurn)
             Debug.Log("DESELECTED PLAYER");
         else
-            Debug.Log("DESELECTED ENEMY");
+            Debug.Log("DESELECTED ENEMY");*/
         gridGenerator.HideGrid(this);
         return null;
     }
@@ -178,14 +187,20 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, TurnEventRe
     {
         if (!movable)
             return false;
-
+        recentlyMoved = true;
         bool t = gridManager.MoveObject(gameObject, cellPos); // Check if its movable on grid
         if (!t)
+        {
+            recentlyMoved = false;
             return false;
+        }
+            
 
         currentCellPos = cellPos;
         transform.position = gridManager.cellToWorld(currentCellPos);
         transform.position = new Vector3(transform.position.x + 0.5f, transform.position.y + 0.5f, transform.position.z);
+
+       
 
         GenerateValidMoveGrid();
         DisableMovement();
