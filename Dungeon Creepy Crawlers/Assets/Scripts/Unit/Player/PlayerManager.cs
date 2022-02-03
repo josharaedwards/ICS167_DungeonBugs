@@ -56,7 +56,7 @@ public class PlayerManager : MonoBehaviour, TurnEventReciever
 
     public void CallBackTurnEvent(GameManager.TurnState turnState) // Refill AP every player turn
     {
-        if (turnState == GameManager.TurnState.EnemyTurn)
+        if (!(turnState == turnEventHandler.turn))
         {
             return;
         }
@@ -85,6 +85,7 @@ public class PlayerManager : MonoBehaviour, TurnEventReciever
             {
                 currentActionPoint -= ability.apCost;
             }
+            return result;
         }
 
         return false;

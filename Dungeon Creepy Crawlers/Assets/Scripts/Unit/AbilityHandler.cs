@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbilityHandler : MonoBehaviour, InputSelectReceiver
+public class AbilityHandler : MonoBehaviour, InputSelectReceiver, TurnEventReciever
 {
     private Ability selectedAbility;
 
     private GridGenerator gridGenerator;
     private MovementPlayer movementComp;
+
     private SelectionHandler selectionHandler;
+    private TurnEventHandler turnEventHandler;
 
     private PlayerManager playerManager;
     private GridManager gridManager;
@@ -27,10 +29,16 @@ public class AbilityHandler : MonoBehaviour, InputSelectReceiver
         selectionHandler = GetComponent<SelectionHandler>();
         selectionHandler.Subscribe(this);
 
+        turnEventHandler = GetComponent<TurnEventHandler>();
+        turnEventHandler.Subscribe(this);
+
         playerManager = PlayerManager.GetInstance();
+        gridManager = GridManager.GetInstance();
 
         rangeVisual = new HashSet<Vector3Int>();
         areaVisual = new HashSet<Vector3Int>();
+
+        castable = true; // By default the player goes first, might change this later
     }
 
     public void Select(Ability ability)
@@ -52,7 +60,7 @@ public class AbilityHandler : MonoBehaviour, InputSelectReceiver
 
     public SelectionHandler CallBackSelect(Vector3Int targetPos)
     {
-        if (selectedAbility == null)
+        if (selectedAbility == null || !castable)
         {
             return null;
         }
@@ -68,20 +76,26 @@ public class AbilityHandler : MonoBehaviour, InputSelectReceiver
         {
             return null;
         }
-        playerManager.Cast(GetComponent<StatsTracker>(), targetStatsTracker, selectedAbility);
+        bool result = playerManager.Cast(GetComponent<StatsTracker>(), targetStatsTracker, selectedAbility);
+        Debug.Log(result);
+        if (result)
+        {
+            DisableCast();
+        }
         return null;
 
     }
 
     public SelectionHandler CallBackDeselect()
     {
-        if (prevMovabable) // Return movability to before
-        {
-            movementComp.EnableMovement();
-        }
+        //Debug.Log("DeselectAbilityCalled");
 
         if (selectedAbility != null)
         {
+            if (prevMovabable) // Return movability to before
+            {
+                movementComp.EnableMovement();
+            }
             selectedAbility = null;
             gridGenerator.DestroyGrid(this);
             return selectionHandler;
@@ -91,6 +105,7 @@ public class AbilityHandler : MonoBehaviour, InputSelectReceiver
 
     private void VisualizeRange()
     {
+        gridGenerator.DestroyGrid(this);
         GenerateRange();
         gridGenerator.GenerateGrid(rangeVisual, this);
     }
@@ -126,9 +141,35 @@ public class AbilityHandler : MonoBehaviour, InputSelectReceiver
         }
     }
 
-    private void VisualizeArea()
+    private void VisualizeArea() // Will be used to visualize AoE
     {
 
+    }
+
+    public virtual void CallBackTurnEvent(GameManager.TurnState turnState)
+    {
+        if (turnState != turnEventHandler.turn)
+        {
+            DisableCast();
+        }
+        else if (turnState == turnEventHandler.turn)
+        {
+            EnableCast();
+        }
+    }
+
+    public void EnableCast()
+    {
+        castable = true;
+    }
+    public void DisableCast()
+    {
+        castable = false;
+    }
+
+    public bool Castable()
+    {
+        return castable;
     }
 
 }

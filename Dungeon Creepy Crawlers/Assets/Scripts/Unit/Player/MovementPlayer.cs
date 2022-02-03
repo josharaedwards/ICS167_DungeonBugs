@@ -20,21 +20,5 @@ public class MovementPlayer : Movement
 
         return null;
     }
-
-
-    public override bool Move(Vector3Int cellPos)
-    {
-        bool t = base.Move(cellPos);
-
-        //Joshara: Update so that AP point will be subtracted based on how many squares the player moved
-        if (!t)
-        {
-            return false;
-        }
-
-        return true;
-
-
-    }
 }
 

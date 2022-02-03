@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class InputSelectManager : MonoBehaviour, TurnEventReciever
 {
-    private SelectionHandler selectedObject = null;
+    [SerializeField] private SelectionHandler selectedObject;
     private TurnEventHandler turnEventHandler;
 
     private bool nextFrameCallBack = false;
@@ -62,7 +62,6 @@ public class InputSelectManager : MonoBehaviour, TurnEventReciever
                 {
                     HandleCallBackDeselect();
                 }
-                selectedObject = t;
             }
         }
         else
@@ -72,7 +71,6 @@ public class InputSelectManager : MonoBehaviour, TurnEventReciever
             {
                 HandleCallBackDeselect();
             }
-            selectedObject = t;
             if (selectedObject == null) // If selectedobj return null then try to find what SelectionHandler in selectedCell and call that
             {
                 GameObject g;
@@ -86,14 +84,19 @@ public class InputSelectManager : MonoBehaviour, TurnEventReciever
         }
     }
 
-    private void HandleCallBackDeselect()
+    private void HandleCallBackDeselect(bool ForceDeselect=false)
     {
         if (selectedObject != null)
         {
             selectedObject = selectedObject.CallBackDeselect();
+            if (ForceDeselect)
+            {
+                selectedObject = null;
+                return;
+            }
             if (selectedObject != null) // Call select again if deselect return something;
             {
-                selectedObject = selectedObject.CallBackSelect();
+                selectedObject.CallBackSelect();
             }
         }
         
@@ -101,8 +104,7 @@ public class InputSelectManager : MonoBehaviour, TurnEventReciever
 
     public void CallBackTurnEvent(GameManager.TurnState turnState)
     {
-        HandleCallBackDeselect();
+        HandleCallBackDeselect(true);
         selectedObject = null; // Deselect regardless at turn change
-        Debug.Log("DESELECTED EVERYTHING");
     }
 }
