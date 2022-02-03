@@ -51,6 +51,11 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, TurnEventRe
         frame = 0;
     }
 
+    public void SetMovementSpeed(int speed) // Use this to set movement from StatsTracker
+    {
+        movement = speed;
+    }
+
     public void Init(Vector2Int spawnPos)
     {
         Vector3Int spawnPosVec3 = new Vector3Int(spawnPos.x, spawnPos.y, 0);
