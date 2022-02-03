@@ -3,12 +3,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
-public class UIManager : MonoBehaviour
+public class UIManager : MonoBehaviour, TurnEventReciever
 {
     private static UIManager instance;
 
     [SerializeField] private GameObject unitInfoSpawnLoc;
+    [SerializeField] private TextMeshProUGUI winLoseText;
+
+    private ActionPointDisplay apBarUI;
+    private TurnEventHandler turnEventHandler;
 
     public static UIManager GetInstance()
     {
@@ -27,8 +33,58 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        turnEventHandler = GetComponent<TurnEventHandler>();
+        turnEventHandler.Subscribe(this);
+
+        apBarUI = GetComponentInChildren<ActionPointDisplay>();
+    }
+
+    void Update()
+    {
+        ShowWinLoseText(GameManager.GetInstance().GetGameState());
+    }
+
+    public void CallBackTurnEvent(GameManager.TurnState turnState)
+    {
+        if(turnState == GameManager.TurnState.EnemyTurn)
+        {
+            StartCoroutine(WaitForEnemies());
+        }
+        else if(turnState == GameManager.TurnState.PlayerTurn)
+        {
+            apBarUI.ToggleRoundDisplay();
+        }
+    }
+
+    IEnumerator WaitForEnemies()
+    {
+        yield return new WaitForSeconds(2);
+
+        apBarUI.ToggleRoundDisplay();
+    }
+
     public Transform GetUnitSpawnLocation()
     {
         return unitInfoSpawnLoc.transform;
+    }
+
+    public void ShowWinLoseText(GameManager.GameState currentState)
+    {
+        switch (currentState)
+        {
+            case GameManager.GameState.Won:
+                winLoseText.text = "You Won!";
+                winLoseText.gameObject.SetActive(true);
+                break;
+            case GameManager.GameState.Lost:
+                winLoseText.text = "You Lose.";
+                winLoseText.gameObject.SetActive(true);
+                break;
+            case GameManager.GameState.Ongoing:
+            default:
+                break;
+        }
     }
 }
