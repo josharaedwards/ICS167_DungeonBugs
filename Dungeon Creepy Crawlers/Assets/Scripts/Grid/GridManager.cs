@@ -108,12 +108,14 @@ public class GridManager : MonoBehaviour
 
     public Vector3Int GetPosFromObject(GameObject obj)
     {
-        if (!objPos.ContainsKey(obj))
+        if (objPos.ContainsKey(obj))
         {
             return objPos[obj];
         }
 
-        return Vector3Int.zero;
+        Debug.Log(obj.ToString() + " DOES NOT EXIST ON GRID");
+
+        return new Vector3Int(1,1,1);
     }
 
     public Vector3 cellToWorld(Vector3Int cellPos)

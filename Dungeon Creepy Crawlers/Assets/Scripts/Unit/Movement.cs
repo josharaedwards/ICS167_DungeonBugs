@@ -13,7 +13,7 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, TurnEventRe
     protected GridManager gridManager;
 
     [SerializeField] protected Vector3Int currentCellPos;
-    protected bool movable;
+    [SerializeField] protected bool movable;
     protected bool recentlyMoved;
 
     protected int frame; // WILL PROBABLY DELETE THIS; JUST A TEMPORARY SOLUTION FOR RUNNING A FUNCTION ON FRAME 2
@@ -104,9 +104,7 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, TurnEventRe
         // Check if the newPos and prevPos is anywhere within the unit's possible range of movement
         float prevDist = Vector3Int.Distance(currentCellPos, prevPos);
         float newDist = Vector3Int.Distance(currentCellPos, newPos);
-        Debug.Log(prevDist);
-        Debug.Log(newDist);
-        if ((int) newDist <= movement || (int) prevDist <= movement) // 0.1f for floating point error
+        if ((int) newDist <= movement || (int) prevDist <= movement)
         {
             GenerateValidMoveGrid();
         }

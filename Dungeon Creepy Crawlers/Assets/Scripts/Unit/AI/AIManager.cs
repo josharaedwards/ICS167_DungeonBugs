@@ -7,6 +7,7 @@ using UnityEngine;
 public class AIManager : MonoBehaviour, TurnEventReciever
 {
     private HashSet<AILogic> AIs;
+    [SerializeField] private int count;
 
     private static AIManager instance;
 
@@ -35,6 +36,11 @@ public class AIManager : MonoBehaviour, TurnEventReciever
         turnEventHandler.Subscribe(this);
     }
 
+    void Update()
+    {
+        count = AIs.Count;
+    }
+
     public void Add(AILogic AI) // Will be called by AILogics on Start()
     {
         AIs.Add(AI);
@@ -47,6 +53,8 @@ public class AIManager : MonoBehaviour, TurnEventReciever
         GameObject target = null;
         Vector3Int AIPos = gridManager.GetPosFromObject(AI.gameObject);
         Vector3Int targetPos;
+
+        Debug.Log(playerManager.GetUnits().Count);
 
         foreach (GameObject player in playerManager.GetUnits())
         {
