@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 277109672}
   m_Layer: 0
   m_Name: Player_TestUnit
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -451,7 +451,7 @@ GameObject:
   - component: {fileID: 383700627}
   m_Layer: 0
   m_Name: Enemy_TestUnit
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -652,6 +652,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1704574538}
     m_Modifications:
+    - target: {fileID: 1820409323, guid: 449a1f0f18d8cde4ba0b3b0e5abaddba, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1820409323, guid: 449a1f0f18d8cde4ba0b3b0e5abaddba, type: 3}
+      propertyPath: playerManager
+      value: 
+      objectReference: {fileID: 1750997168}
     - target: {fileID: 1925530659882047746, guid: 449a1f0f18d8cde4ba0b3b0e5abaddba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 6
@@ -1384,6 +1392,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1750997169}
   - component: {fileID: 1750997168}
+  - component: {fileID: 1750997170}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Untagged
@@ -1403,7 +1412,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb33f9d46c858b84facc498bebdffb6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActionPoint: 10
+  maxActionPoint: 10
+  refillActionPoint: 3
 --- !u!4 &1750997169
 Transform:
   m_ObjectHideFlags: 0
@@ -1419,6 +1429,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1750997170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750997167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccaffe282f765c74586df4a0ac06d225, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turn: 1
 --- !u!1001 &1836915625
 PrefabInstance:
   m_ObjectHideFlags: 0

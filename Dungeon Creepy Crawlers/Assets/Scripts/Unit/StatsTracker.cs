@@ -20,6 +20,7 @@ public class StatsTracker : MonoBehaviour
     public HealthBarDisplay healthBar;
 
     private PlayerManager playerManager;
+    private AbilityHandler abilityHandler;
 
     void Start()
     {
@@ -78,6 +79,11 @@ public class StatsTracker : MonoBehaviour
         {
             healthBar.DamageReceived(dmgCalc);
         }
+    }
+
+    public void SelectAbility(Ability ability) // Will be called by an ability button
+    {
+        abilityHandler.Select(ability);
     }
 
     public void SetupHealthBar()

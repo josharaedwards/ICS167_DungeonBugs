@@ -31,11 +31,14 @@ public class ActionPointDisplay : MonoBehaviour
 
     private bool toggle;
 
+
+
     private void OnEnable()
     {
+        playerManager = PlayerManager.GetInstance();
         playerNameText.text = playerName + "'s Mana";
 
-        maxActionPoints = playerManager.GetActionPoint();
+        maxActionPoints = playerManager.GetMaxActionPoint();
         actionPointSlider.maxValue = maxActionPoints;
 
         toggle = false;
@@ -65,7 +68,7 @@ public class ActionPointDisplay : MonoBehaviour
 
     private void UpdateAPUI()
     {
-        currentActionPoints = playerManager.GetActionPoint();
+        currentActionPoints = playerManager.GetCurrentActionPoint();
         actionPointSlider.value = currentActionPoints;
 
         actionPointText.text = currentActionPoints.ToString();
