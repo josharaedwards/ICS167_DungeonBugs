@@ -58,11 +58,11 @@ public class GameManager : MonoBehaviour
     {
         turnHandlers.Add(handler);
 
-        if (handler.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (handler.gameObject.tag == "Player")
         {
             playerObjects.Add(handler.gameObject);
         }
-        else if (handler.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        else if (handler.gameObject.tag == "Enemy")
         {
             enemyObjects.Add(handler.gameObject);
         }
@@ -73,11 +73,11 @@ public class GameManager : MonoBehaviour
     {
         turnHandlers.Remove(handler);
 
-        if (handler.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (handler.gameObject.tag == "Player")
         {
             playerObjects.Remove(handler.gameObject);
         }
-        else if (handler.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        else if (handler.gameObject.tag == "Enemy")
         {
             enemyObjects.Remove(handler.gameObject);
         }
