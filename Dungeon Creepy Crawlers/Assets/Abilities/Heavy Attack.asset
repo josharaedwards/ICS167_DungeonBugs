@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Heavy Attack
   description: An attack that does more damage but costs more AP.
+  abilityType: 0
   teamCast: 0
   areaOfEffect: 0
-  damage: 4
+  damage: -4
   range: 1
   apCost: 4
