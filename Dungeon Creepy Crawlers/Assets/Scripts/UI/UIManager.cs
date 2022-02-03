@@ -6,12 +6,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class UIManager : MonoBehaviour
+public class UIManager : MonoBehaviour, TurnEventReciever
 {
     private static UIManager instance;
 
     [SerializeField] private GameObject unitInfoSpawnLoc;
     [SerializeField] private TextMeshProUGUI winLoseText;
+
+    private ActionPointDisplay apBarUI;
+    private TurnEventHandler turnEventHandler;
 
     public static UIManager GetInstance()
     {
@@ -30,12 +33,36 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void Update()
+    void Start()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        turnEventHandler = GetComponent<TurnEventHandler>();
+        turnEventHandler.Subscribe(this);
+
+        apBarUI = GetComponentInChildren<ActionPointDisplay>();
+    }
+
+    void Update()
+    {
+        ShowWinLoseText(GameManager.GetInstance().GetGameState());
+    }
+
+    public void CallBackTurnEvent(GameManager.TurnState turnState)
+    {
+        if(turnState == GameManager.TurnState.EnemyTurn)
         {
-            ShowWinLoseText(false);
+            StartCoroutine(WaitForEnemies());
         }
+        else if(turnState == GameManager.TurnState.PlayerTurn)
+        {
+            apBarUI.ToggleRoundDisplay();
+        }
+    }
+
+    IEnumerator WaitForEnemies()
+    {
+        yield return new WaitForSeconds(2);
+
+        apBarUI.ToggleRoundDisplay();
     }
 
     public Transform GetUnitSpawnLocation()
@@ -43,17 +70,21 @@ public class UIManager : MonoBehaviour
         return unitInfoSpawnLoc.transform;
     }
 
-    public void ShowWinLoseText(bool youWon)
+    public void ShowWinLoseText(GameManager.GameState currentState)
     {
-        if(youWon)
+        switch (currentState)
         {
-            winLoseText.text = "You Won!";
+            case GameManager.GameState.Won:
+                winLoseText.text = "You Won!";
+                winLoseText.gameObject.SetActive(true);
+                break;
+            case GameManager.GameState.Lost:
+                winLoseText.text = "You Lose.";
+                winLoseText.gameObject.SetActive(true);
+                break;
+            case GameManager.GameState.Ongoing:
+            default:
+                break;
         }
-        else
-        {
-            winLoseText.text = "You Lose.";
-        }
-
-        winLoseText.gameObject.SetActive(true);
     }
 }

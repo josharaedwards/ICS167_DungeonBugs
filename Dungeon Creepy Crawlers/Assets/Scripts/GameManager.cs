@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    //Joshara: temporarily keep reference to AP Bar
-    public ActionPointDisplay apBarUI;
-
     public enum GameState
     {
         Ongoing,
@@ -89,15 +86,11 @@ public class GameManager : MonoBehaviour
         {
             turnState = TurnState.EnemyTurn;
             Debug.Log("ENEMY TURN");
-
-            apBarUI.ToggleRoundDisplay();
         }
         else if (turnState == TurnState.EnemyTurn)
         {
             turnState = TurnState.PlayerTurn;
             Debug.Log("PlAYER TURN");
-
-            StartCoroutine(WaitForEnemies());
         }
         TurnStateChangeEvent();
     }
@@ -109,7 +102,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public GameState getGameState()
+    public GameState GetGameState()
     {
         return gameState;
     }
@@ -117,13 +110,13 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameState = checkWinCondition();
+        gameState = CheckWinCondition();
     }
 
 
     // THIS IS TEMPPORARY
     // TODO: Ideally checking win condition would be delegated to a scriptable object, which would allow customizable win condition
-    private GameState checkWinCondition()
+    private GameState CheckWinCondition()
     {
         if (enemyObjects.Count == 0)
         {
@@ -135,13 +128,5 @@ public class GameManager : MonoBehaviour
         }
 
         return GameState.Ongoing;
-    }
-
-    //Joshara: Also a temporary wait just to see that it is the enemy's turn
-    IEnumerator WaitForEnemies()
-    {
-        yield return new WaitForSeconds(2);
-
-        apBarUI.ToggleRoundDisplay();
     }
 }
