@@ -1,3 +1,5 @@
+// Dien Nguyen
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,7 +24,6 @@ public class StatsTracker : MonoBehaviour
     private PlayerManager playerManager;
 
     private AbilityHandler abilityHandler;
-    private TurnEventHandler turnEventHandler;
 
     void Start()
     {
