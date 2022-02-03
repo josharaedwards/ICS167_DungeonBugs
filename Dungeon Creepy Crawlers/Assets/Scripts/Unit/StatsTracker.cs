@@ -20,7 +20,9 @@ public class StatsTracker : MonoBehaviour
     public HealthBarDisplay healthBar;
 
     private PlayerManager playerManager;
+
     private AbilityHandler abilityHandler;
+    private TurnEventHandler turnEventHandler;
 
     void Start()
     {
@@ -81,6 +83,17 @@ public class StatsTracker : MonoBehaviour
         {
             healthBar.DamageReceived(dmgCalc);
         }
+
+        if (hp == 0)
+        {
+            HandleDeath();
+        }
+    }
+
+    private void HandleDeath()
+    {
+        GameManager.GetInstance().Unsubscribe(GetComponent<TurnEventHandler>()); // Will probably move this away from TurnEventHandler
+        gameObject.SetActive(false);
     }
 
     public void SelectAbility(Ability ability) // Will be called by an ability button
