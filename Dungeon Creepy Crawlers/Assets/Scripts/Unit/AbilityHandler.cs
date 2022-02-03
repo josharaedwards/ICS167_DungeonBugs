@@ -28,6 +28,9 @@ public class AbilityHandler : MonoBehaviour, InputSelectReceiver
         selectionHandler.Subscribe(this);
 
         playerManager = PlayerManager.GetInstance();
+
+        rangeVisual = new HashSet<Vector3Int>();
+        areaVisual = new HashSet<Vector3Int>();
     }
 
     public void Select(Ability ability)

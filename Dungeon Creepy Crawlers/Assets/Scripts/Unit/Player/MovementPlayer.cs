@@ -32,7 +32,6 @@ public class MovementPlayer : Movement
             return false;
         }
 
-        GameManager.GetInstance().UpdateAPBar(1);
         return true;
 
 

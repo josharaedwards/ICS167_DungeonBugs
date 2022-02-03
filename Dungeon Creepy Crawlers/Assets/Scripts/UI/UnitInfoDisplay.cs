@@ -56,13 +56,13 @@ public class UnitInfoDisplay : MonoBehaviour
 
         for(int i = 0; i < numOfAbilities; ++i)
         {
-            CreateAbilityButton(unitStats.abilities[i]);
+            CreateAbilityButton(unitStats.abilities[i], unitStats);
         }
     }
 
-    private void CreateAbilityButton(Ability ability)
+    private void CreateAbilityButton(Ability ability, StatsTracker unit)
     {
         Button abilityButton = Instantiate(abilityButtonPrototype, buttonContainer.transform);
-        abilityButton.GetComponent<AbilityButtonBroadcast>().Init(ability);
+        abilityButton.GetComponent<AbilityButtonBroadcast>().Init(ability, unit);
     }
 }

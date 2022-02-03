@@ -440,6 +440,7 @@ GameObject:
   - component: {fileID: 6637410797066503057}
   - component: {fileID: 6637410797066503056}
   - component: {fileID: 6637410797066503059}
+  - component: {fileID: 1028288045}
   m_Layer: 0
   m_Name: UnitPrototype
   m_TagString: Player
@@ -602,3 +603,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitInfoPrototype: {fileID: 4547558266661958417, guid: 1b064309705c9654e9c20b227ec7b5f3, type: 3}
   spawnLocation: {fileID: 0}
+--- !u!114 &1028288045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6637410797066503145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 049f6be98c838b74d8c2d061e70ad27e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
