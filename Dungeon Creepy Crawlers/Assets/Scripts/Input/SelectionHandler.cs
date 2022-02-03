@@ -35,11 +35,14 @@ public class SelectionHandler : MonoBehaviour, InputSelectReceiver
 
     public SelectionHandler CallBackDeselect() // Callback when deslected
     {
+        SelectionHandler r = null;
         foreach (InputSelectReceiver reciever in inputSelectReceivers)
         {
-            reciever.CallBackDeselect();
+            SelectionHandler t = reciever.CallBackDeselect();
+            if (r == null)                                          // Will only return the first non-null CallBackSelect return
+                r = t;
         }
-        return null;
+        return r;
     }
 
     public void Subscribe(InputSelectReceiver reciever)

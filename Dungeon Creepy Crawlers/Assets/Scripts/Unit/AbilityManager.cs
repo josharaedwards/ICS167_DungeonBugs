@@ -19,11 +19,13 @@ public class AbilityManager : MonoBehaviour
         instance = this;
     }
 
-    public static AbilityManager GetInstance() {
+    public static AbilityManager GetInstance() 
+    {
         return instance;
     }
 
-    public bool InRange(StatsTracker caster, StatsTracker target, Ability ability) {
+    public bool InRange(StatsTracker caster, StatsTracker target, Ability ability) 
+    {
         Vector3Int casterPos = gridManager.GetPosFromObject(caster.gameObject);
         Vector3Int targetPos = gridManager.GetPosFromObject(target.gameObject);
         if (Vector3Int.Distance(casterPos, targetPos) <= ability.range)
@@ -35,9 +37,13 @@ public class AbilityManager : MonoBehaviour
         }
     }
 
-    public void Cast(StatsTracker caster, StatsTracker target, Ability ability) {
-        if (InRange(caster, target, ability)) {
+    public bool Cast(StatsTracker caster, StatsTracker target, Ability ability) 
+    {
+        if (InRange(caster, target, ability)) 
+        {
             ability.Execute(target);
+            return true;
         }
+        return false;
     }
 }

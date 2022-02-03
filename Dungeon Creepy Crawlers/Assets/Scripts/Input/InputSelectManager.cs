@@ -91,7 +91,12 @@ public class InputSelectManager : MonoBehaviour, TurnEventReciever
         if (selectedObject != null)
         {
             selectedObject = selectedObject.CallBackDeselect();
+            if (selectedObject != null) // Call select again if deselect return something;
+            {
+                selectedObject = selectedObject.CallBackSelect();
+            }
         }
+        
     }
 
     public void CallBackTurnEvent(GameManager.TurnState turnState)

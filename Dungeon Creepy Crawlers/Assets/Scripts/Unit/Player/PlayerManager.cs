@@ -2,18 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : MonoBehaviour, TurnEventReciever
 {
     private HashSet<GameObject> players;
 
     private static PlayerManager instance;
 
-    [SerializeField] private int ActionPoint; // shared pool of AP for the party
+    [SerializeField] private int maxActionPoint; // shared pool of AP for the party
+    [SerializeField] private int refillActionPoint;
+
+    private int currentActionPoint;
+
+    private TurnEventHandler turnEventHandler;
+
+    private AbilityManager abilityManager;
 
 
 
     public static PlayerManager GetInstance()
     {
+        if (instance == null)
+        {
+            Debug.Log("NULLLL");
+        }
         return instance;
     }
 
@@ -25,7 +36,22 @@ public class PlayerManager : MonoBehaviour
 
     void Start()
     {
+        abilityManager = AbilityManager.GetInstance();
 
+        turnEventHandler = GetComponent<TurnEventHandler>();
+        turnEventHandler.Subscribe(this);
+    }
+
+    public void CallBackTurnEvent(GameManager.TurnState turnState) // Refill AP every player turn
+    {
+        if (turnState == GameManager.TurnState.EnemyTurn)
+        {
+            return;
+        }
+        if (currentActionPoint < maxActionPoint)
+        {
+            currentActionPoint = Mathf.Min(currentActionPoint + refillActionPoint, maxActionPoint);
+        }
     }
 
     public HashSet<GameObject> GetUnits()
@@ -38,18 +64,27 @@ public class PlayerManager : MonoBehaviour
         players.Add(unit.gameObject);
     }
 
-    public bool ExecuteAbility(Ability ability, StatsTracker caster, StatsTracker target) // Will be called by indivdual player unit to execute ability
+    public bool Cast(StatsTracker caster, StatsTracker target, Ability ability) // Will be called by indivdual player unit to execute ability
     {
-        if (ability.apCost < ActionPoint)
+        if (ability.apCost <= currentActionPoint)
         {
-            // AbilityManager.Execute
+            bool result = abilityManager.Cast(caster, target, ability);
+            if (result)
+            {
+                currentActionPoint -= ability.apCost;
+            }
         }
 
         return false;
     }
 
-    public int GetActionPoint()
+    public int GetCurrentActionPoint()
     {
-        return ActionPoint;
+        return currentActionPoint;
+    }
+
+    public int GetMaxActionPoint()
+    {
+        return maxActionPoint;
     }
 }
