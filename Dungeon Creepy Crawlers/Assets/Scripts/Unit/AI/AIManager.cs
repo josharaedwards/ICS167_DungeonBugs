@@ -54,8 +54,6 @@ public class AIManager : MonoBehaviour, TurnEventReciever
         Vector3Int AIPos = gridManager.GetPosFromObject(AI.gameObject);
         Vector3Int targetPos;
 
-        Debug.Log(playerManager.GetUnits().Count);
-
         foreach (GameObject player in playerManager.GetUnits())
         {
             targetPos = gridManager.GetPosFromObject(player);
