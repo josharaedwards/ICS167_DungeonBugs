@@ -4,10 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Movement : MonoBehaviour, InputSelectReceiver, TurnEventReciever, GridMovementEventReceiver
+public abstract class Movement : MonoBehaviour, InputSelectReceiver, GridMovementEventReceiver
 {
     protected SelectionHandler selectionHandler;
-    protected TurnEventHandler turnEventHandler;
+    
     protected GridGenerator gridGenerator;
 
     protected GridManager gridManager;
@@ -35,18 +35,14 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, TurnEventRe
         selectionHandler = GetComponent<SelectionHandler>();
         selectionHandler.Subscribe(this);
 
-        turnEventHandler = GetComponent<TurnEventHandler>();
-        turnEventHandler.Subscribe(this);
-
         gridManager = GridManager.GetInstance();
         validMoveCellPos = new HashSet<Vector3Int>();
 
         Init(spawnPos);
 
-        if (turnEventHandler.turn == GameManager.TurnState.PlayerTurn) // By default the player start first, will change this for multiplayer
-            movable = true;
-        else
-            movable = false;
+        movable = true;
+
+        
 
         frame = 0;
     }
@@ -199,13 +195,10 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, TurnEventRe
             recentlyMoved = false;
             return false;
         }
-            
 
         currentCellPos = cellPos;
         transform.position = gridManager.cellToWorld(currentCellPos);
         transform.position = new Vector3(transform.position.x + 0.5f, transform.position.y + 0.5f, transform.position.z);
-
-       
 
         GenerateValidMoveGrid();
         DisableMovement();
@@ -213,15 +206,11 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, TurnEventRe
         return true;
     }
 
-    public virtual void CallBackTurnEvent(GameManager.TurnState turnState)
+    IEnumerator FrameDelay(int n)
     {
-        if (turnState != turnEventHandler.turn)
+        for (int i = 0; i < n; i++)
         {
-            DisableMovement();
-        }
-        else if (turnState == turnEventHandler.turn)
-        {
-            EnableMovement();
+            yield return null;
         }
     }
 }

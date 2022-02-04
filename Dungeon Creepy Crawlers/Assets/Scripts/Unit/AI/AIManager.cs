@@ -72,10 +72,12 @@ public class AIManager : MonoBehaviour, TurnEventReciever
     {
         if (turnState == GameManager.TurnState.EnemyTurn) // Tell each AI to do its moves
         {
+            Debug.Log("AI GOING");
             foreach (AILogic AI in AIs)
             {
                 AI.NextAction(); 
             }
+            Debug.Log("AI Finished Going");
             GameManager.GetInstance().ChangeTurnState(); // End AI's turn
         }
     }
