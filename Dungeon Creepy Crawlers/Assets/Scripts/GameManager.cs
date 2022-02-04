@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         turnState = TurnState.PlayerTurn;
-        Debug.Log("PlAYER TURN");
+        //Debug.Log("PlAYER TURN");
     }
 
     public void Subscribe(TurnEventHandler handler)

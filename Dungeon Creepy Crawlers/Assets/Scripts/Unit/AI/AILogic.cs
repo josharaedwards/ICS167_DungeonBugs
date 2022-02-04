@@ -38,6 +38,7 @@ public class AILogic : MonoBehaviour
 
     public void NextAction()
     {
+        movementAI.EnableMovement();
         if (currentTarget == null)
         {
             currentTarget = manager.GetTarget(this);

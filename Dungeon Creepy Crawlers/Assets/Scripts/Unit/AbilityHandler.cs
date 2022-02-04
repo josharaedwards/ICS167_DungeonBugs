@@ -79,7 +79,6 @@ public class AbilityHandler : MonoBehaviour, InputSelectReceiver, TurnEventRecie
             return null;
         }
         bool result = playerManager.Cast(GetComponent<StatsTracker>(), targetStatsTracker, selectedAbility);
-        Debug.Log(result);
         if (result)
         {
             DisableCast();

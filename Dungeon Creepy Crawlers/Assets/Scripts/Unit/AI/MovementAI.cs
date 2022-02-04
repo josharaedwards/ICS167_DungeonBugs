@@ -18,7 +18,8 @@ public class MovementAI : Movement
 
     public void MoveNext()
     {
-        Move(GetNextMove());
+        Vector3Int T = GetNextMove();
+        Move(T);
     }
 
     private Vector3Int GetNextMove() // Simple Greedy Pathfinding toward the target
