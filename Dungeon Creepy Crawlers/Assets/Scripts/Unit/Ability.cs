@@ -18,5 +18,5 @@ public abstract class Ability : ScriptableObject
     public int range;
     public int apCost;
 
-    public abstract void Execute(StatsTracker target);
+    public abstract void Execute(StatsTracker caster, StatsTracker target);
 }

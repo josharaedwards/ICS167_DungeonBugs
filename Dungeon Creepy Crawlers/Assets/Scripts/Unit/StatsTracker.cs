@@ -8,6 +8,12 @@ public class StatsTracker : MonoBehaviour
 {
     public Unit unit;
 
+    public string type;
+
+    public Sprite miniSprite;
+    public Sprite selectedSprite;
+    public Sprite fullSprite;
+
     public int hp;
     public int maxHP;
 
@@ -25,6 +31,10 @@ public class StatsTracker : MonoBehaviour
 
     private AbilityHandler abilityHandler;
 
+    private SpriteRenderer spriteRenderer;
+
+    private Movement movementInst;
+
     void Start()
     {
         if (gameObject.tag == "Player")
@@ -33,17 +43,16 @@ public class StatsTracker : MonoBehaviour
             playerManager.Add(this);
         }
 
-        hp = unit.hp;
-        maxHP = hp;
-        str = unit.str;
-        def = unit.def;
-        res = unit.res;
-        movement = unit.movement;
-        abilities = unit.abilities;
-
+        UpdateUnit();
         SetupHealthBar();
 
         abilityHandler = GetComponent<AbilityHandler>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        movementInst = GetComponent<Movement>();
+
+        movementInst.SetMovementSpeed(movement);
+        spriteRenderer.sprite = miniSprite;
+
     }
 
     //Joshara: For debug reasons only. Delete this once damaging gets hooked up!
@@ -117,5 +126,20 @@ public class StatsTracker : MonoBehaviour
         {
             healthBar.Init(hp);
         } 
+    }
+
+    private void UpdateUnit()
+    {
+        type = unit.type;
+        miniSprite = unit.miniSprite;
+        selectedSprite = unit.selectedSprite;
+        fullSprite = unit.fullSprite;
+        hp = unit.hp;
+        maxHP = hp;
+        str = unit.str;
+        def = unit.def;
+        res = unit.res;
+        movement = unit.movement;
+        abilities = unit.abilities;
     }
 }
