@@ -89,6 +89,10 @@ public class StatsTracker : MonoBehaviour
             hp = 0;
         }
 
+        if (hp > maxHP) {
+            hp = maxHP;
+        }
+
         if(healthBar)
         {
             healthBar.DamageReceived(dmgCalc);
