@@ -59,6 +59,22 @@ public class GridManager : MonoBehaviour
         return AddObject(obj, grid.WorldToCell(worldPos));
     }
 
+    public bool RemoveObject(GameObject obj)
+    {
+        if (!gameObjects.Contains(obj))
+        {
+            return false;
+        }
+        Vector3Int cellPos = objPos[obj];
+        gameObjects.Remove(obj);
+        objPos.Remove(obj);
+        objFromCell.Remove(cellPos);
+
+        GridMovementEvent(cellPos, cellPos);
+
+        return true;
+    }
+
 
     // Move obj to targetPos on grid
     public bool MoveObject(GameObject obj, Vector3Int targetPos)
