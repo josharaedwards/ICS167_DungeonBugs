@@ -440,7 +440,7 @@ GameObject:
   - component: {fileID: 6637410797066503057}
   - component: {fileID: 6637410797066503056}
   - component: {fileID: 6637410797066503059}
-  - component: {fileID: 1028288045}
+  - component: {fileID: 2656889923641703928}
   m_Layer: 6
   m_Name: PlayerUnit
   m_TagString: Player
@@ -541,6 +541,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce4c70a0469402d498a8b70671741d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentCellPos: {x: 0, y: 0, z: 0}
+  movable: 0
   movement: 1
   spawnPos: {x: 0, y: 0}
 --- !u!114 &6637410797066503058
@@ -581,6 +583,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unit: {fileID: 11400000, guid: c84e8ac0273d1d44d80f75ed7038fd2b, type: 2}
+  type: 
+  miniSprite: {fileID: 0}
+  selectedSprite: {fileID: 0}
+  fullSprite: {fileID: 0}
   hp: 0
   maxHP: 0
   abilities: []
@@ -602,8 +608,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitInfoPrototype: {fileID: 4547558266661958417, guid: 1b064309705c9654e9c20b227ec7b5f3, type: 3}
-  spawnLocation: {fileID: 0}
---- !u!114 &1028288045
+--- !u!114 &2656889923641703928
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -612,6 +617,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6637410797066503145}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 049f6be98c838b74d8c2d061e70ad27e, type: 3}
+  m_Script: {fileID: 11500000, guid: e102bab70809ce04f81725f46a7ada07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
