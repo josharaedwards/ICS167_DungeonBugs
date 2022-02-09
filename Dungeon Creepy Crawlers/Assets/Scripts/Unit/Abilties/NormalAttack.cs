@@ -7,7 +7,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Normal Attack")]
 public class NormalAttack : Ability
 {
-    public override void Execute(StatsTracker target) {
+    public override void Execute(StatsTracker caster, StatsTracker target) {
         target.DamageCalc(damage, abilityType);
     }
 }

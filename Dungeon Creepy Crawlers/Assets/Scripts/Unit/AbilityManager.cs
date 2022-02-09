@@ -41,7 +41,7 @@ public class AbilityManager : MonoBehaviour
     {
         if (InRange(caster, target, ability)) 
         {
-            ability.Execute(target);
+            ability.Execute(caster, target);
             return true;
         }
         return false;
