@@ -55,6 +55,11 @@ public class AbilityHandler : MonoBehaviour, InputSelectReceiver, TurnEventRecie
 
     }
 
+    public void Deselect()
+    {
+        CallBackDeselect();
+    }
+
     public SelectionHandler CallBackSelect()
     {
         return selectionHandler;

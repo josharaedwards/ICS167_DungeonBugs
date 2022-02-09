@@ -122,6 +122,11 @@ public class StatsTracker : MonoBehaviour
         }
     }
 
+    public void DeselectAbility()
+    {
+        abilityHandler.Deselect();
+    }
+
     public void SetupHealthBar()
     {
         healthBar = GetComponentInChildren<HealthBarDisplay>();
