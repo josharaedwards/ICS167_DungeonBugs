@@ -1,6 +1,7 @@
 // Dien Nguyen
 
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -98,7 +99,7 @@ public class GameManager : MonoBehaviour
     }
     private void TurnStateChangeEvent()
     {
-        foreach (TurnEventHandler handler in turnHandlers)
+        foreach (TurnEventHandler handler in turnHandlers.ToList())
         {
             handler.CallBackTurnEvent(turnState);
         }

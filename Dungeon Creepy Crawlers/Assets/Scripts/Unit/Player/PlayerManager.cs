@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour, TurnEventReciever
 {
     private HashSet<GameObject> players;
-    [SerializeField] private int count;
+    //[SerializeField] private int count;
 
     private static PlayerManager instance;
 
@@ -26,7 +26,7 @@ public class PlayerManager : MonoBehaviour, TurnEventReciever
     {
         if (instance == null)
         {
-            Debug.Log("NULLLL");
+            Debug.Log("NULL PlayerManager");
         }
         return instance;
     }
@@ -59,7 +59,7 @@ public class PlayerManager : MonoBehaviour, TurnEventReciever
 
     void Update()
     {
-        count = players.Count;
+        //count = players.Count;
     }
 
     public void CallBackTurnEvent(GameManager.TurnState turnState) // Refill AP every player turn
@@ -84,6 +84,10 @@ public class PlayerManager : MonoBehaviour, TurnEventReciever
         players.Add(unit.gameObject);
     }
 
+    public void Remove(StatsTracker unit)
+    {
+        players.Remove(unit.gameObject);
+    }
     public bool Cast(StatsTracker caster, StatsTracker target, Ability ability) // Will be called by indivdual player unit to execute ability
     {
         if (ability.apCost <= currentActionPoint)

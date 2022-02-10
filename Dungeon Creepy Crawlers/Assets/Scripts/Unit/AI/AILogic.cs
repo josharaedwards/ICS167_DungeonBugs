@@ -8,10 +8,10 @@ public class AILogic : MonoBehaviour
 {
     private AIManager manager;
 
-    [SerializeField] private GameObject currentTarget;
+    private GameObject currentTarget;
 
     private MovementAI movementAI;
-    // Will have script component for abilityAI
+    private AbilityHandlerAI abilityHandlerAI;
 
 
     public bool HasTarget()
@@ -34,16 +34,19 @@ public class AILogic : MonoBehaviour
         manager.Add(this);
 
         movementAI = GetComponent<MovementAI>();
+        abilityHandlerAI = GetComponent<AbilityHandlerAI>();
     }
 
     public void NextAction()
     {
-        movementAI.EnableMovement();
-        if (currentTarget == null)
-        {
-            currentTarget = manager.GetTarget(this);
-        }
-        movementAI.MoveNext();
         currentTarget = manager.GetTarget(this);
+        movementAI.EnableMovement();
+
+        bool casted = abilityHandlerAI.CastNext(); // try casting ability as soon as possible
+        movementAI.MoveNext(casted);
+        if (!casted) // if ability has not been casted.
+        {
+            abilityHandlerAI.CastNext();
+        }
     }
 }
