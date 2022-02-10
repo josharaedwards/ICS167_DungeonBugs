@@ -41,6 +41,10 @@ public abstract class AbilityHandler : MonoBehaviour, InputSelectReceiver
 
     public void Select(Ability ability)
     {
+        if (ability == selectedAbility)
+        {
+            return;
+        }
         selectedAbility = ability;
         prevMovabable = movementComp.Movable();
 
