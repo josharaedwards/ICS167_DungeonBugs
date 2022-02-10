@@ -49,4 +49,9 @@ public class AILogic : MonoBehaviour
             abilityHandlerAI.CastNext();
         }
     }
+
+    private void OnDisable()
+    {
+        manager.Remove(this);
+    }
 }

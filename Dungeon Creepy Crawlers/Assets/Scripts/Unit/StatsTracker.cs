@@ -111,7 +111,10 @@ public class StatsTracker : MonoBehaviour
     private void HandleDeath()
     {
         GameManager.GetInstance().Unsubscribe(GetComponent<TurnEventHandler>()); // Will probably move this away from TurnEventHandler
-        playerManager.Remove(this);
+        if (playerManager != null)
+        {
+            playerManager.Remove(this);
+        } 
         gameObject.SetActive(false);
     }
 
