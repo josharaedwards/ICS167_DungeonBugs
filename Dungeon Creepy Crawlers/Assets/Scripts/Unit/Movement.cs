@@ -60,6 +60,15 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, GridMovemen
         transform.position = transform.position + new Vector3(0.5f, 0.5f, 0);
     }
 
+    void OnDisable()
+    {
+        if (gridManager != null)
+        {
+            gridManager.RemoveObject(gameObject);
+        }
+        
+    }
+
     public void DisableMovement()
     {
         movable = false;

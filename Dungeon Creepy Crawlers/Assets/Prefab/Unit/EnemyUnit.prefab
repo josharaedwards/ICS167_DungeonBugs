@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1664427193633135928}
   - component: {fileID: 9150843173512672325}
   - component: {fileID: -8022281934203515026}
+  - component: {fileID: -592777648053216746}
   m_Layer: 7
   m_Name: EnemyUnit
   m_TagString: Enemy
@@ -143,6 +144,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unit: {fileID: 11400000, guid: 194b2c5ae53707340ab57711f19340a9, type: 2}
+  type: 
+  miniSprite: {fileID: 0}
+  selectedSprite: {fileID: 0}
+  fullSprite: {fileID: 0}
   hp: 0
   maxHP: 0
   abilities: []
@@ -164,7 +169,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitInfoPrototype: {fileID: 4547558266661958417, guid: 1b064309705c9654e9c20b227ec7b5f3, type: 3}
-  spawnLocation: {fileID: 0}
 --- !u!114 &9150843173512672325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,6 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3a21e303ac581f4cae864e56fab7255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentTarget: {fileID: 0}
 --- !u!114 &-8022281934203515026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,8 +194,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6fa39c07c1d67f479f059638bafc061, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentCellPos: {x: 0, y: 0, z: 0}
+  movable: 0
   movement: 2
   spawnPos: {x: 3, y: 3}
+--- !u!114 &-592777648053216746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664427193633135938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42f525f7e3cd05540bfde926a109fb91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5405984499383039342
 GameObject:
   m_ObjectHideFlags: 0

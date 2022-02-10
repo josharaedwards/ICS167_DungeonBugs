@@ -4,35 +4,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbilityHandler : MonoBehaviour, InputSelectReceiver, TurnEventReciever
+public abstract class AbilityHandler : MonoBehaviour, InputSelectReceiver
 {
-    private Ability selectedAbility;
+    protected Ability selectedAbility;
 
-    private GridGenerator gridGenerator;
-    private MovementPlayer movementComp;
+    protected GridGenerator gridGenerator;
+    protected Movement movementComp;
 
-    private SelectionHandler selectionHandler;
-    private TurnEventHandler turnEventHandler;
+    protected SelectionHandler selectionHandler;
 
-    private PlayerManager playerManager;
-    private GridManager gridManager;
+    protected PlayerManager playerManager;
+    protected GridManager gridManager;
 
-    private bool castable;
+    protected bool castable;
 
-    private HashSet<Vector3Int> rangeVisual;
-    private HashSet<Vector3Int> areaVisual;
-    private bool prevMovabable; // Store object Movability before disabling it for ability usage
+    protected HashSet<Vector3Int> rangeVisual;
+    protected HashSet<Vector3Int> areaVisual;
+    protected bool prevMovabable; // Store object Movability before disabling it for ability usage
 
-    void Start()
+    protected virtual void Start()
     {
         gridGenerator = GetComponent<GridGenerator>();
-        movementComp = GetComponent<MovementPlayer>();
+        movementComp = GetComponent<Movement>();
 
         selectionHandler = GetComponent<SelectionHandler>();
         selectionHandler.Subscribe(this);
-
-        turnEventHandler = GetComponent<TurnEventHandler>();
-        turnEventHandler.Subscribe(this);
 
         playerManager = PlayerManager.GetInstance();
         gridManager = GridManager.GetInstance();
@@ -55,42 +51,23 @@ public class AbilityHandler : MonoBehaviour, InputSelectReceiver, TurnEventRecie
 
     }
 
-    public SelectionHandler CallBackSelect()
+    public void Deselect()
+    {
+        CallBackDeselect();
+    }
+
+    public virtual SelectionHandler CallBackSelect()
     {
         return selectionHandler;
     }
 
-    public SelectionHandler CallBackSelect(Vector3Int targetPos)
+    public virtual SelectionHandler CallBackSelect(Vector3Int targetPos)
     {
-        if (selectedAbility == null || !castable)
-        {
-            return null;
-        }
-        
-        GameObject target = gridManager.GetObjectFromCell(targetPos);
-        if (target == null)
-        {
-            return null;
-        }
-
-        StatsTracker targetStatsTracker = target.GetComponent<StatsTracker>();
-        if (targetStatsTracker == null)
-        {
-            return null;
-        }
-        bool result = playerManager.Cast(GetComponent<StatsTracker>(), targetStatsTracker, selectedAbility);
-        if (result)
-        {
-            DisableCast();
-        }
         return null;
-
     }
 
-    public SelectionHandler CallBackDeselect()
+    public virtual SelectionHandler CallBackDeselect()
     {
-        //Debug.Log("DeselectAbilityCalled");
-
         if (selectedAbility != null)
         {
             if (prevMovabable) // Return movability to before
@@ -145,18 +122,6 @@ public class AbilityHandler : MonoBehaviour, InputSelectReceiver, TurnEventRecie
     private void VisualizeArea() // Will be used to visualize AoE
     {
 
-    }
-
-    public virtual void CallBackTurnEvent(GameManager.TurnState turnState)
-    {
-        if (turnState != turnEventHandler.turn)
-        {
-            DisableCast();
-        }
-        else if (turnState == turnEventHandler.turn)
-        {
-            EnableCast();
-        }
     }
 
     public void EnableCast()
