@@ -1,7 +1,6 @@
 // Dien Nguyen
 
 using System.Collections;
-using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,6 +25,7 @@ public class GameManager : MonoBehaviour
     private TurnState turnState;
 
     private HashSet<TurnEventHandler> turnHandlers;
+    private HashSet<TurnEventHandler> toBeRemovedTurnHandlers;
 
     private HashSet<GameObject> playerObjects;
     private HashSet<GameObject> enemyObjects;
@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
         instance = this;
 
         turnHandlers = new HashSet<TurnEventHandler>();
+        toBeRemovedTurnHandlers = new HashSet<TurnEventHandler>();
 
         playerObjects = new HashSet<GameObject>();
         enemyObjects = new HashSet<GameObject>();
@@ -71,7 +72,7 @@ public class GameManager : MonoBehaviour
 
     public void Unsubscribe(TurnEventHandler handler)
     {
-        turnHandlers.Remove(handler);
+        toBeRemovedTurnHandlers.Add(handler); // Add to this set to be removed after the loop in TurnStateChangeEvent is done
 
         if (handler.gameObject.tag == "Player")
         {
@@ -99,10 +100,18 @@ public class GameManager : MonoBehaviour
     }
     private void TurnStateChangeEvent()
     {
-        foreach (TurnEventHandler handler in turnHandlers.ToList())
+        toBeRemovedTurnHandlers.Clear();
+
+        foreach (TurnEventHandler handler in turnHandlers)
         {
             handler.CallBackTurnEvent(turnState);
         }
+
+        foreach (TurnEventHandler handler in toBeRemovedTurnHandlers) // Remove any object in this set
+        {
+            turnHandlers.Remove(handler);
+        }
+
     }
 
     public GameState GetGameState()
