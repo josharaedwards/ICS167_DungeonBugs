@@ -18,5 +18,6 @@ MonoBehaviour:
   teamCast: 1
   areaOfEffect: 0
   damage: 2
+  minRange: 1
   range: 1
   apCost: 3

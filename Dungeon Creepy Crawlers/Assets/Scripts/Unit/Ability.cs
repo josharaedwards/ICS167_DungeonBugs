@@ -15,6 +15,7 @@ public abstract class Ability : ScriptableObject
     public enum AbilType { Phys, Mag, Buff };
 
     public int damage;
+    public int minRange;
     public int range;
     public int apCost;
 
