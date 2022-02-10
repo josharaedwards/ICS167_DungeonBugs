@@ -25,7 +25,7 @@ public class StatsTracker : MonoBehaviour
 
     public int movement;
 
-    public HealthBarDisplay healthBar;
+    private HealthBarDisplay healthBar;
 
     private PlayerManager playerManager;
 
@@ -35,6 +35,11 @@ public class StatsTracker : MonoBehaviour
 
     private Movement movementInst;
 
+    void Awake()
+    {
+        UpdateUnit();
+    }
+
     void Start()
     {
         if (gameObject.tag == "Player")
@@ -43,7 +48,6 @@ public class StatsTracker : MonoBehaviour
             playerManager.Add(this);
         }
 
-        UpdateUnit();
         SetupHealthBar();
 
         abilityHandler = GetComponent<AbilityHandler>();
@@ -107,6 +111,7 @@ public class StatsTracker : MonoBehaviour
     private void HandleDeath()
     {
         GameManager.GetInstance().Unsubscribe(GetComponent<TurnEventHandler>()); // Will probably move this away from TurnEventHandler
+        playerManager.Remove(this);
         gameObject.SetActive(false);
     }
 

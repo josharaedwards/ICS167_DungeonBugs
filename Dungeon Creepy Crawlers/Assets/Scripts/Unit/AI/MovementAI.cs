@@ -16,16 +16,30 @@ public class MovementAI : Movement
 
     }
 
-    public void MoveNext()
+    public void MoveNext(bool casted)
     {
-        Vector3Int T = GetNextMove();
-        Move(T);
+        Vector3Int currentTargetPos = gridManager.GetPosFromObject(mainLogic.CurrentTarget());
+        Vector3Int nextPos;
+        if (casted)
+        {
+            nextPos = GetRunAway(currentTargetPos);
+        }
+        else
+        {
+            nextPos = GetNextMove(currentTargetPos);
+        }
+        Move(nextPos);
     }
 
-    private Vector3Int GetNextMove() // Simple Greedy Pathfinding toward the target
+    private Vector3Int GetRunAway(Vector3Int currentTargetPos) // Run away from target
+    {
+        Vector3Int runAwayPos = currentCellPos - currentTargetPos + currentCellPos;
+        return GetNextMove(runAwayPos);
+    }
+
+    private Vector3Int GetNextMove(Vector3Int currentTargetPos) // Simple Greedy Pathfinding toward the target
     {
         // TODO: When ability is implemented include the logic of using them
-        Vector3Int currentTargetPos = gridManager.GetPosFromObject(mainLogic.CurrentTarget());
         float distanceToTarget = float.MaxValue;
         float tempDist;
         Vector3Int bestMove = Vector3Int.zero;
