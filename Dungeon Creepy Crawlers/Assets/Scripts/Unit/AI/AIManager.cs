@@ -46,6 +46,11 @@ public class AIManager : MonoBehaviour, TurnEventReciever
         AIs.Add(AI);
     }
 
+    public void Remove(AILogic AI)
+    {
+        AIs.Remove(AI);
+    }
+
     public GameObject GetTarget(AILogic AI) // return a valid target for the AI (target with the minimum distance for now)
     {
         float min_dist = float.MaxValue;
