@@ -33,7 +33,7 @@ public class MovementAI : Movement
 
     private Vector3Int GetRunAway(Vector3Int currentTargetPos) // Run away from target
     {
-        Vector3Int runAwayPos = currentCellPos - currentTargetPos + currentCellPos;
+        Vector3Int runAwayPos = currentCellPos - currentTargetPos + currentCellPos; // get a position mirrored the targetPos
         return GetNextMove(runAwayPos);
     }
 
