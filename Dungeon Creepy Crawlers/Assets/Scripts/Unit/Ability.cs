@@ -9,6 +9,7 @@ public abstract class Ability : ScriptableObject
     public string abilityName;
     public string description;
     public AbilType abilityType;
+    public ParticleSystem particleSystem;
 
     public bool teamCast; //for support abilities
     public bool areaOfEffect; //if it can hit multiple units
