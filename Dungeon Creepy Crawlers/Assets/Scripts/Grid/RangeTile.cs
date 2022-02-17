@@ -8,9 +8,10 @@ public class RangeTile : MonoBehaviour
     [SerializeField] private SpriteRenderer _renderer;
     [SerializeField] private GameObject _highlight;
 
-    public void Init()
+    public void Init(Color color)
     {
-        _renderer.color = _baseColor;
+        _renderer.color = color;
+        //_renderer.color = _baseColor;
     }
 
     private void OnDisable()

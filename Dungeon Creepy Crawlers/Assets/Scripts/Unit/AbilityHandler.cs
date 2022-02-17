@@ -6,6 +6,8 @@ using UnityEngine;
 
 public abstract class AbilityHandler : MonoBehaviour, InputSelectReceiver
 {
+    [SerializeField] private Color visualColor;
+
     protected Ability selectedAbility;
 
     protected GridGenerator gridGenerator;
@@ -89,7 +91,7 @@ public abstract class AbilityHandler : MonoBehaviour, InputSelectReceiver
     {
         gridGenerator.DestroyGrid(this);
         GenerateRange();
-        gridGenerator.GenerateGrid(rangeVisual, this);
+        gridGenerator.GenerateGrid(rangeVisual, this, visualColor);
     }
 
     private void GenerateRange() // Reuse Generate valid move code

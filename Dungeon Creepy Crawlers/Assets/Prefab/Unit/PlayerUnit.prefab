@@ -541,6 +541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce4c70a0469402d498a8b70671741d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visualColor: {r: 0, g: 1, b: 0.7254902, a: 0.4392157}
   currentCellPos: {x: 0, y: 0, z: 0}
   movable: 0
   movement: 1
@@ -594,7 +595,6 @@ MonoBehaviour:
   def: 0
   res: 0
   movement: 0
-  healthBar: {fileID: 0}
 --- !u!114 &6637410797066503059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -620,3 +620,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e102bab70809ce04f81725f46a7ada07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visualColor: {r: 1, g: 0, b: 0, a: 0.3254902}

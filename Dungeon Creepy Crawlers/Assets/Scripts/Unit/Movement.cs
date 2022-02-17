@@ -6,6 +6,8 @@ using UnityEngine;
 
 public abstract class Movement : MonoBehaviour, InputSelectReceiver, GridMovementEventReceiver
 {
+    [SerializeField] private Color visualColor;
+
     protected SelectionHandler selectionHandler;
     
     protected GridGenerator gridGenerator;
@@ -125,7 +127,7 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, GridMovemen
         gridGenerator.DestroyGrid(this);
 
         GenerateValidMove();
-        gridGenerator.GenerateGrid(validMoveCellPos, this);
+        gridGenerator.GenerateGrid(validMoveCellPos, this, visualColor);
         gridGenerator.HideGrid(this);
     }
 
