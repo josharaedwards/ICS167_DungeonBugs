@@ -15,7 +15,7 @@ public class GridGenerator : MonoBehaviour
 
     
     // Generate visualizing Grid and operate on them based on the type of the requesting object
-    public void GenerateGrid(HashSet<Vector3Int> cellPosSet, object obj)
+    public void GenerateGrid(HashSet<Vector3Int> cellPosSet, object obj, Color color)
     {
         Type type = obj.GetType();
         Dictionary<Vector3Int, RangeTile> tileDict;
@@ -34,6 +34,7 @@ public class GridGenerator : MonoBehaviour
         {
             Vector3 worldPos = gridManager.cellToWorld(pos);
             RangeTile spawnedTile = Instantiate(_tilePrefab, worldPos + new Vector3(0.5f, 0.5f, 0f), Quaternion.identity);
+            spawnedTile.Init(color);
             spawnedTile.transform.SetParent(gameObject.transform, true);
             spawnedTile.name = $"Tile {pos.x} {pos.y}";
             tileDict.Add(pos, spawnedTile);

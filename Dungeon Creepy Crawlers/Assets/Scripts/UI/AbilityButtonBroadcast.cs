@@ -39,4 +39,14 @@ public class AbilityButtonBroadcast : MonoBehaviour
             Debug.Log("Stats Tracker missing");
         }
     }
+
+    public void OnHoverEnter()
+    {
+        unit.SelectAbility(ability);
+    }
+
+    public void OnHoverExit()
+    {
+        unit.DeselectAbility();
+    }
 }
