@@ -9,9 +9,7 @@ public class Heal : Ability
 {
     public override void Execute(StatsTracker caster, StatsTracker target)
     {
+        base.Execute(caster, target);
         target.DamageCalc(damage, abilityType);
-        Instantiate(particleSystem, target.transform);
-        //particleSystem.transform = target.transform;
-        particleSystem.Play();
     }
 }

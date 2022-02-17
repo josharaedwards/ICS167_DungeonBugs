@@ -20,5 +20,12 @@ public abstract class Ability : ScriptableObject
     public int range;
     public int apCost;
 
-    public abstract void Execute(StatsTracker caster, StatsTracker target);
+    public virtual void Execute(StatsTracker caster, StatsTracker target) {
+        PlayAnimation(caster, target);
+    }
+
+    private void PlayAnimation(StatsTracker caster, StatsTracker target) {
+        Instantiate(particleSystem, target.transform.position, Quaternion.identity);
+        particleSystem.Play();
+    }
 }
