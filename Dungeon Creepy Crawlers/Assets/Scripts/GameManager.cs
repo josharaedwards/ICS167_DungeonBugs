@@ -17,7 +17,8 @@ public class GameManager : MonoBehaviour
     public enum TurnState
     {
         Neutral,
-        PlayerTurn,
+        Player1Turn,
+        Player2Turn,
         EnemyTurn
     }
 
@@ -51,7 +52,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        turnState = TurnState.PlayerTurn;
+        turnState = TurnState.Player1Turn;
         //Debug.Log("PlAYER TURN");
     }
 
@@ -86,14 +87,14 @@ public class GameManager : MonoBehaviour
 
     public void ChangeTurnState() // WILL BE CALLED BY ENDROUND BUTTON ON PLAYER TURN. AN AI MANAGER WILL CALL ON ENEMY TURN
     {
-        if (turnState == TurnState.PlayerTurn)
+        if (turnState == TurnState.Player1Turn)
         {
             turnState = TurnState.EnemyTurn;
             Debug.Log("ENEMY TURN");
         }
         else if (turnState == TurnState.EnemyTurn)
         {
-            turnState = TurnState.PlayerTurn;
+            turnState = TurnState.Player1Turn;
             Debug.Log("PlAYER TURN");
         }
         TurnStateChangeEvent();

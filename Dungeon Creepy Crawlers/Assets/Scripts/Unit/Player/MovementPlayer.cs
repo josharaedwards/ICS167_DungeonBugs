@@ -16,7 +16,7 @@ public class MovementPlayer : Movement, TurnEventReciever
         turnEventHandler = GetComponent<TurnEventHandler>();
         turnEventHandler.Subscribe(this);
 
-        if (turnEventHandler.turn == GameManager.TurnState.PlayerTurn) // By default the player start first, will change this for multiplayer
+        if (turnEventHandler.turn == GameManager.TurnState.Player1Turn) // By default the player start first, will change this for multiplayer
             movable = true;
         else
             movable = false;
