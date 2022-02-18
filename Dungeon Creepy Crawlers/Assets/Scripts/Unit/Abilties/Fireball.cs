@@ -9,6 +9,7 @@ public class Fireball : Ability
 {
     public override void Execute(StatsTracker caster, StatsTracker target)
     {
+        base.Execute(caster, target);
         target.DamageCalc(damage, abilityType);
     }
 }

@@ -15,8 +15,10 @@ MonoBehaviour:
   abilityName: Fireball
   description: A magic ability that casts a ranged ball of fire at an enemy.
   abilityType: 1
+  particleSystem: {fileID: 8152653447004640464, guid: d7a19df32f0716448bbf0042c583d889, type: 3}
   teamCast: 0
   areaOfEffect: 0
   damage: -3
+  minRange: 2
   range: 3
   apCost: 4

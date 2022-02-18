@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Ranged Attack
   description: An attack made at range.
+  abilityType: 0
   teamCast: 0
   areaOfEffect: 0
   damage: -1
+  minRange: 2
   range: 3
   apCost: 2

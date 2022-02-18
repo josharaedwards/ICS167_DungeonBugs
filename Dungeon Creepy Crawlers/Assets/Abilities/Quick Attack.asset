@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Quick Attack
   description: An attack where the unit strikes multiple times in quick succession.
+  abilityType: 0
   teamCast: 0
   areaOfEffect: 0
   damage: -3
+  minRange: 1
   range: 1
   apCost: 2

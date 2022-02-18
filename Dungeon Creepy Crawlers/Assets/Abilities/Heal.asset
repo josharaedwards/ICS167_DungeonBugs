@@ -15,8 +15,10 @@ MonoBehaviour:
   abilityName: Heal
   description: An ability that allows a unit to heal itself or its allies.
   abilityType: 2
+  particleSystem: {fileID: 6142082014262723540, guid: 62f535fdbd150ff4b9473a48bfc5fd5f, type: 3}
   teamCast: 1
   areaOfEffect: 0
   damage: 2
+  minRange: 1
   range: 1
   apCost: 3
