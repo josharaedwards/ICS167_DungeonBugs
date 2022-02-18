@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class AbilityHandlerPlayer : AbilityHandler, TurnEventReciever
 {
-    protected TurnEventHandler turnEventHandler;
+    private TurnEventHandler turnEventHandler;
+    private PlayerManager playerManager;
 
     protected override void Start()
     {
         base.Start();
+
         turnEventHandler = GetComponent<TurnEventHandler>();
         turnEventHandler.Subscribe(this);
+
+        playerManager = PlayerManager.GetInstance();
+
     }
 
     public void CallBackTurnEvent(GameManager.TurnState turnState)

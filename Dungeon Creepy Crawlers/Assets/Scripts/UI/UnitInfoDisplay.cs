@@ -31,10 +31,11 @@ public class UnitInfoDisplay : MonoBehaviour
             unitNameText.text = unitStats.unit.type;
             unitImageObject.sprite = unitStats.unit.fullSprite;
 
-            healthBar.maxValue = unitStats.maxHP;
-            healthBar.value = unitStats.hp;
+            stats stats_ = unitStats.GetStats();
+            healthBar.maxValue = stats_.maxHP;
+            healthBar.value = stats_.hp;
 
-            healthBarValue.text = unitStats.hp.ToString() + " / " + unitStats.maxHP.ToString();
+            healthBarValue.text = stats_.hp.ToString() + " / " + stats_.maxHP.ToString();
         }
         else
         {
