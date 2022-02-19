@@ -22,8 +22,15 @@ public class GameManager : MonoBehaviour
         EnemyTurn
     }
 
-    private GameState gameState;
-    private TurnState turnState;
+    public enum GameMode
+    {
+        PVE,
+        PVP
+    }
+
+    [SerializeField]  private GameMode gameMode = GameMode.PVE;
+    [SerializeField]  private GameState gameState;
+    [SerializeField]  private TurnState turnState;
 
     private HashSet<TurnEventHandler> turnHandlers;
     private HashSet<TurnEventHandler> toBeRemovedTurnHandlers;
@@ -60,11 +67,11 @@ public class GameManager : MonoBehaviour
     {
         turnHandlers.Add(handler);
 
-        if (handler.gameObject.tag == "Player")
+        if (handler.turn == TurnState.Player1Turn)
         {
             playerObjects.Add(handler.gameObject);
         }
-        else if (handler.gameObject.tag == "Enemy")
+        else if (handler.turn == TurnState.EnemyTurn)
         {
             enemyObjects.Add(handler.gameObject);
         }
@@ -87,15 +94,13 @@ public class GameManager : MonoBehaviour
 
     public void ChangeTurnState() // WILL BE CALLED BY ENDROUND BUTTON ON PLAYER TURN. AN AI MANAGER WILL CALL ON ENEMY TURN
     {
-        if (turnState == TurnState.Player1Turn)
+        if (gameMode == GameMode.PVE)
         {
-            turnState = TurnState.EnemyTurn;
-            Debug.Log("ENEMY TURN");
+            ChangeTurnStatePVE();
         }
-        else if (turnState == TurnState.EnemyTurn)
+        else if (gameMode == GameMode.PVE)
         {
-            turnState = TurnState.Player1Turn;
-            Debug.Log("PlAYER TURN");
+            ChangeTurnStatePVP();
         }
         TurnStateChangeEvent();
     }
@@ -141,5 +146,31 @@ public class GameManager : MonoBehaviour
         }
 
         return GameState.Ongoing;
+    }
+
+    private void ChangeTurnStatePVE()
+    {
+        if (turnState == TurnState.Player1Turn)
+        {
+            turnState = TurnState.EnemyTurn;
+            //Debug.Log("ENEMY TURN");
+        }
+        else if (turnState == TurnState.EnemyTurn)
+        {
+            turnState = TurnState.Player1Turn;
+            //Debug.Log("PlAYER TURN");
+        }
+    }
+
+    private void ChangeTurnStatePVP()
+    {
+        if (turnState == TurnState.Player1Turn)
+        {
+            turnState = TurnState.Player2Turn;
+        }
+        else if (turnState == TurnState.Player2Turn)
+        {
+            turnState = TurnState.Player1Turn;
+        }
     }
 }
