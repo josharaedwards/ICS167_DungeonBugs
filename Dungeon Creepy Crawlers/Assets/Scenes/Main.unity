@@ -199,6 +199,10 @@ PrefabInstance:
       propertyPath: spawnLocation
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1664427193633135930, guid: 7ae4b31ba83fa934ca8295b73d9e0736, type: 3}
+      propertyPath: turn
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1664427193633135932, guid: 7ae4b31ba83fa934ca8295b73d9e0736, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -371,6 +375,10 @@ PrefabInstance:
       propertyPath: spawnLocation
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1664427193633135930, guid: 7ae4b31ba83fa934ca8295b73d9e0736, type: 3}
+      propertyPath: turn
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1664427193633135931, guid: 7ae4b31ba83fa934ca8295b73d9e0736, type: 3}
       propertyPath: unit
       value: 
@@ -536,6 +544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e102bab70809ce04f81725f46a7ada07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visualColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &696344250
 GameObject:
   m_ObjectHideFlags: 0
@@ -12167,6 +12176,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1664427193633135930, guid: 7ae4b31ba83fa934ca8295b73d9e0736, type: 3}
+      propertyPath: turn
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1664427193633135930, guid: 7ae4b31ba83fa934ca8295b73d9e0736, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -12824,6 +12837,10 @@ PrefabInstance:
       propertyPath: spawnLocation
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1664427193633135930, guid: 7ae4b31ba83fa934ca8295b73d9e0736, type: 3}
+      propertyPath: turn
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1664427193633135931, guid: 7ae4b31ba83fa934ca8295b73d9e0736, type: 3}
       propertyPath: unit
       value: 
@@ -13168,6 +13185,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5541654489855895702, guid: 48c1c29fb23bfb246b362ede060f6969, type: 3}
+      propertyPath: turn
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5541654489855895703, guid: 48c1c29fb23bfb246b362ede060f6969, type: 3}
       propertyPath: m_Name
       value: AIManager
@@ -13223,6 +13244,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6558409693750742892, guid: 34cc4ac70fe0c354ba4e8269e0e5dbd6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6558409693750742895, guid: 34cc4ac70fe0c354ba4e8269e0e5dbd6, type: 3}
+      propertyPath: turn
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6558409693750742898, guid: 34cc4ac70fe0c354ba4e8269e0e5dbd6, type: 3}

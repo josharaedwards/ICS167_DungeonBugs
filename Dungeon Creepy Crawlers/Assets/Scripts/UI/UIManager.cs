@@ -53,7 +53,7 @@ public class UIManager : MonoBehaviour, TurnEventReciever
         {
             StartCoroutine(WaitForEnemies());
         }
-        else if(turnState == GameManager.TurnState.PlayerTurn)
+        else if(turnState == GameManager.TurnState.Player1Turn)
         {
             apBarUI.ToggleRoundDisplay();
         }

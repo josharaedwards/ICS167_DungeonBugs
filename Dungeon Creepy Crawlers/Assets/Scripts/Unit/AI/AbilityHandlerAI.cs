@@ -7,8 +7,7 @@ public class AbilityHandlerAI : AbilityHandler
     private AbilityManager abilityManager;
 
     private AILogic mainLogic;
-    private Ability[] abilities;
-    private StatsTracker statsTracker;
+    
 
 
     protected override void Start()
@@ -18,8 +17,6 @@ public class AbilityHandlerAI : AbilityHandler
         abilityManager = AbilityManager.GetInstance();
 
         mainLogic = GetComponent<AILogic>();
-        statsTracker = GetComponent<StatsTracker>();
-        abilities = statsTracker.abilities;
     }
 
     public bool CastNext()

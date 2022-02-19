@@ -4,6 +4,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct stats
+{
+    public int hp;
+    public int maxHP;
+
+    public int str;
+    public int def;
+    public int res;
+
+    public int movement;
+}
+
 public class StatsTracker : MonoBehaviour
 {
     public Unit unit;
@@ -14,16 +26,9 @@ public class StatsTracker : MonoBehaviour
     public Sprite selectedSprite;
     public Sprite fullSprite;
 
-    public int hp;
-    public int maxHP;
-
     public Ability[] abilities;
 
-    public int str;
-    public int def;
-    public int res;
-
-    public int movement;
+    private stats unitStats;
 
     private HealthBarDisplay healthBar;
 
@@ -54,7 +59,7 @@ public class StatsTracker : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         movementInst = GetComponent<Movement>();
 
-        movementInst.SetMovementSpeed(movement);
+        movementInst.SetMovementSpeed(unitStats.movement);
         spriteRenderer.sprite = miniSprite;
 
     }
@@ -74,27 +79,27 @@ public class StatsTracker : MonoBehaviour
 
         if (abilType == Ability.AbilType.Phys)
         {
-            dmgCalc += def;
+            dmgCalc += unitStats.def;
 
-            hp += dmgCalc;
+            unitStats.hp += dmgCalc;
         }
         else if (abilType == Ability.AbilType.Mag) {
-            dmgCalc += res;
+            dmgCalc += unitStats.res;
 
-            hp += dmgCalc;
+            unitStats.hp += dmgCalc;
         }
         else
         {
-            hp += dmgCalc;
+            unitStats.hp += dmgCalc;
         }
 
-        if (hp < 0)
+        if (unitStats.hp < 0)
         {
-            hp = 0;
+            unitStats.hp = 0;
         }
 
-        if (hp > maxHP) {
-            hp = maxHP;
+        if (unitStats.hp > unitStats.maxHP) {
+            unitStats.hp = unitStats.maxHP;
         }
 
         if(healthBar)
@@ -102,7 +107,7 @@ public class StatsTracker : MonoBehaviour
             healthBar.DamageReceived(dmgCalc);
         }
 
-        if (hp == 0)
+        if (unitStats.hp == 0)
         {
             HandleDeath();
         }
@@ -141,7 +146,7 @@ public class StatsTracker : MonoBehaviour
 
         if(healthBar)
         {
-            healthBar.Init(hp);
+            healthBar.Init(unitStats.hp);
         } 
     }
 
@@ -151,12 +156,22 @@ public class StatsTracker : MonoBehaviour
         miniSprite = unit.miniSprite;
         selectedSprite = unit.selectedSprite;
         fullSprite = unit.fullSprite;
-        hp = unit.hp;
-        maxHP = hp;
-        str = unit.str;
-        def = unit.def;
-        res = unit.res;
-        movement = unit.movement;
+        unitStats.hp = unit.hp;
+        unitStats.maxHP = unitStats.hp;
+        unitStats.str = unit.str;
+        unitStats.def = unit.def;
+        unitStats.res = unit.res;
+        unitStats.movement = unit.movement;
         abilities = unit.abilities;
+    }
+
+    public Ability[] GetInitAbilities()
+    {
+        return unit.abilities;
+    }
+
+    public stats GetStats()
+    {
+        return unitStats;
     }
 }

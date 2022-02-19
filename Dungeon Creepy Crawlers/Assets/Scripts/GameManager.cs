@@ -17,12 +17,20 @@ public class GameManager : MonoBehaviour
     public enum TurnState
     {
         Neutral,
-        PlayerTurn,
+        Player1Turn,
+        Player2Turn,
         EnemyTurn
     }
 
-    private GameState gameState;
-    private TurnState turnState;
+    public enum GameMode
+    {
+        PVE,
+        PVP
+    }
+
+    [SerializeField]  private GameMode gameMode = GameMode.PVE;
+    [SerializeField]  private GameState gameState;
+    [SerializeField]  private TurnState turnState;
 
     private HashSet<TurnEventHandler> turnHandlers;
     private HashSet<TurnEventHandler> toBeRemovedTurnHandlers;
@@ -51,7 +59,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        turnState = TurnState.PlayerTurn;
+        turnState = TurnState.Player1Turn;
         //Debug.Log("PlAYER TURN");
     }
 
@@ -59,11 +67,15 @@ public class GameManager : MonoBehaviour
     {
         turnHandlers.Add(handler);
 
-        if (handler.gameObject.tag == "Player")
+        if (handler.turn == TurnState.Player1Turn)
         {
             playerObjects.Add(handler.gameObject);
         }
-        else if (handler.gameObject.tag == "Enemy")
+        else if (handler.turn == TurnState.EnemyTurn)
+        {
+            enemyObjects.Add(handler.gameObject);
+        }
+        else if (handler.turn == TurnState.Player2Turn) // TODO; maybe some other list to save player2
         {
             enemyObjects.Add(handler.gameObject);
         }
@@ -74,11 +86,15 @@ public class GameManager : MonoBehaviour
     {
         toBeRemovedTurnHandlers.Add(handler); // Add to this set to be removed after the loop in TurnStateChangeEvent is done
 
-        if (handler.gameObject.tag == "Player")
+        if (handler.turn == TurnState.Player1Turn)
         {
             playerObjects.Remove(handler.gameObject);
         }
-        else if (handler.gameObject.tag == "Enemy")
+        else if (handler.turn == TurnState.EnemyTurn)
+        {
+            enemyObjects.Remove(handler.gameObject);
+        }
+        else if (handler.turn == TurnState.Player2Turn) // TODO; maybe some other list to save player2
         {
             enemyObjects.Remove(handler.gameObject);
         }
@@ -86,15 +102,13 @@ public class GameManager : MonoBehaviour
 
     public void ChangeTurnState() // WILL BE CALLED BY ENDROUND BUTTON ON PLAYER TURN. AN AI MANAGER WILL CALL ON ENEMY TURN
     {
-        if (turnState == TurnState.PlayerTurn)
+        if (gameMode == GameMode.PVE)
         {
-            turnState = TurnState.EnemyTurn;
-            Debug.Log("ENEMY TURN");
+            ChangeTurnStatePVE();
         }
-        else if (turnState == TurnState.EnemyTurn)
+        else if (gameMode == GameMode.PVE)
         {
-            turnState = TurnState.PlayerTurn;
-            Debug.Log("PlAYER TURN");
+            ChangeTurnStatePVP();
         }
         TurnStateChangeEvent();
     }
@@ -140,5 +154,31 @@ public class GameManager : MonoBehaviour
         }
 
         return GameState.Ongoing;
+    }
+
+    private void ChangeTurnStatePVE()
+    {
+        if (turnState == TurnState.Player1Turn)
+        {
+            turnState = TurnState.EnemyTurn;
+            //Debug.Log("ENEMY TURN");
+        }
+        else if (turnState == TurnState.EnemyTurn)
+        {
+            turnState = TurnState.Player1Turn;
+            //Debug.Log("PlAYER TURN");
+        }
+    }
+
+    private void ChangeTurnStatePVP()
+    {
+        if (turnState == TurnState.Player1Turn)
+        {
+            turnState = TurnState.Player2Turn;
+        }
+        else if (turnState == TurnState.Player2Turn)
+        {
+            turnState = TurnState.Player1Turn;
+        }
     }
 }
