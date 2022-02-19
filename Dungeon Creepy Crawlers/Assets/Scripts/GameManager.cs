@@ -75,6 +75,10 @@ public class GameManager : MonoBehaviour
         {
             enemyObjects.Add(handler.gameObject);
         }
+        else if (handler.turn == TurnState.Player2Turn) // TODO; maybe some other list to save player2
+        {
+            enemyObjects.Add(handler.gameObject);
+        }
     }
 
 
@@ -82,11 +86,15 @@ public class GameManager : MonoBehaviour
     {
         toBeRemovedTurnHandlers.Add(handler); // Add to this set to be removed after the loop in TurnStateChangeEvent is done
 
-        if (handler.gameObject.tag == "Player")
+        if (handler.turn == TurnState.Player1Turn)
         {
             playerObjects.Remove(handler.gameObject);
         }
-        else if (handler.gameObject.tag == "Enemy")
+        else if (handler.turn == TurnState.EnemyTurn)
+        {
+            enemyObjects.Remove(handler.gameObject);
+        }
+        else if (handler.turn == TurnState.Player2Turn) // TODO; maybe some other list to save player2
         {
             enemyObjects.Remove(handler.gameObject);
         }
