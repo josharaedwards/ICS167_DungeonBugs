@@ -836,13 +836,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb817f7d89cf72448962df41319d3f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerManager: {fileID: 0}
+  playerName: Jay Doe
   actionPointSlider: {fileID: 2742508885220627368}
   fillImage: {fileID: 2742508883533056416}
   playerNameText: {fileID: 284017572}
   actionPointText: {fileID: 1123791820}
-  playerName: Jay Doe
-  maxActionPoints: 10
   fullActionColor: {r: 0.5877713, g: 0.35694784, b: 0.8867924, a: 1}
   emptyActionColor: {r: 0.27839085, g: 0.9622642, b: 0.9122247, a: 0.72156864}
   backgroundObj: {fileID: 2742508883406392668}
@@ -863,6 +861,7 @@ GameObject:
   - component: {fileID: 8450074702478761430}
   - component: {fileID: 607135214564408696}
   - component: {fileID: 1925530659882047746}
+  - component: {fileID: 1961622078868068888}
   m_Layer: 5
   m_Name: End Round Button
   m_TagString: Untagged
@@ -1045,3 +1044,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &1961622078868068888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4602428485140507825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3053e5eac01c7cb4285513d8c026b4d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonSFX: {fileID: 8300000, guid: a6b8ee0842240fa4a8336a1e8a46b6d5, type: 3}
