@@ -49,20 +49,6 @@ public class UIManager : MonoBehaviour, TurnEventReciever
 
     public void CallBackTurnEvent(GameManager.TurnState turnState)
     {
-        if(turnState == GameManager.TurnState.EnemyTurn)
-        {
-            StartCoroutine(WaitForEnemies());
-        }
-        else if(turnState == GameManager.TurnState.Player1Turn)
-        {
-            apBarUI.ToggleRoundDisplay();
-        }
-    }
-
-    IEnumerator WaitForEnemies()
-    {
-        yield return new WaitForSeconds(2);
-
         apBarUI.ToggleRoundDisplay();
     }
 
