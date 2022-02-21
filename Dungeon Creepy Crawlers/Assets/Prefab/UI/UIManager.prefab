@@ -391,6 +391,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3093325821796768707}
   - component: {fileID: 3093325821796768704}
+  - component: {fileID: 154520254}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -429,6 +430,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitInfoSpawnLoc: {fileID: 142289920}
   winLoseText: {fileID: 381442442}
+  unitInfoPrototype: {fileID: 4547558266661958417, guid: 1b064309705c9654e9c20b227ec7b5f3, type: 3}
+--- !u!114 &154520254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3093325821796768705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccaffe282f765c74586df4a0ac06d225, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turn: 0
 --- !u!1001 &3093325821706478424
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -8,8 +8,9 @@ using TMPro;
 
 public class AbilityButtonBroadcast : MonoBehaviour
 {
-    public Ability ability;
-    public StatsTracker unit;
+    private Ability ability;
+    private AbilityHandler abilityHandler;
+    private bool isClicked;
 
     private Button self;
 
@@ -18,21 +19,25 @@ public class AbilityButtonBroadcast : MonoBehaviour
         self = GetComponent<Button>();
     }
 
-    public void Init(Ability abilityIn, StatsTracker unitIn)
+    public void Init(Ability ability_, AbilityHandler abilityHandler_)
     {
-        ability = abilityIn;
-        unit = unitIn;
+        ability = ability_;
+        abilityHandler = abilityHandler_;
 
         self.GetComponentInChildren<TextMeshProUGUI>().text = ability.abilityName;
         self.onClick.AddListener(() => BroadcastAbility());
+
+        isClicked = false;
     }
 
     private void BroadcastAbility()
     {
-        if(unit)
+        isClicked = true;
+
+        if (abilityHandler)
         {
             Debug.Log("Broadcasting Ability: " + ability.abilityName);
-            unit.SelectAbility(ability);
+            abilityHandler.Select(ability);
         }
         else
         {
@@ -42,11 +47,12 @@ public class AbilityButtonBroadcast : MonoBehaviour
 
     public void OnHoverEnter()
     {
-        unit.SelectAbility(ability);
+        abilityHandler.Select(ability);
     }
 
     public void OnHoverExit()
     {
-        unit.DeselectAbility();
+       if(!isClicked)
+            abilityHandler.Deselect();
     }
 }
