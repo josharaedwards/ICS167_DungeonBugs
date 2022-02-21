@@ -12,6 +12,7 @@ public abstract class AbilityHandler : MonoBehaviour, InputSelectReceiver
     protected StatsTracker statsTracker;
 
     protected Ability selectedAbility;
+    protected Ability hoveredAbility;
 
     protected GridGenerator gridGenerator;
     protected Movement movementComp;
@@ -48,7 +49,7 @@ public abstract class AbilityHandler : MonoBehaviour, InputSelectReceiver
 
     public void Select(Ability ability)  // Will be called by an ability button
     {
-        if (selectedAbility == null)
+        if (selectedAbility != null)
         {
             prevMovabable = movementComp.Movable();
             movementComp.DisableMovement(); //Disable movement so unit dont try to move while using ability
@@ -58,6 +59,26 @@ public abstract class AbilityHandler : MonoBehaviour, InputSelectReceiver
         
         VisualizeRange(ability);
         VisualizeArea(ability);
+    }
+
+    public void SelectHover(Ability ability)
+    {
+        if (selectedAbility != null)
+        {
+            return;
+        }
+
+        hoveredAbility = ability;
+
+        VisualizeRange(ability);
+        VisualizeArea(ability);
+    }
+
+    public void DeselectHover()
+    {
+        rangeVisual.Clear();
+        hoveredAbility = null;
+        gridGenerator.DestroyGrid(this);
     }
 
 
@@ -78,6 +99,7 @@ public abstract class AbilityHandler : MonoBehaviour, InputSelectReceiver
 
     public virtual SelectionHandler CallBackDeselect()
     {
+        rangeVisual.Clear();
         if (selectedAbility != null)
         {
             if (prevMovabable) // Return movability to before
