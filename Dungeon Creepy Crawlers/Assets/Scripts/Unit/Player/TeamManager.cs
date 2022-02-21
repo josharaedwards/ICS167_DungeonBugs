@@ -18,8 +18,6 @@ public class TeamManager
         maxActionPoint = maxActionPoint_;
         refillActionPoint = refillActionPoint_;
 
-        abilityManager = AbilityManager.GetInstance();
-
         currentActionPoint = maxActionPoint;
 
         players = new HashSet<GameObject>();
@@ -71,5 +69,10 @@ public class TeamManager
     public int GetMaxActionPoint()
     {
         return maxActionPoint;
+    }
+
+    public void SetAbilityManager()
+    {
+        abilityManager = AbilityManager.GetInstance();
     }
 }

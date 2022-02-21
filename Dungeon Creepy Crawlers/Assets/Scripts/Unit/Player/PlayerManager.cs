@@ -63,6 +63,11 @@ public class PlayerManager : MonoBehaviour, TurnEventReciever
             Debug.Log("ERROR: Missing Turn Event Handler");
         }
 
+        foreach (TeamManager teamManager in teamManagers.Values) // Set AbilityManager for TeamManager after everything is set up
+        {
+            teamManager.SetAbilityManager();
+        }
+
         currentActionPoint = maxActionPoint;
         
     }
