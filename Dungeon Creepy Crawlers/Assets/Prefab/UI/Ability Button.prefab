@@ -136,8 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d9202bca57036448bca8f7f26681ac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ability: {fileID: 0}
-  unit: {fileID: 0}
+  buttonSFX: {fileID: 8300000, guid: cdbd456db583d4840bc44728664ac5a9, type: 3}
 --- !u!114 &5199896815372613489
 MonoBehaviour:
   m_ObjectHideFlags: 0

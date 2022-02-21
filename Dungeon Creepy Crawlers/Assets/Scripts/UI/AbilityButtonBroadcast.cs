@@ -6,16 +6,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class AbilityButtonBroadcast : MonoBehaviour
+public class AbilityButtonBroadcast : DBButton
 {
     private Ability ability;
     private AbilityHandler abilityHandler;
 
-    private Button self;
-
     public void OnEnable()
     {
-        self = GetComponent<Button>();
+        Setup();
     }
 
     public void Init(Ability ability_, AbilityHandler abilityHandler_)
@@ -24,7 +22,12 @@ public class AbilityButtonBroadcast : MonoBehaviour
         abilityHandler = abilityHandler_;
 
         self.GetComponentInChildren<TextMeshProUGUI>().text = ability.abilityName;
-        self.onClick.AddListener(() => BroadcastAbility());
+    }
+
+    protected override void OnDBButtonClick()
+    {
+        base.OnDBButtonClick();
+        BroadcastAbility();
     }
 
     private void BroadcastAbility()

@@ -47,8 +47,6 @@ public class ActionPointDisplay : MonoBehaviour
         }
 
         toggle = false;
-
-        SetupEndRoundButton();
     }
 
     void Update()
@@ -71,18 +69,6 @@ public class ActionPointDisplay : MonoBehaviour
             actionPointText.text = currentActionPoints.ToString();
             fillImage.color = Color.Lerp(emptyActionColor, fullActionColor, currentActionPoints / maxActionPoints);
         }
-    }
-
-    private void SetupEndRoundButton()
-    {
-        Button endRound = endRoundButton.GetComponentInChildren<Button>();
-
-        endRound.onClick.AddListener(() => EndPlayerRound());
-    }
-
-    private void EndPlayerRound()
-    {
-        GameManager.GetInstance().ChangeTurnState();
     }
 
     public void ToggleRoundDisplay()
