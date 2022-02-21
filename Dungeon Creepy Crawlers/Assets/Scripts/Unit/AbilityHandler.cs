@@ -48,18 +48,16 @@ public abstract class AbilityHandler : MonoBehaviour, InputSelectReceiver
 
     public void Select(Ability ability)  // Will be called by an ability button
     {
-        if (ability == selectedAbility)
+        if (selectedAbility == null)
         {
-            return;
+            prevMovabable = movementComp.Movable();
+            movementComp.DisableMovement(); //Disable movement so unit dont try to move while using ability
         }
+
         selectedAbility = ability;
-        prevMovabable = movementComp.Movable();
-
-        movementComp.DisableMovement(); //Disable movement so unit dont try to move while using ability
-
+        
         VisualizeRange();
         VisualizeArea();
-
     }
 
     public void Deselect()
