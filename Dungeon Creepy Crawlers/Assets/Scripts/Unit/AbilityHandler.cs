@@ -56,9 +56,10 @@ public abstract class AbilityHandler : MonoBehaviour, InputSelectReceiver
 
         selectedAbility = ability;
         
-        VisualizeRange();
-        VisualizeArea();
+        VisualizeRange(ability);
+        VisualizeArea(ability);
     }
+
 
     public void Deselect()
     {
@@ -90,19 +91,22 @@ public abstract class AbilityHandler : MonoBehaviour, InputSelectReceiver
         return null;
     }
 
-    private void VisualizeRange()
+    private void VisualizeRange(Ability ability)
     {
         gridGenerator.DestroyGrid(this);
-        GenerateRange();
+        GenerateRange(ability);
         gridGenerator.GenerateGrid(rangeVisual, this, visualColor);
     }
 
-    private void GenerateRange() // Reuse Generate valid move code
+    private void GenerateRange(Ability ability) // Reuse Generate valid move code
     {
         rangeVisual.Clear();
-        int range = selectedAbility.range;
+
+        int range = ability.range;
+        int minRange = ability.minRange;
 
         HashSet<Vector3Int>[] tempPos = new HashSet<Vector3Int>[range + 1];
+        HashSet<Vector3Int> tmp = new HashSet<Vector3Int>();
         Vector3Int[] fourDirections = { Vector3Int.right, Vector3Int.left, Vector3Int.up, Vector3Int.down };
 
         for (int i = 0; i <= range; ++i)
@@ -111,6 +115,7 @@ public abstract class AbilityHandler : MonoBehaviour, InputSelectReceiver
         }
 
         tempPos[0].Add(movementComp.currentPos());
+        tmp.Add(movementComp.currentPos());
 
         for (int i = 1; i <= range; ++i)
         {
@@ -118,17 +123,26 @@ public abstract class AbilityHandler : MonoBehaviour, InputSelectReceiver
             {
                 foreach (Vector3Int direction in fourDirections)
                 {
-                    tempPos[i].Add(pos + direction);
+                    Vector3Int t = pos + direction;
+                    if (!tmp.Contains(t))
+                    {
+                        tempPos[i].Add(t);
+                        tmp.Add(t);
+                    }
                 }
             }
+        }
+
+        for (int i = minRange; i <= range; ++i)
+        {
             foreach (Vector3Int pos in tempPos[i])
             {
                 rangeVisual.Add(pos);
-            }
+            }      
         }
     }
 
-    private void VisualizeArea() // Will be used to visualize AoE
+    private void VisualizeArea(Ability ability) // Will be used to visualize AoE
     {
 
     }
