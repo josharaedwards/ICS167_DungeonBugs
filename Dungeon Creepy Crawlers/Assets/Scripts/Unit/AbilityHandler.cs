@@ -76,6 +76,11 @@ public abstract class AbilityHandler : MonoBehaviour, InputSelectReceiver
 
     public void DeselectHover()
     {
+        if (selectedAbility != null)
+        {
+            return;
+        }
+
         rangeVisual.Clear();
         hoveredAbility = null;
         gridGenerator.DestroyGrid(this);
