@@ -8,26 +8,26 @@ using TMPro;
 
 public class ActionPointDisplay : MonoBehaviour
 {
-    public PlayerManager playerManager;
-
-    public Slider actionPointSlider;
-    public Image fillImage; 
-    public TextMeshProUGUI playerNameText;
-    public TextMeshProUGUI actionPointText;
-
-    public string playerName;
-    public int maxActionPoints;
+    private PlayerManager playerManager;
+    private int maxActionPoints;
     private int currentActionPoints;
 
-    public Color fullActionColor;
-    public Color emptyActionColor;
+    [SerializeField] private string playerName;
 
-    public GameObject backgroundObj;
-    public GameObject fillAreaObj;
-    public GameObject apNumberObj;
-    public GameObject playerNameObj;
-    public GameObject endRoundButton;
-    public GameObject enemyTextObj;
+    [SerializeField] private Slider actionPointSlider;
+    [SerializeField] private Image fillImage;
+    [SerializeField] private TextMeshProUGUI playerNameText;
+    [SerializeField] private TextMeshProUGUI actionPointText;     
+
+    [SerializeField] private Color fullActionColor;
+    [SerializeField] private Color emptyActionColor;
+
+    [SerializeField] private GameObject backgroundObj;
+    [SerializeField] private GameObject fillAreaObj;
+    [SerializeField] private GameObject apNumberObj;
+    [SerializeField] private GameObject playerNameObj;
+    [SerializeField] private GameObject endRoundButton;
+    [SerializeField] private GameObject enemyTextObj;
 
     private bool toggle;
 
@@ -54,6 +54,11 @@ public class ActionPointDisplay : MonoBehaviour
     void Update()
     {
         UpdateAPUI();
+    }
+
+    public void SetPlayerName(string playerName_)
+    {
+        playerName = playerName_;
     }
 
     private void UpdateAPUI()

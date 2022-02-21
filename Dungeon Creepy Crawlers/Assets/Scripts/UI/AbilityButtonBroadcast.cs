@@ -10,7 +10,6 @@ public class AbilityButtonBroadcast : MonoBehaviour
 {
     private Ability ability;
     private AbilityHandler abilityHandler;
-    private bool isClicked;
 
     private Button self;
 
@@ -26,14 +25,10 @@ public class AbilityButtonBroadcast : MonoBehaviour
 
         self.GetComponentInChildren<TextMeshProUGUI>().text = ability.abilityName;
         self.onClick.AddListener(() => BroadcastAbility());
-
-        isClicked = false;
     }
 
     private void BroadcastAbility()
     {
-        isClicked = true;
-
         if (abilityHandler)
         {
             Debug.Log("Broadcasting Ability: " + ability.abilityName);
@@ -47,12 +42,11 @@ public class AbilityButtonBroadcast : MonoBehaviour
 
     public void OnHoverEnter()
     {
-        abilityHandler.Select(ability);
+        abilityHandler.SelectHover(ability);
     }
 
     public void OnHoverExit()
     {
-       if(!isClicked)
-            abilityHandler.Deselect();
+        abilityHandler.DeselectHover();
     }
 }
