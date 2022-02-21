@@ -81,7 +81,14 @@ public class AIManager : MonoBehaviour, TurnEventReciever
             {
                 AI.NextAction(); 
             }
-            GameManager.GetInstance().ChangeTurnState(); // End AI's turn
+            StartCoroutine(EndTurn());
+            //GameManager.GetInstance().ChangeTurnState(); // End AI's turn
         }
+    }
+
+    IEnumerator EndTurn()
+    {
+        yield return new WaitForSeconds(2);
+        GameManager.GetInstance().ChangeTurnState();
     }
 }

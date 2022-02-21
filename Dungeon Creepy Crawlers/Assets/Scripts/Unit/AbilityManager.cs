@@ -28,7 +28,7 @@ public class AbilityManager : MonoBehaviour
     {
         Vector3Int casterPos = gridManager.GetPosFromObject(caster.gameObject);
         Vector3Int targetPos = gridManager.GetPosFromObject(target.gameObject);
-        if (Vector3Int.Distance(casterPos, targetPos) >= ability.minRange & Vector3Int.Distance(casterPos, targetPos) <= ability.range)
+        if (Vector3Int.Distance(casterPos, targetPos) > ability.minRange-0.9 & Vector3Int.Distance(casterPos, targetPos) <= ability.range) // -0.9 in case of diagonal
         {
             return true;
         }
