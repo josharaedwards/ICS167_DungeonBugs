@@ -23,8 +23,6 @@ public class UnitInfo : MonoBehaviour, InputSelectReceiver
 
     public SelectionHandler CallBackSelect()
     {
-        //Debug.Log("Open Info UI");
-
         InitUnitInfoDisplay();
 
         return selectionHandler;
@@ -32,8 +30,6 @@ public class UnitInfo : MonoBehaviour, InputSelectReceiver
 
     public SelectionHandler CallBackDeselect()
     {
-        //Debug.Log("Close Info UI");
-
         if (unitInfoInst != null)
             Destroy(unitInfoInst.gameObject);
 
@@ -49,8 +45,8 @@ public class UnitInfo : MonoBehaviour, InputSelectReceiver
     {
         if(unitStats && unitInfoPrototype)
         {
-            unitInfoPrototype.GetComponent<UnitInfoDisplay>().unitStats = unitStats;
             unitInfoInst = Instantiate(unitInfoPrototype, uiManager.GetUnitSpawnLocation());
+            unitInfoInst.GetComponent<UnitInfoDisplay>().Init(unitStats);
         }
         else
         {

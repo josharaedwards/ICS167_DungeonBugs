@@ -174,4 +174,9 @@ public class StatsTracker : MonoBehaviour
     {
         return unitStats;
     }
+
+    public AbilityHandler GetAbilityHandler()
+    {
+        return abilityHandler;
+    }
 }

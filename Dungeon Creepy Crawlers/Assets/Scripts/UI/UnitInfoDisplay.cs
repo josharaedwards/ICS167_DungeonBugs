@@ -8,47 +8,42 @@ using TMPro;
 
 public class UnitInfoDisplay : MonoBehaviour
 {
-    public Image unitImageObject;
-    public TextMeshProUGUI unitNameText;
-    public Slider healthBar;
-    public TextMeshProUGUI healthBarValue;
+    [SerializeField] private Image unitImageObject;
+    [SerializeField] private TextMeshProUGUI unitNameText;
+    [SerializeField] private Slider healthBar;
+    [SerializeField] private TextMeshProUGUI healthBarValue;
 
-    public GameObject buttonContainer;
-    public Button abilityButtonPrototype;
+    [SerializeField] private GameObject buttonContainer;
+    [SerializeField] private Button abilityButtonPrototype;
 
-    public StatsTracker unitStats;
+    private StatsTracker unitStats;
 
-    private void OnEnable()
+
+    public void Init(StatsTracker unitStats_)
     {
-        Init();
+        unitStats = unitStats_;
+
+        unitNameText.text = unitStats.unit.type;
+        unitImageObject.sprite = unitStats.unit.fullSprite;
+
+        stats stats_ = unitStats.GetStats();
+        healthBar.maxValue = stats_.maxHP;
+        healthBar.value = stats_.hp;
+
+        healthBarValue.text = stats_.hp.ToString() + " / " + stats_.maxHP.ToString();
+
         UpdateAbilities();
-    }
-
-    public void Init()
-    {
-        if(unitStats)
-        {
-            unitNameText.text = unitStats.unit.type;
-            unitImageObject.sprite = unitStats.unit.fullSprite;
-
-            stats stats_ = unitStats.GetStats();
-            healthBar.maxValue = stats_.maxHP;
-            healthBar.value = stats_.hp;
-
-            healthBarValue.text = stats_.hp.ToString() + " / " + stats_.maxHP.ToString();
-        }
-        else
-        {
-            unitNameText.text = "Debug";
-        }
     }
 
     public void UpdateAbilities()
     {
         if (!unitStats)
             return;
+            
+        AbilityHandler abilityHandler = unitStats.GetAbilityHandler();
+        Ability[] abilities = abilityHandler.GetAbilities();
 
-        int numOfAbilities = unitStats.abilities.Length;
+        int numOfAbilities = abilities.Length;
 
         foreach (Transform child in buttonContainer.transform)
         {
@@ -57,13 +52,13 @@ public class UnitInfoDisplay : MonoBehaviour
 
         for(int i = 0; i < numOfAbilities; ++i)
         {
-            CreateAbilityButton(unitStats.abilities[i], unitStats);
+            CreateAbilityButton(abilities[i], abilityHandler);
         }
     }
 
-    private void CreateAbilityButton(Ability ability, StatsTracker unit)
+    private void CreateAbilityButton(Ability ability, AbilityHandler abilityHandler)
     {
         Button abilityButton = Instantiate(abilityButtonPrototype, buttonContainer.transform);
-        abilityButton.GetComponent<AbilityButtonBroadcast>().Init(ability, unit);
+        abilityButton.GetComponent<AbilityButtonBroadcast>().Init(ability, abilityHandler);
     }
 }
