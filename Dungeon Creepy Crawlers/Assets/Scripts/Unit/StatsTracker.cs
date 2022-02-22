@@ -30,8 +30,6 @@ public class StatsTracker : MonoBehaviour
 
     private stats unitStats;
 
-    private HealthBarDisplay healthBar;
-
     private PlayerManager playerManager;
 
     private AbilityHandler abilityHandler;
@@ -39,6 +37,12 @@ public class StatsTracker : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     private Movement movementInst;
+
+    public delegate void OnSetupHealthUI(int health, Transform parent);
+    public static event OnSetupHealthUI updateHealthUI;
+
+    public delegate void OnDamageUpdate(int damage, Transform parent);
+    public static event OnDamageUpdate updateDamageUI;
 
     void Awake()
     {
@@ -53,7 +57,7 @@ public class StatsTracker : MonoBehaviour
             playerManager.Add(this);
         }
 
-        SetupHealthBar();
+        updateHealthUI(unitStats.hp, gameObject.transform);
 
         abilityHandler = GetComponent<AbilityHandler>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -62,15 +66,6 @@ public class StatsTracker : MonoBehaviour
         movementInst.SetMovementSpeed(unitStats.movement);
         spriteRenderer.sprite = miniSprite;
 
-    }
-
-    //Joshara: For debug reasons only. Delete this once damaging gets hooked up!
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            DamageCalc(-2, Ability.AbilType.Phys);
-        }
     }
 
     public void DamageCalc(int dmg, Ability.AbilType abilType)
@@ -102,10 +97,8 @@ public class StatsTracker : MonoBehaviour
             unitStats.hp = unitStats.maxHP;
         }
 
-        if(healthBar)
-        {
-            healthBar.DamageReceived(dmgCalc);
-        }
+
+        updateDamageUI(dmgCalc, gameObject.transform);
 
         if (unitStats.hp == 0)
         {
@@ -138,16 +131,6 @@ public class StatsTracker : MonoBehaviour
     public void DeselectAbility()
     {
         abilityHandler.Deselect();
-    }
-
-    public void SetupHealthBar()
-    {
-        healthBar = GetComponentInChildren<HealthBarDisplay>();
-
-        if(healthBar)
-        {
-            healthBar.Init(unitStats.hp);
-        } 
     }
 
     private void UpdateUnit()
