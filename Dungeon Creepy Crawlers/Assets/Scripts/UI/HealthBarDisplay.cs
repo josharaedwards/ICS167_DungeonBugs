@@ -22,6 +22,12 @@ public class HealthBarDisplay : MonoBehaviour
         StatsTracker.updateDamageUI += DamageReceived;
     }
 
+    public void OnDisable()
+    {
+        StatsTracker.updateHealthUI -= Init;
+        StatsTracker.updateDamageUI -= DamageReceived;
+    }
+
     void Update()
     {
         UpdateBar();
