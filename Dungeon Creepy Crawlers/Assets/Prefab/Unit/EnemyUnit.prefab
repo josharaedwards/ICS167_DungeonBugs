@@ -148,13 +148,7 @@ MonoBehaviour:
   miniSprite: {fileID: 0}
   selectedSprite: {fileID: 0}
   fullSprite: {fileID: 0}
-  hp: 0
-  maxHP: 0
   abilities: []
-  str: 0
-  def: 0
-  res: 0
-  movement: 0
 --- !u!114 &1664427193633135928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,6 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3a21e303ac581f4cae864e56fab7255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  behaviour: {fileID: 11400000, guid: ce791742d9c6d1940a1b942668400e95, type: 2}
 --- !u!114 &-8022281934203515026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,6 +192,7 @@ MonoBehaviour:
   movable: 0
   movement: 2
   spawnPos: {x: 3, y: 3}
+  wanderRange: 2
 --- !u!114 &-592777648053216746
 MonoBehaviour:
   m_ObjectHideFlags: 0
