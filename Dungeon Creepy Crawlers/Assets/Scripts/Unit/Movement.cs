@@ -86,7 +86,7 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, GridMovemen
         return movable;
     }
 
-    public Vector3Int currentPos()
+    public Vector3Int CurrentPos()
     {
         return currentCellPos;
     }

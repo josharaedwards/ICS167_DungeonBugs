@@ -12,6 +12,11 @@ public class AILogic : MonoBehaviour
 
     private MovementAI movementAI;
     private AbilityHandlerAI abilityHandlerAI;
+    private StatsTracker statsTracker;
+
+    private AIState currentState;
+
+    [SerializeField] private AIBehaviour behaviour;
 
 
     public bool HasTarget()
@@ -35,19 +40,18 @@ public class AILogic : MonoBehaviour
 
         movementAI = GetComponent<MovementAI>();
         abilityHandlerAI = GetComponent<AbilityHandlerAI>();
+        statsTracker = GetComponent<StatsTracker>();
+
+        currentState = behaviour.InitializeState();
     }
 
+    //TODO: Add Target choosing logic?
     public void NextAction()
     {
         currentTarget = manager.GetTarget(this);
         movementAI.EnableMovement();
 
-        bool casted = abilityHandlerAI.CastNext(); // try casting ability as soon as possible
-        movementAI.MoveNext(casted);
-        if (!casted) // if ability has not been casted.
-        {
-            abilityHandlerAI.CastNext();
-        }
+        currentState = behaviour.NextAction(statsTracker, movementAI, abilityHandlerAI, currentState, currentTarget);
     }
 
     private void OnDisable()

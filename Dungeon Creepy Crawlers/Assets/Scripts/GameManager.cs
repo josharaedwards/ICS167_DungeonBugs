@@ -32,6 +32,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]  private GameState gameState;
     [SerializeField]  private TurnState turnState;
 
+    [SerializeField] private int playerCount;
+    [SerializeField] private int enemyCount;
+
     private HashSet<TurnEventHandler> turnHandlers;
     private HashSet<TurnEventHandler> toBeRemovedTurnHandlers;
 
@@ -106,7 +109,7 @@ public class GameManager : MonoBehaviour
         {
             ChangeTurnStatePVE();
         }
-        else if (gameMode == GameMode.PVE)
+        else if (gameMode == GameMode.PVP)
         {
             ChangeTurnStatePVP();
         }
@@ -136,6 +139,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        playerCount = playerObjects.Count;
+        enemyCount = enemyObjects.Count;
         gameState = CheckWinCondition();
     }
 

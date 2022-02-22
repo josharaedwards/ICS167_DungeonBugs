@@ -141,8 +141,8 @@ public abstract class AbilityHandler : MonoBehaviour, InputSelectReceiver
             tempPos[i] = new HashSet<Vector3Int>();
         }
 
-        tempPos[0].Add(movementComp.currentPos());
-        tmp.Add(movementComp.currentPos());
+        tempPos[0].Add(movementComp.CurrentPos());
+        tmp.Add(movementComp.CurrentPos());
 
         for (int i = 1; i <= range; ++i)
         {
