@@ -32,6 +32,10 @@ public class BasicBehaviour : AIBehaviour
         {
             currentState = AIState.Aggro;
         }
+        else if (currentState == AIState.Aggro)
+        {
+            currentState = AIState.Stop;
+        }
 
         switch (currentState)
         {
