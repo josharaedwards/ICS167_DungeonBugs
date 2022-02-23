@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Fighter
   m_EditorClassIdentifier: 
   type: Fighter
-  miniSprite: {fileID: 21300000, guid: 5115ded342a811e4abdcfd7319e72e45, type: 3}
+  miniSprite: {fileID: 21300000, guid: 0237e7e0b73e04147bffe442f3d9f870, type: 3}
   selectedSprite: {fileID: 0}
-  fullSprite: {fileID: 21300000, guid: 171a9e53d22dce74a890b822e1649fbd, type: 3}
+  fullSprite: {fileID: 21300000, guid: 7459d26b16329424a846930e7221359b, type: 3}
   abilities:
   - {fileID: 11400000, guid: 3db11a098d985414d981d392d6d3598b, type: 2}
   - {fileID: 11400000, guid: eda647b53f05dfc488ac85798c5881dc, type: 2}
