@@ -44,7 +44,7 @@ public abstract class AbilityHandler : MonoBehaviour, InputSelectReceiver
         rangeVisual = new HashSet<Vector3Int>();
         areaVisual = new HashSet<Vector3Int>();
 
-        castable = true; // By default the player goes first, might change this later
+        EnableCast();
     }
 
     public void Select(Ability ability)  // Will be called by an ability button
