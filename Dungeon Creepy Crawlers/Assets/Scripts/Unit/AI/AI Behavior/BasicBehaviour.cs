@@ -8,7 +8,7 @@ public class BasicBehaviour : AIBehaviour
 {
     [SerializeField] private bool wander = false;
     [SerializeField] private bool kite = false;
-    [SerializeField] private bool agressive = false; // if true never leaves aggro state
+    [SerializeField] private bool aggressive = false; // if true never leaves aggro state
     [SerializeField] [Range(0f, 1f)] private float p_stop_to_wander = 0.5f;
     [SerializeField] [Range(0f, 1f)] private float p_wander_to_stop = 0.5f;
 
@@ -31,6 +31,10 @@ public class BasicBehaviour : AIBehaviour
         if (inAggroRange(movementAI, currentTarget))
         {
             currentState = AIState.Aggro;
+        }
+        else if (currentState == AIState.Aggro && !aggressive)
+        {
+            currentState = AIState.Stop;
         }
 
         switch (currentState)
@@ -88,11 +92,7 @@ public class BasicBehaviour : AIBehaviour
             movementAI.RunAway();
         }
 
-        if (agressive)
-        {
-            return AIState.Aggro;
-        }
-        return AIState.Stop;
+        return AIState.Aggro;
     }
 
 }

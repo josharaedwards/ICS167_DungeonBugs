@@ -49,7 +49,7 @@ public class UIManager : MonoBehaviour, TurnEventReciever
 
     public void CallBackTurnEvent(GameManager.TurnState turnState)
     {
-        apBarUI.ToggleRoundDisplay();
+        apBarUI.ChangeAPUIDisplay(turnState);
     }
 
     IEnumerator WaitForWinLose()

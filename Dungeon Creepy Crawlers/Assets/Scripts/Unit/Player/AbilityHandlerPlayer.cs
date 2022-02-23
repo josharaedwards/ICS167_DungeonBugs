@@ -16,6 +16,11 @@ public class AbilityHandlerPlayer : AbilityHandler, TurnEventReciever
 
         playerManager = PlayerManager.GetInstance();
 
+        if (turnEventHandler.turn == GameManager.TurnState.Player2Turn)
+        {
+            DisableCast();
+        }
+
     }
 
     public void CallBackTurnEvent(GameManager.TurnState turnState)
