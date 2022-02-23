@@ -106,16 +106,6 @@ public class PlayerManager : MonoBehaviour, TurnEventReciever
 
     public bool Cast(StatsTracker caster, StatsTracker target, Ability ability) // Will be called by indivdual player unit to execute ability
     {
-        /*if (ability.apCost <= currentActionPoint)
-        {
-            bool result = abilityManager.Cast(caster, target, ability);
-            if (result)
-            {
-                currentActionPoint -= ability.apCost;
-            }
-            return result;
-        }*/
-
         bool result = teamManagers[caster.GetComponent<TurnEventHandler>().turn].Cast(caster, target, ability);
 
         return result;
