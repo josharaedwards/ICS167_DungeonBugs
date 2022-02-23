@@ -29,41 +29,34 @@ public class ActionPointDisplay : MonoBehaviour
     [SerializeField] private GameObject endRoundButton;
     [SerializeField] private GameObject enemyTextObj;
 
-    private bool toggle;
+    private GameManager.TurnState currentTurn = GameManager.TurnState.Player1Turn;
 
     private void Start()
     {
         playerManager = PlayerManager.GetInstance();
-        playerNameText.text = playerName + "'s Mana";
-
-        if (playerManager)
-        {
-            maxActionPoints = playerManager.GetMaxActionPoint();
-            actionPointSlider.maxValue = maxActionPoints;
-        }
-        else
-        {
-            Debug.Log("ERROR: Missing Player Manager on AP UI");
-        }
-
-        toggle = false;
+        SetPlayerName("Player 1");
     }
 
     void Update()
     {
-        UpdateAPUI();
+        if(currentTurn != GameManager.TurnState.EnemyTurn)
+            UpdateAPUI();
     }
 
     public void SetPlayerName(string playerName_)
     {
         playerName = playerName_;
+        playerNameText.text = playerName + "'s Mana";
     }
 
     private void UpdateAPUI()
     {
         if(playerManager)
         {
-            currentActionPoints = playerManager.GetCurrentActionPoint();
+            maxActionPoints = playerManager.GetMaxActionPoint(currentTurn);
+            actionPointSlider.maxValue = maxActionPoints;
+
+            currentActionPoints = playerManager.GetCurrentActionPoint(currentTurn);
             actionPointSlider.value = currentActionPoints;
 
             actionPointText.text = currentActionPoints.ToString();
@@ -71,23 +64,36 @@ public class ActionPointDisplay : MonoBehaviour
         }
     }
 
-    public void ToggleRoundDisplay()
+    public void ChangeAPUIDisplay(GameManager.TurnState turnState)
     {
-        if(toggle)
+        switch (turnState)
         {
-            toggle = false;
-        }
-        else
-        {
-            toggle = true;
+            case GameManager.TurnState.EnemyTurn:
+                SetRoundDisplay(false);
+                break;
+            case GameManager.TurnState.Player1Turn:
+                SetPlayerName("Player 1");
+                SetRoundDisplay(true);
+                break;
+            case GameManager.TurnState.Player2Turn:
+                SetPlayerName("Player 2");
+                SetRoundDisplay(true);
+                break;
+            default:
+                break;
         }
 
-        backgroundObj.SetActive(!toggle);
-        fillAreaObj.SetActive(!toggle);
-        apNumberObj.SetActive(!toggle);
-        playerNameObj.SetActive(!toggle);
-        endRoundButton.SetActive(!toggle);
+        currentTurn = turnState;
+    }
 
-        enemyTextObj.SetActive(toggle);
+    private void SetRoundDisplay(bool isPlayerTurn)
+    {
+        backgroundObj.SetActive(isPlayerTurn);
+        fillAreaObj.SetActive(isPlayerTurn);
+        apNumberObj.SetActive(isPlayerTurn);
+        playerNameObj.SetActive(isPlayerTurn);
+        endRoundButton.SetActive(isPlayerTurn);
+
+        enemyTextObj.SetActive(!isPlayerTurn);
     }
 }
