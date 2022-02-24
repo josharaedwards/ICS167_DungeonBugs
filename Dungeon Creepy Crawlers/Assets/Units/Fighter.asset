@@ -21,6 +21,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eda647b53f05dfc488ac85798c5881dc, type: 2}
   hp: 6
   str: 2
-  def: 1
+  def: 0
   res: 0
   movement: 1
