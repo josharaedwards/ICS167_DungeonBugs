@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MeleeGrunt
   m_EditorClassIdentifier: 
   type: Melee Grunt
-  miniSprite: {fileID: 21300000, guid: 8e4dca7ca512051459628195a95108ee, type: 3}
+  miniSprite: {fileID: 21300000, guid: 4a03a96cf94d589498ca48cae92815de, type: 3}
   selectedSprite: {fileID: 0}
   fullSprite: {fileID: 0}
   abilities:

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Mage
   m_EditorClassIdentifier: 
   type: Mage
-  miniSprite: {fileID: 21300000, guid: cb52bbdefbb733748a7dbef20ff957be, type: 3}
+  miniSprite: {fileID: 21300000, guid: 7e83ef0d32c71a7488f55407ed6ba54b, type: 3}
   selectedSprite: {fileID: 0}
-  fullSprite: {fileID: 21300000, guid: 0c6049e78f12b0e41ad5feba26369158, type: 3}
+  fullSprite: {fileID: 21300000, guid: 37b0046d73fb2eb42b8d05c461876d74, type: 3}
   abilities:
   - {fileID: 11400000, guid: 3db11a098d985414d981d392d6d3598b, type: 2}
   - {fileID: 11400000, guid: d33e22be9dcab754ba401f7790d47167, type: 2}

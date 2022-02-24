@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Healer
   m_EditorClassIdentifier: 
   type: Healer
-  miniSprite: {fileID: 21300000, guid: a1ea35af4efcd1c4fb6ce7df3aa2c927, type: 3}
+  miniSprite: {fileID: 21300000, guid: 06a580b59ce438d42931bdc181115eaf, type: 3}
   selectedSprite: {fileID: 0}
-  fullSprite: {fileID: 21300000, guid: 7a4edbc311054084db3ebfe6a66b3900, type: 3}
+  fullSprite: {fileID: 21300000, guid: 610bf8f4e89ec914daa9c0294df23bc4, type: 3}
   abilities:
   - {fileID: 11400000, guid: 3db11a098d985414d981d392d6d3598b, type: 2}
   - {fileID: 11400000, guid: d57b680b10ccee64cbcc3b3f94cdaf5a, type: 2}
