@@ -532,6 +532,7 @@ GameObject:
   - component: {fileID: 6637410797066503056}
   - component: {fileID: 6637410797066503059}
   - component: {fileID: 2656889923641703928}
+  - component: {fileID: 7117038151743215516}
   m_Layer: 6
   m_Name: PlayerUnit
   m_TagString: Player
@@ -706,3 +707,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visualColor: {r: 1, g: 0, b: 0, a: 0.3254902}
+--- !u!114 &7117038151743215516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6637410797066503145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73feccba1356f234399c21acd00120db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 6637410797066503070}
+  greyedColor: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 1}
