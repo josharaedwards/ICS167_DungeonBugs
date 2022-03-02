@@ -214,6 +214,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player2_Mage
       objectReference: {fileID: 0}
+    - target: {fileID: 7583178096319725862, guid: a352ac923bc170546b7210cfc2b76582, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a352ac923bc170546b7210cfc2b76582, type: 3}
 --- !u!1001 &268888062
@@ -375,6 +379,10 @@ PrefabInstance:
     - target: {fileID: 6637410797066503145, guid: a352ac923bc170546b7210cfc2b76582, type: 3}
       propertyPath: m_Name
       value: Player2_Assassin
+      objectReference: {fileID: 0}
+    - target: {fileID: 7583178096319725862, guid: a352ac923bc170546b7210cfc2b76582, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a352ac923bc170546b7210cfc2b76582, type: 3}
@@ -3782,6 +3790,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player2_Fighter
       objectReference: {fileID: 0}
+    - target: {fileID: 7583178096319725862, guid: a352ac923bc170546b7210cfc2b76582, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a352ac923bc170546b7210cfc2b76582, type: 3}
 --- !u!1001 &818865117
@@ -4356,6 +4368,10 @@ PrefabInstance:
     - target: {fileID: 6637410797066503145, guid: a352ac923bc170546b7210cfc2b76582, type: 3}
       propertyPath: m_Name
       value: Player2_Healer
+      objectReference: {fileID: 0}
+    - target: {fileID: 7583178096319725862, guid: a352ac923bc170546b7210cfc2b76582, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a352ac923bc170546b7210cfc2b76582, type: 3}
