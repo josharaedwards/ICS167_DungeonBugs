@@ -9,6 +9,9 @@ public class MovementPlayer : Movement, TurnEventReciever
 {
     private TurnEventHandler turnEventHandler;
 
+    public delegate void OnUpdateMovemntUI(bool isMovable, Transform root);
+    public static event OnUpdateMovemntUI updateMovementUI;
+
     protected override void Start()
     {
         base.Start();
@@ -48,6 +51,18 @@ public class MovementPlayer : Movement, TurnEventReciever
         {
             EnableMovement();
         }
+    }
+
+    public override void DisableMovement()
+    {
+        base.DisableMovement();
+        updateMovementUI(movable, gameObject.transform);
+    }
+
+    public override void EnableMovement()
+    {
+        base.EnableMovement();
+        updateMovementUI(movable, gameObject.transform);
     }
 }
 
