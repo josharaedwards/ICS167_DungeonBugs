@@ -26,7 +26,6 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, GridMovemen
 
     [SerializeField] protected Vector2Int spawnPos = Vector2Int.zero;
 
-
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -71,12 +70,12 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, GridMovemen
         
     }
 
-    public void DisableMovement()
+    public virtual void DisableMovement()
     {
         movable = false;
     }
 
-    public void EnableMovement()
+    public virtual void EnableMovement()
     {
         movable = true;
     }
