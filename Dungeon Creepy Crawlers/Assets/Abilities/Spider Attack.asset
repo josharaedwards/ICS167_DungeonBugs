@@ -15,9 +15,10 @@ MonoBehaviour:
   abilityName: '[ COOL NAME FOR BOSS ABILITY ]'
   description: 
   abilityType: 0
+  particleSystem: {fileID: 0}
   teamCast: 0
   areaOfEffect: 1
-  damage: -4
+  damage: -3
   minRange: 1
   range: 1
   apCost: 2

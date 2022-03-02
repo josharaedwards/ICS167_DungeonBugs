@@ -18,7 +18,7 @@ MonoBehaviour:
   fullSprite: {fileID: 0}
   abilities:
   - {fileID: 11400000, guid: 3db11a098d985414d981d392d6d3598b, type: 2}
-  hp: 3
+  hp: 4
   str: 1
   def: 0
   res: 0
