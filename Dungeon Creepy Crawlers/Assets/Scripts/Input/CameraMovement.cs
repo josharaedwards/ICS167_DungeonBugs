@@ -11,7 +11,7 @@ public class CameraMovement : MonoBehaviour
     private Camera cam;
 
     [SerializeField]
-    private Tilemap tileMap;
+    private RectTransform camBound;
 
     [SerializeField]
     private float moveSpeed;
@@ -71,9 +71,9 @@ public class CameraMovement : MonoBehaviour
         return false;
     }
     private void UpdateBounds() {
-        minY = tileMap.cellBounds.position.y + cam.orthographicSize;
-        maxY = tileMap.cellBounds.size.y + tileMap.cellBounds.position.y - cam.orthographicSize;
-        minX = tileMap.cellBounds.position.x + cam.orthographicSize*2.5f;
-        maxX = tileMap.cellBounds.size.x + tileMap.cellBounds.position.x - cam.orthographicSize*2.5f;
+        //minY = tileMap.cellBounds.position.y + cam.orthographicSize;
+        //maxY = tileMap.cellBounds.size.y + tileMap.cellBounds.position.y - cam.orthographicSize;
+        //minX = tileMap.cellBounds.position.x + cam.orthographicSize*2.5f;
+        //maxX = tileMap.cellBounds.size.x + tileMap.cellBounds.position.x - cam.orthographicSize*2.5f;
     }
 }
