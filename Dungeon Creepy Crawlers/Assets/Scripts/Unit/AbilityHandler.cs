@@ -174,11 +174,11 @@ public abstract class AbilityHandler : MonoBehaviour, InputSelectReceiver
 
     }
 
-    public void EnableCast()
+    public virtual void EnableCast()
     {
         castable = true;
     }
-    public void DisableCast()
+    public virtual void DisableCast()
     {
         castable = false;
     }

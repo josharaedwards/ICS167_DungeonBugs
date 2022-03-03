@@ -6,16 +6,28 @@ using UnityEngine.UI;
 public class UnitDisplay : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer sprite;
-    [SerializeField] private Color greyedColor;
+    private Color greyedColor;
     private Color defaultColor;
 
-    public void OnEnabled()
+    public void Start()
     {
         defaultColor = sprite.color;
+        greyedColor = defaultColor;
+        greyedColor.g -= 0.45f;
+
+        AbilityHandlerPlayer.updateUnitDisplay += UpdatePlayerIcon;
     }
 
-    public void UpdatePlayerIcon(bool hasUsedAbility)
+    public void OnDisable()
     {
+        AbilityHandlerPlayer.updateUnitDisplay -= UpdatePlayerIcon;
+    }
+
+    public void UpdatePlayerIcon(bool hasUsedAbility, Transform root)
+    {
+        if (!hasSameRoot(root))
+            return;
+
         if (hasUsedAbility)
         {
             sprite.color = greyedColor;
@@ -24,5 +36,10 @@ public class UnitDisplay : MonoBehaviour
         {
             sprite.color = defaultColor;
         }
+    }
+
+    private bool hasSameRoot(Transform root)
+    {
+        return root == gameObject.transform.root;
     }
 }

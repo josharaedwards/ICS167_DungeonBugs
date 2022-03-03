@@ -7,6 +7,9 @@ public class AbilityHandlerPlayer : AbilityHandler, TurnEventReciever
     private TurnEventHandler turnEventHandler;
     private PlayerManager playerManager;
 
+    public delegate void OnUpdateUnitDisplay(bool hasUsedAbility, Transform root);
+    public static event OnUpdateUnitDisplay updateUnitDisplay;
+
     protected override void Start()
     {
         base.Start();
@@ -20,7 +23,6 @@ public class AbilityHandlerPlayer : AbilityHandler, TurnEventReciever
         {
             DisableCast();
         }
-
     }
 
     public void CallBackTurnEvent(GameManager.TurnState turnState)
@@ -60,5 +62,17 @@ public class AbilityHandlerPlayer : AbilityHandler, TurnEventReciever
         }
         return null;
 
+    }
+
+    public override void EnableCast()
+    {
+        base.EnableCast();
+        updateUnitDisplay(false, gameObject.transform);
+    }
+
+    public override void DisableCast()
+    {
+        base.DisableCast();
+        updateUnitDisplay(true, gameObject.transform);
     }
 }
