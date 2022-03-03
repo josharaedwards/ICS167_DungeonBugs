@@ -21,7 +21,9 @@ public class AbilityButtonBroadcast : DBButton
         ability = ability_;
         abilityHandler = abilityHandler_;
 
-        self.GetComponentInChildren<TextMeshProUGUI>().text = ability.abilityName;
+        string abilityDisplayText = ability.abilityName + " - " + ability.apCost;
+
+        self.GetComponentInChildren<TextMeshProUGUI>().text = abilityDisplayText;
     }
 
     protected override void OnDBButtonClick()
