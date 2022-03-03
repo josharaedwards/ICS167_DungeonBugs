@@ -17,11 +17,11 @@ public class AggressiveBehaviour : AIBehaviour
 
     public override AIState NextAction(StatsTracker AIStats, MovementAI movementAI, AbilityHandlerAI abilityAI, AIState currentState, GameObject currentTarget)
     {
-        bool casted = abilityAI.CastNext();
+        bool casted = abilityAI.CastNext(currentState, currentTarget);
         if (!casted)
         {
             movementAI.Pursue();
-            casted = abilityAI.CastNext();
+            casted = abilityAI.CastNext(currentState, currentTarget);
         }
         if (casted && kite)
         {

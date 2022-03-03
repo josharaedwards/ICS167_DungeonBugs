@@ -19,10 +19,10 @@ public class AbilityHandlerAI : AbilityHandler
         mainLogic = GetComponent<AILogic>();
     }
 
-    public bool CastNext()
+    public bool CastNext(AIState currentState, GameObject currentTarget)
     {
         Ability nextAbility = GetNextAbility();
-        bool result = abilityManager.Cast(statsTracker, mainLogic.CurrentTarget().GetComponent<StatsTracker>(), nextAbility);
+        bool result = abilityManager.Cast(statsTracker, currentTarget.GetComponent<StatsTracker>(), nextAbility);
         return result;
     }
 
