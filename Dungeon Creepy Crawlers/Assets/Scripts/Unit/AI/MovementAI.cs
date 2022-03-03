@@ -37,17 +37,17 @@ public class MovementAI : Movement
         Move(nextPos);
     }
 
-    public void Pursue()
+    public void Pursue(GameObject target)
     {
-        Vector3Int currentTargetPos = gridManager.GetPosFromObject(mainLogic.CurrentTarget());
+        Vector3Int currentTargetPos = gridManager.GetPosFromObject(target);
         Vector3Int nextPos;
         nextPos = GetNextMove(currentTargetPos);
         Move(nextPos);
     }
 
-    public void RunAway()
+    public void RunAway(GameObject target)
     {
-        Vector3Int currentTargetPos = gridManager.GetPosFromObject(mainLogic.CurrentTarget());
+        Vector3Int currentTargetPos = gridManager.GetPosFromObject(target);
         Vector3Int nextPos;
         nextPos = GetRunAway(currentTargetPos);
         Move(nextPos);

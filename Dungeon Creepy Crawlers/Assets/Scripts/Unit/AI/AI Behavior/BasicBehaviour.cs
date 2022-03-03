@@ -84,12 +84,12 @@ public class BasicBehaviour : AIBehaviour
         bool casted = abilityAI.CastNext(currentState, currentTarget);
         if (!casted)
         {
-            movementAI.Pursue();
+            movementAI.Pursue(currentTarget);
             casted = abilityAI.CastNext(currentState, currentTarget);
         }
         if (casted && kite)
         {
-            movementAI.RunAway();
+            movementAI.RunAway(currentTarget);
         }
 
         return AIState.Aggro;
