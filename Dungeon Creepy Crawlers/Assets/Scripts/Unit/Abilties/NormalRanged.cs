@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Normal Ranged")]
-public class NormalRanged : Ability
+public class NormalRanged : AbilityData
 {
-    public override void Execute(StatsTracker caster, StatsTracker target)
+    public override void Execute(StatsTracker caster, StatsTracker target, Ability instance)
     {
-        target.DamageCalc(damage, abilityType);
+        target.DamageCalc(instance.damage, instance.abilityType);
     }
 }

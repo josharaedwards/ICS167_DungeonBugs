@@ -8,7 +8,7 @@ public abstract class AbilityHandler : MonoBehaviour, InputSelectReceiver
 {
     [SerializeField] private Color visualColor;
 
-    protected Ability[] abilities;
+    protected List<Ability> abilities;
     protected StatsTracker statsTracker;
 
     protected Ability selectedAbility;
@@ -38,13 +38,23 @@ public abstract class AbilityHandler : MonoBehaviour, InputSelectReceiver
         gridManager = GridManager.GetInstance();
 
         statsTracker = GetComponent<StatsTracker>();
-        abilities = statsTracker.GetInitAbilities();
+        AbilityData[] abilitiesData = statsTracker.GetAbilitiesData();
+        abilities = new List<Ability>();
+        InitalizeAbilities(abilitiesData);
         
 
         rangeVisual = new HashSet<Vector3Int>();
         areaVisual = new HashSet<Vector3Int>();
 
         EnableCast();
+    }
+
+    private void InitalizeAbilities(AbilityData[] abilitiesData)
+    {
+        foreach (AbilityData abilityData in abilitiesData)
+        {
+            abilities.Add(new Ability(abilityData));
+        }
     }
 
     public void Select(Ability ability)  // Will be called by an ability button
@@ -188,7 +198,7 @@ public abstract class AbilityHandler : MonoBehaviour, InputSelectReceiver
         return castable;
     }
 
-    public Ability[] GetAbilities()
+    public List<Ability> GetAbilities()
     {
         return abilities;
     }

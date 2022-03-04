@@ -13,7 +13,7 @@ public class Unit : ScriptableObject
     public Sprite selectedSprite;
     public Sprite fullSprite;
 
-    public Ability[] abilities;
+    public AbilityData[] abilities;
 
     public int hp;
 

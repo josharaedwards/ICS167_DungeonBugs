@@ -41,9 +41,9 @@ public class UnitInfoDisplay : MonoBehaviour
             return;
             
         AbilityHandler abilityHandler = unitStats.GetAbilityHandler();
-        Ability[] abilities = abilityHandler.GetAbilities();
+        List<Ability> abilities = abilityHandler.GetAbilities();
 
-        int numOfAbilities = abilities.Length;
+        int numOfAbilities = abilities.Count;
 
         foreach (Transform child in buttonContainer.transform)
         {
