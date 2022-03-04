@@ -1,11 +1,11 @@
-//Jaynie Leavins
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Ability : ScriptableObject
+public class Ability
 {
+    private AbilityData abilityData;
+
     public string abilityName;
     public string description;
     public AbilType abilityType;
@@ -13,19 +13,32 @@ public abstract class Ability : ScriptableObject
 
     public bool teamCast; //for support abilities
     public bool areaOfEffect; //if it can hit multiple units
-    public enum AbilType { Phys, Mag, Buff };
 
     public int damage;
     public int minRange;
     public int range;
     public int apCost;
 
-    public virtual void Execute(StatsTracker caster, StatsTracker target) {
-        PlayAnimation(caster, target);
+    public Ability(AbilityData _abilityData)
+    {
+        abilityData = _abilityData;
+
+        abilityName = _abilityData.abilityName;
+        description = _abilityData.description;
+        abilityType = _abilityData.abilityType;
+        particleSystem = _abilityData.particleSystem;
+
+        teamCast = _abilityData.teamCast;
+        areaOfEffect = _abilityData.areaOfEffect;
+        
+        damage = _abilityData.damage;
+        minRange = _abilityData.minRange;
+        range = _abilityData.range;
+        apCost = _abilityData.apCost;
     }
 
-    private void PlayAnimation(StatsTracker caster, StatsTracker target) {
-        Instantiate(particleSystem, target.transform.position, Quaternion.identity);
-        particleSystem.Play();
+    public void Execute(StatsTracker caster, StatsTracker target)
+    {
+        abilityData.Execute(caster, target, this);
     }
 }

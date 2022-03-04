@@ -26,7 +26,7 @@ public class StatsTracker : MonoBehaviour
     public Sprite selectedSprite;
     public Sprite fullSprite;
 
-    public Ability[] abilities;
+    public AbilityData[] abilities;
 
     private stats unitStats;
 
@@ -68,17 +68,17 @@ public class StatsTracker : MonoBehaviour
 
     }
 
-    public void DamageCalc(int dmg, Ability.AbilType abilType)
+    public void DamageCalc(int dmg, AbilType abilType)
     {
         int dmgCalc = dmg;
 
-        if (abilType == Ability.AbilType.Phys)
+        if (abilType == AbilType.Phys)
         {
             dmgCalc += unitStats.def;
 
             unitStats.hp += dmgCalc;
         }
-        else if (abilType == Ability.AbilType.Mag) {
+        else if (abilType == AbilType.Mag) {
             dmgCalc += unitStats.res;
 
             unitStats.hp += dmgCalc;
@@ -116,23 +116,6 @@ public class StatsTracker : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void SelectAbility(Ability ability) // Will be called by an ability button
-    {
-        if(ability)
-        {
-            abilityHandler.Select(ability);
-        }
-        else
-        {
-            Debug.Log("Missing Ability in Stats Tracker");
-        }
-    }
-
-    public void DeselectAbility()
-    {
-        abilityHandler.Deselect();
-    }
-
     private void UpdateUnit()
     {
         type = unit.type;
@@ -148,7 +131,7 @@ public class StatsTracker : MonoBehaviour
         abilities = unit.abilities;
     }
 
-    public Ability[] GetInitAbilities()
+    public AbilityData[] GetAbilitiesData()
     {
         return unit.abilities;
     }

@@ -81,15 +81,15 @@ public class BasicBehaviour : AIBehaviour
 
     private AIState Aggro(StatsTracker AIStats, MovementAI movementAI, AbilityHandlerAI abilityAI, AIState currentState, GameObject currentTarget)
     {
-        bool casted = abilityAI.CastNext();
+        bool casted = abilityAI.CastNext(currentState, currentTarget);
         if (!casted)
         {
-            movementAI.Pursue();
-            casted = abilityAI.CastNext();
+            movementAI.Pursue(currentTarget);
+            casted = abilityAI.CastNext(currentState, currentTarget);
         }
         if (casted && kite)
         {
-            movementAI.RunAway();
+            movementAI.RunAway(currentTarget);
         }
 
         return AIState.Aggro;

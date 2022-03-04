@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Quick Attack")]
-public class QuickAttack : Ability
+public class QuickAttack : AbilityData
 {
-    public override void Execute(StatsTracker caster, StatsTracker target)
+    public override void Execute(StatsTracker caster, StatsTracker target, Ability instance)
     {
-        target.DamageCalc(damage, abilityType);
+        target.DamageCalc(instance.damage, instance.abilityType);
     }
 }

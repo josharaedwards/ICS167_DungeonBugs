@@ -91,4 +91,9 @@ public class AIManager : MonoBehaviour, TurnEventReciever
         yield return new WaitForSeconds(2);
         GameManager.GetInstance().ChangeTurnState();
     }
+
+    public HashSet<AILogic> GetAIList()
+    {
+        return AIs;
+    }
 }
