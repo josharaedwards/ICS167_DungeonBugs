@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 974c6ab61eed32c479561da951ea539e, type: 3}
+  m_Name: HealerBehaviour
+  m_EditorClassIdentifier: 
+  aggroRange: 0
+  wander: 0
+  kite: 0
+  aggressive: 0
+  p_stop_to_wander: 0
+  p_wander_to_stop: 0
+  guard_hp_threshold: 0.4
+  guardRange: 50

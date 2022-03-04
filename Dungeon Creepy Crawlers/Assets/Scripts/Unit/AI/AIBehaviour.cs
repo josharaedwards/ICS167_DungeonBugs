@@ -7,6 +7,7 @@ public enum AIState
     Stop,
     Wander,
     Aggro,
+    Guard
 }
 
 public abstract class AIBehaviour: ScriptableObject
@@ -14,11 +15,17 @@ public abstract class AIBehaviour: ScriptableObject
     [SerializeField] protected int aggroRange;
 
 
-    protected bool inAggroRange(MovementAI movementAI, GameObject currentTarget)
+    protected float Distance(MovementAI movementAI, GameObject target)
     {
         GridManager gridManager = GridManager.GetInstance();
-        Vector3Int currentTargetPos = gridManager.GetPosFromObject(currentTarget);
-        return (Vector3Int.Distance(movementAI.CurrentPos(), currentTargetPos) <= aggroRange);
+        Vector3Int targetPos = gridManager.GetPosFromObject(target);
+        return Vector3Int.Distance(movementAI.CurrentPos(), targetPos);
+    }
+
+
+    protected bool inAggroRange(MovementAI movementAI, GameObject currentTarget)
+    {
+        return (Distance(movementAI, currentTarget) <= aggroRange);
     }
 
     public abstract AIState InitializeState();
