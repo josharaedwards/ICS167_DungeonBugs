@@ -6,11 +6,11 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "AI Behaviour/Basic Behaviour")]
 public class BasicBehaviour : AIBehaviour
 {
-    [SerializeField] private bool wander = false;
-    [SerializeField] private bool kite = false;
-    [SerializeField] private bool aggressive = false; // if true never leaves aggro state
-    [SerializeField] [Range(0f, 1f)] private float p_stop_to_wander = 0.5f;
-    [SerializeField] [Range(0f, 1f)] private float p_wander_to_stop = 0.5f;
+    [SerializeField] protected bool wander = false;
+    [SerializeField] protected bool kite = false;
+    [SerializeField] protected bool aggressive = false; // if true never leaves aggro state
+    [SerializeField] [Range(0f, 1f)] protected float p_stop_to_wander = 0.5f;
+    [SerializeField] [Range(0f, 1f)] protected float p_wander_to_stop = 0.5f;
 
 
     public override AIState InitializeState()
