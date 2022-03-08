@@ -610,9 +610,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: Unit Info Menu
       objectReference: {fileID: 0}
-    - target: {fileID: 4547558266661958429, guid: 1b064309705c9654e9c20b227ec7b5f3, type: 3}
-      propertyPath: unitStats
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b064309705c9654e9c20b227ec7b5f3, type: 3}
