@@ -11,6 +11,9 @@ public class AbilityButtonBroadcast : DBButton
     private Ability ability;
     private AbilityHandler abilityHandler;
 
+    public delegate void OnAbilityHoverText(bool isHovering, Transform root, string description = "");
+    public static event OnAbilityHoverText abilityHoverText;
+
     public void OnEnable()
     {
         Setup();
@@ -48,10 +51,12 @@ public class AbilityButtonBroadcast : DBButton
     public void OnHoverEnter()
     {
         abilityHandler.SelectHover(ability);
+        abilityHoverText(true, gameObject.transform.root, ability.description);
     }
 
     public void OnHoverExit()
     {
         abilityHandler.DeselectHover();
+        abilityHoverText(false, gameObject.transform.root);
     }
 }

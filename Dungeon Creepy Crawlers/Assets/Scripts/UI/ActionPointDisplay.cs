@@ -19,8 +19,10 @@ public class ActionPointDisplay : MonoBehaviour
     [SerializeField] private TextMeshProUGUI playerNameText;
     [SerializeField] private TextMeshProUGUI actionPointText;     
 
-    [SerializeField] private Color fullActionColor;
-    [SerializeField] private Color emptyActionColor;
+    private Color fullActionColor;
+    private Color emptyActionColor;
+    [SerializeField] Color player1APColor;
+    [SerializeField] Color player2APColor;
 
     [SerializeField] private GameObject backgroundObj;
     [SerializeField] private GameObject fillAreaObj;
@@ -33,6 +35,10 @@ public class ActionPointDisplay : MonoBehaviour
 
     private void Start()
     {
+        SetPlayerColor(true);
+        emptyActionColor = fullActionColor;
+        emptyActionColor.b -= 0.45f;
+
         playerManager = PlayerManager.GetInstance();
         SetPlayerName("Player 1");
     }
@@ -43,10 +49,22 @@ public class ActionPointDisplay : MonoBehaviour
             UpdateAPUI();
     }
 
-    public void SetPlayerName(string playerName_)
+    private void SetPlayerName(string playerName_)
     {
         playerName = playerName_;
         playerNameText.text = playerName + "'s Mana";
+    }
+
+    private void SetPlayerColor(bool isPlayer1)
+    {
+        if(isPlayer1)
+        {
+            fullActionColor = player1APColor;
+        }
+        else
+        {
+            fullActionColor = player2APColor;
+        }
     }
 
     private void UpdateAPUI()
@@ -73,10 +91,12 @@ public class ActionPointDisplay : MonoBehaviour
                 break;
             case GameManager.TurnState.Player1Turn:
                 SetPlayerName("Player 1");
+                SetPlayerColor(true);
                 SetRoundDisplay(true);
                 break;
             case GameManager.TurnState.Player2Turn:
                 SetPlayerName("Player 2");
+                SetPlayerColor(false);
                 SetRoundDisplay(true);
                 break;
             default:
