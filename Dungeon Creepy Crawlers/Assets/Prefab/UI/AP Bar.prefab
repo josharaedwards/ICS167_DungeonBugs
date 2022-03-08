@@ -841,8 +841,8 @@ MonoBehaviour:
   fillImage: {fileID: 2742508883533056416}
   playerNameText: {fileID: 284017572}
   actionPointText: {fileID: 1123791820}
-  fullActionColor: {r: 0.5877713, g: 0.35694784, b: 0.8867924, a: 1}
-  emptyActionColor: {r: 0.27839085, g: 0.9622642, b: 0.9122247, a: 0.72156864}
+  player1APColor: {r: 0.0141509175, g: 0.60179424, b: 1, a: 1}
+  player2APColor: {r: 0.06180266, g: 0.9811321, b: 0.0509078, a: 1}
   backgroundObj: {fileID: 2742508883406392668}
   fillAreaObj: {fileID: 2742508885119446804}
   apNumberObj: {fileID: 1123791818}
