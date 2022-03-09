@@ -12,6 +12,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Stage1.unity
     guid: 909299c2b522a474499e90ae5ebf97a2
   - enabled: 1
+    path: Assets/Scenes/Stage2.unity
+    guid: e726ace677595c943af61143c4cf0928
+  - enabled: 1
+    path: Assets/Scenes/Stage3.unity
+    guid: f33281098f64a624f8590b52a4cc6660
+  - enabled: 1
     path: Assets/Scenes/PVP.unity
     guid: 892e4dcbb55b5ed49ab237c571a16314
+  - enabled: 1
+    path: Assets/Scenes/PvAI.unity
+    guid: 514d9dcec72f86647a926107419252f0
   m_configObjects: {}
