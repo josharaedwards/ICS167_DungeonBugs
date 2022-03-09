@@ -14,7 +14,6 @@ public abstract class AIBehaviour: ScriptableObject
 {
     [SerializeField] protected int aggroRange;
 
-
     protected float Distance(MovementAI movementAI, GameObject target)
     {
         GridManager gridManager = GridManager.GetInstance();

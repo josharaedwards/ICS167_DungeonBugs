@@ -7,6 +7,7 @@ using UnityEngine;
 public class MovementAI : Movement
 {
     private AILogic mainLogic;
+    private ActionQueue actionQueue;
 
     [SerializeField] private int wanderRange;
 
@@ -16,10 +17,17 @@ public class MovementAI : Movement
     {
         base.Start();
         mainLogic = GetComponent<AILogic>();
+        actionQueue = GetComponent<ActionQueue>();
 
         wanderTiles = new HashSet<Vector3Int>();
         GenerateWanderTiles();
 
+    }
+
+    // Add the Moving the transform to a queue to be executed by AIManager
+    protected override void MoveTransform()
+    {
+        actionQueue.Add(MoveToTarget);
     }
 
     public void MoveNext(bool casted)

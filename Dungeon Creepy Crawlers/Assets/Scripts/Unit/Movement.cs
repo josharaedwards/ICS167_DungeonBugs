@@ -2,11 +2,14 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public abstract class Movement : MonoBehaviour, InputSelectReceiver, GridMovementEventReceiver
 {
     [SerializeField] private Color visualColor;
+
+    delegate IEnumerator coroutine();
 
     protected SelectionHandler selectionHandler;
     
@@ -20,6 +23,7 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, GridMovemen
 
     [SerializeField] protected int movement;
     protected HashSet<Vector3Int> validMoveCellPos;
+    protected Dictionary<Vector3Int,List<Vector3Int>> path;
 
     [SerializeField] protected Vector2Int spawnPos = Vector2Int.zero;
 
@@ -116,6 +120,7 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, GridMovemen
     protected void GenerateValidMove() // TODO: Consider ally that could be went through
     {
         validMoveCellPos.Clear();
+        // path.Clear();
         // a temporary set to store the validMove to the next loop to calculate the next valid move pos
         HashSet<Vector3Int>[] tempPos = new HashSet<Vector3Int>[movement + 1];
         Vector3Int[] fourDirections = { Vector3Int.right, Vector3Int.left, Vector3Int.up, Vector3Int.down };
@@ -128,6 +133,7 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, GridMovemen
         }
 
         tempPos[0].Add(currentCellPos);
+        // path.Add(currentCellPos, new List<Vector3Int>());
         for (int i = 1; i <= movement; ++i)
         {
             foreach (Vector3Int pos in tempPos[i - 1])
@@ -189,8 +195,7 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, GridMovemen
         }
 
         currentCellPos = cellPos;
-        transform.position = gridManager.cellToWorld(currentCellPos);
-        transform.position = new Vector3(transform.position.x + 0.5f, transform.position.y + 0.5f, transform.position.z);
+        MoveTransform();
 
         GenerateValidMoveGrid();
         DisableMovement();
@@ -198,14 +203,34 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, GridMovemen
         return true;
     }
 
+    protected virtual void MoveTransform()
+    {
+        StartCoroutine(MoveToTarget());
+    }
+
     IEnumerator InitMoveGrid()
     {
         for (int i = 0; i < 3; i++)
         {
-            Debug.Log(i);
             yield return null;
         }
         GenerateValidMoveGrid();
-        Debug.Log("Generated Move Grid");
+        yield return null;
+    }
+
+    public IEnumerator MoveToTarget()
+    {
+        int totalFrame = 15;
+        Vector3 tempPos = transform.position;
+        Vector3 finalPos = gridManager.cellToWorld(currentCellPos);
+        finalPos = new Vector3(finalPos.x + 0.5f, finalPos.y + 0.5f, finalPos.z);
+
+        for (int i = 1; i <= totalFrame; i++)
+        {
+            transform.position = Vector3.Lerp(tempPos, finalPos, (float)i/totalFrame);
+            yield return null;
+        }
+        transform.position = finalPos;
+        yield return null;
     }
 }

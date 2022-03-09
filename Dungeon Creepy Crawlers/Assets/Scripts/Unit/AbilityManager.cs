@@ -37,9 +37,14 @@ public class AbilityManager : MonoBehaviour
         }
     }
 
+    public bool ValidCast(StatsTracker caster, StatsTracker target, Ability ability)
+    {
+        return InRange(caster, target, ability);
+    }
+
     public bool Cast(StatsTracker caster, StatsTracker target, Ability ability) 
     {
-        if (InRange(caster, target, ability)) 
+        if (ValidCast(caster, target, ability)) 
         {
             ability.Execute(caster, target);
             return true;
