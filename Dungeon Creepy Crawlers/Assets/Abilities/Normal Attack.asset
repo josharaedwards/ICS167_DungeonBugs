@@ -15,6 +15,7 @@ MonoBehaviour:
   abilityName: Normal Attack
   description: A normal attack that every unit can use.
   abilityType: 0
+  particleSystem: {fileID: 1775645239339303617, guid: c92be4a356e98524085d0ff587563221, type: 3}
   teamCast: 0
   areaOfEffect: 0
   damage: -1
