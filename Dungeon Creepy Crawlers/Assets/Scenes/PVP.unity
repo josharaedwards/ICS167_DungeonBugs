@@ -4670,11 +4670,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 2037579121}
-  tileMap: {fileID: 482993838}
+  camBound: {fileID: 482993838}
   moveSpeed: 5
   zoomStep: 0.5
   minCamSize: 3
-  maxCamSize: 4
+  maxCamSize: 5
 --- !u!1001 &2107364560
 PrefabInstance:
   m_ObjectHideFlags: 0

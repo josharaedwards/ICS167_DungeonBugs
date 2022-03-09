@@ -13,6 +13,6 @@ public class SinglePlayerButton : DBButton
     protected override void OnDBButtonClick()
     {
         base.OnDBButtonClick();
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("Stage1");
     }
 }
