@@ -218,14 +218,16 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, GridMovemen
 
     public IEnumerator MoveToTarget()
     {
-        int totalFrame = 15;
+        float totalTime = 0.2f; // in second;
+        float elapsedTime = 0f;
         Vector3 tempPos = transform.position;
         Vector3 finalPos = gridManager.cellToWorld(currentCellPos);
         finalPos = new Vector3(finalPos.x + 0.5f, finalPos.y + 0.5f, finalPos.z);
 
-        for (int i = 1; i <= totalFrame; i++)
+        while (elapsedTime < totalTime)
         {
-            transform.position = Vector3.Lerp(tempPos, finalPos, (float)i/totalFrame);
+            transform.position = Vector3.Lerp(tempPos, finalPos, elapsedTime / totalTime);
+            elapsedTime += Time.deltaTime;
             yield return null;
         }
         transform.position = finalPos;
