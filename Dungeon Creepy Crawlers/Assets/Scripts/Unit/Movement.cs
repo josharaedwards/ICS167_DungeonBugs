@@ -18,9 +18,6 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, GridMovemen
     [SerializeField] protected bool movable;
     protected bool recentlyMoved;
 
-    protected int frame; // WILL PROBABLY DELETE THIS; JUST A TEMPORARY SOLUTION FOR RUNNING A FUNCTION ON FRAME 2
-
-
     [SerializeField] protected int movement;
     protected HashSet<Vector3Int> validMoveCellPos;
 
@@ -43,9 +40,8 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, GridMovemen
 
         movable = true;
 
-        
 
-        frame = 0;
+        StartCoroutine(InitMoveGrid());
     }
 
     public void SetMovementSpeed(int speed) // Use this to set movement from StatsTracker
@@ -88,20 +84,6 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, GridMovemen
     public Vector3Int CurrentPos()
     {
         return currentCellPos;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // TODO: USE COROUTINE TO SOVLE THIS
-        if (frame <= 2) // Call GenerateValidMoveGrid() on 2nd frame with everything in the scene set up, TEMPORARY
-        {
-            frame++;
-            if (frame >= 2)
-            {
-                GenerateValidMoveGrid();
-            }
-        }
     }
 
     // Re-generate valid movable tile if prevPos or newPos from the event is within the existing valid moves
@@ -216,11 +198,14 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, GridMovemen
         return true;
     }
 
-    IEnumerator FrameDelay(int n)
+    IEnumerator InitMoveGrid()
     {
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < 3; i++)
         {
+            Debug.Log(i);
             yield return null;
         }
+        GenerateValidMoveGrid();
+        Debug.Log("Generated Move Grid");
     }
 }
