@@ -36,11 +36,8 @@ public class AbilityHandlerAI : AbilityHandler
 
     private IEnumerator CastCoroutine()
     {
-        int waitFrame = 5;
-        for (int i = 0; i < waitFrame; i++)
-        {
-            yield return null;
-        }
+        float waitTime = 0.2f;
+        yield return new WaitForSeconds(waitTime);
         abilityManager.Cast(statsTracker, currentTarget.GetComponent<StatsTracker>(), currentAbility);
         yield return null;
     }
