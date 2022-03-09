@@ -113,7 +113,24 @@ public class StatsTracker : MonoBehaviour
         {
             playerManager.Remove(this);
         } 
+        StartCoroutine(DeathCoroutine());
+    }
+
+    IEnumerator DeathCoroutine()
+    {
+        int totalFrame = 30;
+        Color color = spriteRenderer.color;
+        float delta = color.a / totalFrame;
+        for (int i = 0; i < totalFrame; i++)
+        {
+            color.a -= delta;
+            spriteRenderer.color = color;
+            yield return null;
+        }
+        color.a = 0;
+        spriteRenderer.color = color;
         gameObject.SetActive(false);
+        yield return null;
     }
 
     private void UpdateUnit()
