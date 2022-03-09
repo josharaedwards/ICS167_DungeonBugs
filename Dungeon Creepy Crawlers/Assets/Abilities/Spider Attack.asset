@@ -15,7 +15,7 @@ MonoBehaviour:
   abilityName: '[ COOL NAME FOR BOSS ABILITY ]'
   description: 
   abilityType: 0
-  particleSystem: {fileID: 0}
+  particleSystem: {fileID: 8734643542595209289, guid: f1c42b86c50320d4bafa372baf4228c6, type: 3}
   teamCast: 0
   areaOfEffect: 1
   damage: -3

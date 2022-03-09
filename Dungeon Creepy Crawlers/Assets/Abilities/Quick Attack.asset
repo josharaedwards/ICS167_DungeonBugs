@@ -15,6 +15,7 @@ MonoBehaviour:
   abilityName: Quick Attack
   description: An attack where the unit strikes multiple times in quick succession.
   abilityType: 0
+  particleSystem: {fileID: 8734643542595209289, guid: f1c42b86c50320d4bafa372baf4228c6, type: 3}
   teamCast: 0
   areaOfEffect: 0
   damage: -3

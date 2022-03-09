@@ -9,6 +9,7 @@ public class NormalAttack : AbilityData
 {
     public override void Execute(StatsTracker caster, StatsTracker target, Ability instance) 
     {
+        base.Execute(caster, target, instance);
         target.DamageCalc(instance.damage, instance.abilityType);
     }
 }
