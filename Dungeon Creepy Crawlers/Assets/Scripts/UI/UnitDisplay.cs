@@ -9,7 +9,7 @@ public class UnitDisplay : MonoBehaviour
     private Color greyedColor;
     private Color defaultColor;
 
-    public void Start()
+    public void Awake()
     {
         defaultColor = sprite.color;
         greyedColor = defaultColor;
