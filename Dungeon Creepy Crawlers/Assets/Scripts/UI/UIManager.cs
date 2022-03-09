@@ -92,7 +92,7 @@ public class UIManager : MonoBehaviour, TurnEventReciever
         }
 
         Scene currentScene = SceneManager.GetActiveScene();
-        if(currentScene.buildIndex != 3)
+        if(currentScene.buildIndex < 3)
         {
             winLoseText.text += "Onto Next Round!";
         }
@@ -108,7 +108,7 @@ public class UIManager : MonoBehaviour, TurnEventReciever
 
         Scene currentScene = SceneManager.GetActiveScene();
 
-        if(currentScene.buildIndex == 3)
+        if(currentScene.buildIndex >= 3)
         {
             SceneManager.LoadScene(0);
         }
