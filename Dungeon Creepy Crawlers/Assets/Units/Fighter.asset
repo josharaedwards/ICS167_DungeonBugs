@@ -23,4 +23,4 @@ MonoBehaviour:
   str: 2
   def: 0
   res: 0
-  movement: 1
+  movement: 2
