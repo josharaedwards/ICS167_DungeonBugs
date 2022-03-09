@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VersusButton : DBButton
+public class VersusCancelButton : DBButton
 {
     private void Start()
     {

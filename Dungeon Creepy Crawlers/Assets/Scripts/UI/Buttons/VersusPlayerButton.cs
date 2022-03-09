@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SinglePlayerButton : DBButton
+public class VersusPlayerButton : DBButton
 {
     void Start()
     {
@@ -13,6 +13,6 @@ public class SinglePlayerButton : DBButton
     protected override void OnDBButtonClick()
     {
         base.OnDBButtonClick();
-        SceneManager.LoadScene("Stage1");
+        SceneManager.LoadScene("PVP");
     }
 }
