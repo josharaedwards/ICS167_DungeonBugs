@@ -77,19 +77,36 @@ public class AIManager : MonoBehaviour, TurnEventReciever
     {
         if (turnState == GameManager.TurnState.EnemyTurn) // Tell each AI to do its moves
         {
-            foreach (AILogic AI in AIs)
-            {
-                AI.NextAction(); 
-            }
-            StartCoroutine(EndTurn());
-            //GameManager.GetInstance().ChangeTurnState(); // End AI's turn
+            StartCoroutine(ExecuteTurn());
         }
+    }
+
+    IEnumerator ExecuteTurn()
+    {
+        ActionQueue actionQueue;
+        float waitSeconds = 0.3f;
+        foreach (AILogic AI in AIs)
+        {
+            AI.NextAction();
+            actionQueue = AI.GetComponent<ActionQueue>();
+            yield return StartCoroutine(actionQueue.Execute());
+            yield return new WaitForSeconds(waitSeconds);
+        }
+        yield return StartCoroutine(EndTurn());
     }
 
     IEnumerator EndTurn()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         GameManager.GetInstance().ChangeTurnState();
+    }
+
+    IEnumerator DelayFrame(int n)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            yield return null;
+        }
     }
 
     public HashSet<AILogic> GetAIList()
