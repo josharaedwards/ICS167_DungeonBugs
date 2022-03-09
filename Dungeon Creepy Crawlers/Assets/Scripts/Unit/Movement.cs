@@ -196,8 +196,6 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, GridMovemen
 
         currentCellPos = cellPos;
         MoveTransform();
-
-        GenerateValidMoveGrid();
         DisableMovement();
 
         return true;
@@ -231,6 +229,8 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, GridMovemen
             yield return null;
         }
         transform.position = finalPos;
+        GenerateValidMoveGrid();
+
         yield return null;
     }
 }
