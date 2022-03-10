@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour, TurnEventReciever
 
     [SerializeField] private GameObject unitInfoSpawnLoc;
     [SerializeField] private TextMeshProUGUI winLoseText;
+    public Transform damagePopupInst;
 
     private ActionPointDisplay apBarUI;
     private TurnEventHandler turnEventHandler;
@@ -39,7 +40,7 @@ public class UIManager : MonoBehaviour, TurnEventReciever
         turnEventHandler = GetComponent<TurnEventHandler>();
         turnEventHandler.Subscribe(this);
 
-        apBarUI = GetComponentInChildren<ActionPointDisplay>();
+        apBarUI = GetComponentInChildren<ActionPointDisplay>();      
     }
 
     void Update()
@@ -52,11 +53,11 @@ public class UIManager : MonoBehaviour, TurnEventReciever
         apBarUI.ChangeAPUIDisplay(turnState);
     }
 
-    IEnumerator WaitForWinLose()
+    IEnumerator WaitForWinLose(GameManager.GameState currentState)
     {
         yield return new WaitForSeconds(3);
 
-        SceneManager.LoadScene("MainMenu");
+        GoToNextLevel(currentState);
     }
 
     public Transform GetUnitSpawnLocation()
@@ -69,18 +70,53 @@ public class UIManager : MonoBehaviour, TurnEventReciever
         switch (currentState)
         {
             case GameManager.GameState.Won:
-                winLoseText.text = "You Won!";
-                winLoseText.gameObject.SetActive(true);
-                StartCoroutine(WaitForWinLose());
-                break;
             case GameManager.GameState.Lost:
-                winLoseText.text = "You Lose.";
+                SetEndGameText(currentState);
                 winLoseText.gameObject.SetActive(true);
-                StartCoroutine(WaitForWinLose());
+                StartCoroutine(WaitForWinLose(currentState));
                 break;
             case GameManager.GameState.Ongoing:
             default:
                 break;
+        }
+    }
+
+    private void SetEndGameText(GameManager.GameState currentstate)
+    {
+        if(currentstate == GameManager.GameState.Lost)
+        {
+            winLoseText.text = "You Lose. \n Try Again!";
+        }
+        else
+        {
+            winLoseText.text = "You Won! \n";
+        }
+
+        Scene currentScene = SceneManager.GetActiveScene();
+        if(currentScene.buildIndex < 3)
+        {
+            winLoseText.text += "Onto Next Round!";
+        }
+    }
+
+    private void GoToNextLevel(GameManager.GameState currentstate)
+    {
+        if(currentstate == GameManager.GameState.Lost)
+        {
+            SceneManager.LoadScene(0);
+            return;
+        }
+
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        if(currentScene.buildIndex >= 3)
+        {
+            SceneManager.LoadScene(0);
+        }
+        else
+        {
+            int nextScene = currentScene.buildIndex + 1;
+            SceneManager.LoadScene(nextScene);
         }
     }
 }

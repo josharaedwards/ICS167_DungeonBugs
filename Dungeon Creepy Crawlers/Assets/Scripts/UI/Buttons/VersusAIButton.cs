@@ -13,6 +13,6 @@ public class VersusAIButton : DBButton
     protected override void OnDBButtonClick()
     {
         base.OnDBButtonClick();
-        //SceneManager.LoadScene("PVP");
+        SceneManager.LoadScene("PvAI");
     }
 }
