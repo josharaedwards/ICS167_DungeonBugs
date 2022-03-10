@@ -1511,6 +1511,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitInfoSpawnLoc: {fileID: 142289920}
   winLoseText: {fileID: 381442442}
+  damagePopupInst: {fileID: 6802214700266382327, guid: 1ebf71498e5b68b4abeb24f0836bd0f0, type: 3}
 --- !u!114 &154520254
 MonoBehaviour:
   m_ObjectHideFlags: 0

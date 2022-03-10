@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour, TurnEventReciever
 
     [SerializeField] private GameObject unitInfoSpawnLoc;
     [SerializeField] private TextMeshProUGUI winLoseText;
+    public Transform damagePopupInst;
 
     private ActionPointDisplay apBarUI;
     private TurnEventHandler turnEventHandler;
@@ -39,7 +40,7 @@ public class UIManager : MonoBehaviour, TurnEventReciever
         turnEventHandler = GetComponent<TurnEventHandler>();
         turnEventHandler.Subscribe(this);
 
-        apBarUI = GetComponentInChildren<ActionPointDisplay>();
+        apBarUI = GetComponentInChildren<ActionPointDisplay>();      
     }
 
     void Update()
