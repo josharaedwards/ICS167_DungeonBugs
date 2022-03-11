@@ -95,7 +95,7 @@ public class UIManager : MonoBehaviour, TurnEventReciever
         Scene currentScene = SceneManager.GetActiveScene();
         if(currentScene.buildIndex < 3)
         {
-            winLoseText.text += "Onto Next Round!";
+            winLoseText.text += "LEVEL UP!";
         }
     }
 
