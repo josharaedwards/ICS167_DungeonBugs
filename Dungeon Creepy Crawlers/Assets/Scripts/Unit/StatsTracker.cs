@@ -118,13 +118,15 @@ public class StatsTracker : MonoBehaviour
 
     IEnumerator DeathCoroutine()
     {
-        int totalFrame = 30;
+        float totalTime = 0.8f;
+        float elapsedTime = 0f;
         Color color = spriteRenderer.color;
-        float delta = color.a / totalFrame;
-        for (int i = 0; i < totalFrame; i++)
+        float start_a = color.a;
+        while (elapsedTime < totalTime)
         {
-            color.a -= delta;
+            color.a = Mathf.Lerp(start_a, 0, elapsedTime/totalTime);
             spriteRenderer.color = color;
+            elapsedTime += Time.deltaTime;
             yield return null;
         }
         color.a = 0;
