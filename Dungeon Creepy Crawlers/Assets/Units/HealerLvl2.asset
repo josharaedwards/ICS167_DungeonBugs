@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 343fafb94447aa74fb4c66959938d738, type: 3}
+  m_Name: HealerLvl2
+  m_EditorClassIdentifier: 
+  type: Healer
+  miniSprite: {fileID: 21300000, guid: 06a580b59ce438d42931bdc181115eaf, type: 3}
+  selectedSprite: {fileID: 0}
+  fullSprite: {fileID: 21300000, guid: 610bf8f4e89ec914daa9c0294df23bc4, type: 3}
+  abilities:
+  - {fileID: 11400000, guid: 3db11a098d985414d981d392d6d3598b, type: 2}
+  - {fileID: 11400000, guid: 6866616c20a2df347af1af09f6e10dbc, type: 2}
+  hp: 6
+  str: 1
+  def: 0
+  res: 1
+  movement: 2
