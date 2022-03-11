@@ -16,6 +16,10 @@ public class UnitInfoDisplay : MonoBehaviour
     [SerializeField] private GameObject buttonContainer;
     [SerializeField] private Button abilityButtonPrototype;
 
+    [SerializeField] private TextMeshProUGUI strText;
+    [SerializeField] private TextMeshProUGUI defText;
+    [SerializeField] private TextMeshProUGUI resText;
+
     private StatsTracker unitStats;
 
 
@@ -32,7 +36,15 @@ public class UnitInfoDisplay : MonoBehaviour
 
         healthBarValue.text = stats_.hp.ToString() + " / " + stats_.maxHP.ToString();
 
+        SetupStatsDisplay(stats_);
         UpdateAbilities();
+    }
+
+    private void SetupStatsDisplay(stats stats_)
+    {
+        strText.text = "STR: +" + stats_.str.ToString();
+        defText.text = "DEF: +" + stats_.def.ToString();
+        resText.text = "RES: +" + stats_.res.ToString();
     }
 
     public void UpdateAbilities()
