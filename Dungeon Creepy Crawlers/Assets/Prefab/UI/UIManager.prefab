@@ -1532,6 +1532,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1704574538}
     m_Modifications:
+    - target: {fileID: 284017572, guid: 449a1f0f18d8cde4ba0b3b0e5abaddba, type: 3}
+      propertyPath: m_fontSize
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 284017572, guid: 449a1f0f18d8cde4ba0b3b0e5abaddba, type: 3}
+      propertyPath: m_fontStyle
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 284017572, guid: 449a1f0f18d8cde4ba0b3b0e5abaddba, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 22
+      objectReference: {fileID: 0}
     - target: {fileID: 1820409323, guid: 449a1f0f18d8cde4ba0b3b0e5abaddba, type: 3}
       propertyPath: playerManager
       value: 
