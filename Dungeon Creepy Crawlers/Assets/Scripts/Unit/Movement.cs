@@ -206,7 +206,7 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, GridMovemen
         StartCoroutine(MoveToTarget());
     }
 
-    IEnumerator InitMoveGrid()
+    IEnumerator InitMoveGrid()  // Delay a few frame at startup before generate valid move
     {
         for (int i = 0; i < 3; i++)
         {
@@ -216,7 +216,7 @@ public abstract class Movement : MonoBehaviour, InputSelectReceiver, GridMovemen
         yield return null;
     }
 
-    public IEnumerator MoveToTarget()
+    protected IEnumerator MoveToTarget()
     {
         float totalTime = 0.2f; // in second;
         float elapsedTime = 0f;

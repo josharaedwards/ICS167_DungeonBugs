@@ -30,26 +30,11 @@ public class MovementAI : Movement
         actionQueue.Add(MoveToTarget);
     }
 
-    public void MoveNext(bool casted)
-    {
-        Vector3Int currentTargetPos = gridManager.GetPosFromObject(mainLogic.CurrentTarget());
-        Vector3Int nextPos;
-        if (casted)
-        {
-            nextPos = GetRunAway(currentTargetPos);
-        }
-        else
-        {
-            nextPos = GetNextMove(currentTargetPos);
-        }
-        Move(nextPos);
-    }
-
-    public void Pursue(GameObject target)
+    public void Pursue(GameObject target, int minRange)
     {
         Vector3Int currentTargetPos = gridManager.GetPosFromObject(target);
         Vector3Int nextPos;
-        nextPos = GetNextMove(currentTargetPos);
+        nextPos = GetNextMove(currentTargetPos, minRange);
         Move(nextPos);
     }
 
@@ -77,27 +62,27 @@ public class MovementAI : Movement
         }
 
         Vector3Int nextPos;
-        nextPos = GetNextMove(currentTargetPos);
+        nextPos = GetNextMove(currentTargetPos, 0);
         Move(nextPos);
     }
 
 
     private Vector3Int GetRunAway(Vector3Int currentTargetPos) // Run away from target
     {
-        Vector3Int runAwayPos = currentCellPos - currentTargetPos + currentCellPos; // get a position mirrored the targetPos
-        return GetNextMove(runAwayPos);
+        Vector3Int runAwayPos = 10*(currentCellPos - currentTargetPos) + currentCellPos; // get the furthest position mirrored the targetPos
+        return GetNextMove(runAwayPos, 0);
     }
 
-    private Vector3Int GetNextMove(Vector3Int currentTargetPos) // Simple Greedy Pathfinding toward the target
+    private Vector3Int GetNextMove(Vector3Int currentTargetPos, int minRange) // Simple Greedy Pathfinding toward the target
     {
-        // TODO: When ability is implemented include the logic of using them
-        float distanceToTarget = float.MaxValue;
+        Vector3Int bestMove = currentCellPos;
+        float distanceToTarget = Vector3Int.Distance(currentCellPos, currentTargetPos);
         float tempDist;
-        Vector3Int bestMove = Vector3Int.zero;
+
         foreach (Vector3Int move in validMoveCellPos)
-        {
+        {   
             tempDist = Vector3Int.Distance(move, currentTargetPos);
-            if (tempDist < distanceToTarget)
+            if (tempDist < distanceToTarget && tempDist > minRange - 0.9)
             {
                 distanceToTarget = tempDist;
                 bestMove = move;

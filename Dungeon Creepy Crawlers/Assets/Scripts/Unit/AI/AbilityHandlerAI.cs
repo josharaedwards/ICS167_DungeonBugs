@@ -22,7 +22,7 @@ public class AbilityHandlerAI : AbilityHandler
         actionQueue = GetComponent<ActionQueue>();
     }
 
-    public bool CastNext(AIState currentState, GameObject target)
+    public (Ability, bool) CastNext(AIState currentState, GameObject target)
     {
         currentAbility = GetNextAbility();
         currentTarget = target;
@@ -31,7 +31,7 @@ public class AbilityHandlerAI : AbilityHandler
         {
             actionQueue.Add(CastCoroutine);
         }
-        return result;
+        return (currentAbility, result);
     }
 
     private IEnumerator CastCoroutine()

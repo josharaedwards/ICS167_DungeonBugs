@@ -60,14 +60,17 @@ public class ProtectBehaviour: BasicBehaviour
 
     private AIState Guard(StatsTracker AIStats, MovementAI movementAI, AbilityHandlerAI abilityAI, AIState currentState, GameObject currentTarget)
     {
-        bool casted = abilityAI.CastNext(currentState, currentTarget);
-        if (!casted)
+        (Ability ability, bool result) casted = abilityAI.CastNext(currentState, currentTarget);
+        if (!casted.result)
         {
-            movementAI.Pursue(currentTarget);
+            movementAI.Pursue(currentTarget, casted.ability.minRange);
             casted = abilityAI.CastNext(currentState, currentTarget);
         }
-
-        return AIState.Guard;
+        if (casted.result && kite)
+        {
+            movementAI.RunAway(currentTarget);
+        }
+        return AIState.Aggro;
     }
 
 

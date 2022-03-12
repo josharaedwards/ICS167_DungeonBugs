@@ -135,7 +135,7 @@ public abstract class AbilityHandler : MonoBehaviour, InputSelectReceiver
         gridGenerator.GenerateGrid(rangeVisual, this, visualColor);
     }
 
-    private void GenerateRange(Ability ability) // Reuse Generate valid move code
+    private void GenerateRange(Ability ability) // Modified Generate valid move code for minRange
     {
         rangeVisual.Clear();
 
