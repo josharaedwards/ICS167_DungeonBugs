@@ -87,6 +87,7 @@ public class StatsTracker : MonoBehaviour
         {
             unitStats.hp += dmgCalc;
         }
+        DamagePopup.Create(transform.root.position, dmgCalc);
 
         if (unitStats.hp < 0)
         {

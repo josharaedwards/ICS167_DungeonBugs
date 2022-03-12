@@ -134,7 +134,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -185,6 +185,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab989048631a0440b07edb23efc78fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disappearSpeed: 6
-  textSpeed: 6.5
-  disappearTimer: 0.25
+  disappearSpeed: 1
+  textSpeed: 3
+  disappearTimer: 1
+  damageColor: {r: 1, g: 0.56078434, b: 0.56078434, a: 1}
+  healColor: {r: 0, g: 0.85098046, b: 0.6392157, a: 1}

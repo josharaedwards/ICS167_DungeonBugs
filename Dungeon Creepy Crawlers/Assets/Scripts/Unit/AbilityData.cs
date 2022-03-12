@@ -22,7 +22,6 @@ public abstract class AbilityData : ScriptableObject
     public int apCost;
 
     public virtual void Execute(StatsTracker caster, StatsTracker target, Ability instance) {
-        DamagePopup.Create(target.transform.root.position, damage);
         PlayAnimation(caster, target);
     }
 

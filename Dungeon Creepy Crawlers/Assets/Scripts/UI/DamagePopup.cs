@@ -11,6 +11,9 @@ public class DamagePopup : MonoBehaviour
     [SerializeField] private float textSpeed = 5f;
     [SerializeField] private float disappearTimer = 1f;
 
+    [SerializeField] private Color damageColor;
+    [SerializeField] private Color healColor;
+
     private TextMeshPro damageText;
     private Color textColor;
 
@@ -30,6 +33,14 @@ public class DamagePopup : MonoBehaviour
 
     public void Setup(int damageAmount)
     {
+        if (damageAmount < 0)
+        {
+            damageText.color = damageColor;
+        }
+        else if (damageAmount > 0)
+        {
+            damageText.color = healColor;
+        }
         int displayAmount = Mathf.Abs(damageAmount);
         textColor = damageText.color;
 
