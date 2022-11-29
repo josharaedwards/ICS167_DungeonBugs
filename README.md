@@ -1,7 +1,7 @@
-# DungeonBugs
+# Dungeon Creepy Crawlers
  The group project for ICS 167: Game and Multiplayer Systems
  
-Dungeon Bugs!
+Dungeon Creepy Crawlers!
 
 This is a 2D turn-based RPG game where bugs with special abilities battle each other.
 
