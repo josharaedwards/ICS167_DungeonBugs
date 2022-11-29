@@ -1,4 +1,4 @@
-# ICS167_Group11
+# DungeonBugs
  The group project for ICS 167: Game and Multiplayer Systems
  
 Dungeon Bugs!
